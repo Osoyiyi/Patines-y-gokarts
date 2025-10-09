@@ -1,13 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+//Elaborado por Papu inc
 package Pck_Examen;
 
-/**
- *
- * @author joseluisgonzalezflor
- */
 public class Vehiculo {
     protected int idVehiculo;
     protected String modelo;

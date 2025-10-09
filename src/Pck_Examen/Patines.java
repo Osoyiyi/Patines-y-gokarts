@@ -1,14 +1,47 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+//Elaborado por Papu inc
 package Pck_Examen;
 
-/**
- *
- * @author joseluisgonzalezflor
- */
-public class Patines {
-    int papu;
-    String skibidi;
+public class Patines extends Vehiculo {
+    private String tipo;
+    private String materialBota;
+    private int noRuedas;
+
+    public Patines(String tipo, String materialBota, int noRuedas, int idVehiculo, String modelo, String marca, int anio, String color, float precio) {
+        super(idVehiculo, modelo, marca, anio, color, precio);
+        this.tipo = tipo;
+        this.materialBota = materialBota;
+        this.noRuedas = noRuedas;
+    }
+    
+    public Patines(){
+        this.tipo = null;
+        this.materialBota = null;
+        this.noRuedas = 0;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public void setMaterialBota(String materialBota) {
+        this.materialBota = materialBota;
+    }
+
+    public void setNoRuedas(int noRuedas) {
+        this.noRuedas = noRuedas;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public String getMaterialBota() {
+        return materialBota;
+    }
+
+    public int getNoRuedas() {
+        return noRuedas;
+    }
+    
+    
 }
