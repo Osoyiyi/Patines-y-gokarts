@@ -10,4 +10,5 @@ package Pck_Examen;
  */
 public class Patines {
     int papu;
+    String skibidi;
 }
