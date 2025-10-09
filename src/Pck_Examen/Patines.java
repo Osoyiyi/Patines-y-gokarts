@@ -9,5 +9,5 @@ package Pck_Examen;
  * @author joseluisgonzalezflor
  */
 public class Patines {
-    
+    int papu;
 }
