@@ -32,17 +32,13 @@ public class Clientes {
         this.fechaNacimiento = new Fecha(dN, mN, aN);
     }
     
-//    public boolean setFechaNacimiento (int dN, int mN, int aN){
-////        fechaElaboracion.setFecha(d, m, a);
-////        if(fechaElaboracion.fechaCorrecta()){
-////            return true;
-////        }else{
-////            return false;
-////        }
-//    }
-    
     public Clientes() {
         this(null, null, null, null, null, null, new Fecha());
+    }
+    
+    public boolean setFechaNacimiento (int dN, int mN, int aN){
+        fechaNacimiento.setFecha(dN, mN, aN);
+        return fechaNacimiento.fechaCorrecta();
     }
 
     public void setIdCliente(String idCliente) {
@@ -72,6 +68,44 @@ public class Clientes {
     public void setFechaNacimiento(Fecha fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
+
+    public String getIdCliente() {
+        return idCliente;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getIdentificacion() {
+        return identificacion;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public String getFechaNacimiento() {
+        return fechaNacimiento.getFecha();
+    }
     
+    public String getDatos(){
+        return "CLIENTE------------" +
+               "\nIdCliente: " + getIdCliente() +
+               "\nNombre: " + getNombre() +
+               "\nDirección: " + getDireccion() +
+               "\nIdentificación: " + getIdentificacion() +
+               "\nTipo: " + getTipo() +
+               "\nTeléfono: " + getTelefono() +
+               "\nFecha de Nacimiento: " + getFechaNacimiento();
+    }
     
 }
