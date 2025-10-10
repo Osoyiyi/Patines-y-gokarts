@@ -6,7 +6,7 @@ public class Gokart extends Vehiculo{
     private int noLlantas;
     private float velocidadMaxima;
 
-    public Gokart(int cilindrada, int noLlantas, float velocidadMaxima, int idVehiculo, String modelo, String marca, int anio, String color, float precio) {
+    public Gokart(int idVehiculo, String modelo, String marca, int anio, String color, float precio ,int cilindrada, int noLlantas, float velocidadMaxima) {
         super(idVehiculo, modelo, marca, anio, color, precio);
         this.cilindrada = cilindrada;
         this.noLlantas = noLlantas;
