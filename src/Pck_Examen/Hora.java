@@ -20,14 +20,14 @@ public class Hora {
         this.num2 = num2;
     }
     
-    public boolean horaCorrecta(){
-        boolean num1Corr = false, num2Corr = false;
-        num1Corr = (num1 >= 0 && num1 < 24);
-        num2Corr = (num2 >= 0 && num2 <60);
-        if(num1Corr && num2Corr){
-            return true;
-        }else{
-            
-        }
-    }
+//    public boolean horaCorrecta(){
+//        boolean num1Corr = false, num2Corr = false;
+//        num1Corr = (num1 >= 0 && num1 < 24);
+//        num2Corr = (num2 >= 0 && num2 <60);
+//        if(num1Corr && num2Corr){
+//            return true;
+////        }else{
+////            
+////        }
+//    }
 }
