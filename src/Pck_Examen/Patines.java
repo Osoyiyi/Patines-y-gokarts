@@ -6,7 +6,8 @@ public class Patines extends Vehiculo {
     private String materialBota;
     private int noRuedas;
 
-    public Patines(String tipo, String materialBota, int noRuedas, int idVehiculo, String modelo, String marca, int anio, String color, float precio) {
+    public Patines(int idVehiculo, String modelo, String marca, int anio, String color, float precio, 
+            String tipo, String materialBota, int noRuedas) {
         super(idVehiculo, modelo, marca, anio, color, precio);
         this.tipo = tipo;
         this.materialBota = materialBota;
