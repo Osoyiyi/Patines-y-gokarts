@@ -72,13 +72,13 @@ public class Vehiculo {
     }
     
     public String getDatos(){
-        return "-------- VEHICULO ---------" +
-               "\nId del vehiculo: " + getIdVehiculo() +
-               "\nModelo: " + getModelo() +
-               "\nMarca: " + getMarca() +
-               "\nAño: " + getAnio() +
-               "\nColor: " + getColor() +
-               "\nPrecio: " + getPrecio();
+        return "-------- VEHICULO ---------"
+                + "\nId del vehiculo: " + getIdVehiculo()
+                + "\nModelo: " + getModelo()
+                + "\nMarca: " + getMarca()
+                + "\nAño: " + getAnio()
+                + "\nColor: " + getColor()
+                + "\nPrecio: " + getPrecio();
                 
     }
 }

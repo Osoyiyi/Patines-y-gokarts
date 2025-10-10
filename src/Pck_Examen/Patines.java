@@ -43,5 +43,17 @@ public class Patines extends Vehiculo {
         return noRuedas;
     }
     
-    
+    @Override
+    public String getDatos() {
+        return "-------- PATINES ---------"
+                + "\nId del vehiculo: " + getIdVehiculo()
+                + "\nModelo: " + getModelo()
+                + "\nMarca: " + getMarca()
+                + "\nAño: " + getAnio()
+                + "\nColor: " + getColor()
+                + "\nTipo: " + getTipo()
+                + "\nMaterial de bota: " + getMaterialBota()
+                + "\nNumero de ruedas: " + getNoRuedas()
+                + "\nPrecio: " + getPrecio();
+    }
 }
