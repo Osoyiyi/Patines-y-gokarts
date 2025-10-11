@@ -100,6 +100,7 @@ public class Renta {
         return horaFinal.getHora();
     }
     
+    //comentario para un push de prueba
     public String gtDatos(){
         return "-------- RENTA -------"
                + "Id renta: " + getIdRenta()
