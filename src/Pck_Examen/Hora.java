@@ -37,4 +37,8 @@ public class Hora {
             return false;
         }
     }
+    
+    public String getHora(){
+        return num1 + ":" + num2;
+    }
 }

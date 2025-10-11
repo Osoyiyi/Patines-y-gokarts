@@ -6,10 +6,10 @@ public class Renta {
     private int idVehiculo;
     private String idCliente;
     private Fecha fechaRenta;
-    private String horaInicio;
-    private String horaFinal;
+    private Hora horaInicio;
+    private Hora horaFinal;
 
-    public Renta(int idRenta, int idVehiculo, String idCliente, Fecha fechaRenta, String horaInicio, String horaFinal) {
+    public Renta(int idRenta, int idVehiculo, String idCliente, Fecha fechaRenta, Hora horaInicio, Hora horaFinal) {
         this.idRenta = idRenta;
         this.idVehiculo = idVehiculo;
         this.idCliente = idCliente;
@@ -18,13 +18,13 @@ public class Renta {
         this.horaFinal = horaFinal;
     }
     
-    public Renta(int idRenta, int idVehiculo, String idCliente, int d, int m, int a, String horaInicio, String horaFinal) {
+    public Renta(int idRenta, int idVehiculo, String idCliente, int d, int m, int a, int nHI1, int nHF1, int nHI2, int nHF2) {
         this.idRenta = idRenta;
         this.idVehiculo = idVehiculo;
         this.idCliente = idCliente;
         this.fechaRenta = new Fecha(d,m,a);
-        this.horaInicio = horaInicio;
-        this.horaFinal = horaFinal;
+        this.horaInicio = new Hora(nHI1, nHF1);
+        this.horaFinal = new Hora(nHI2, nHF2);
     }
     
     public Renta(){
@@ -32,8 +32,8 @@ public class Renta {
         this.idVehiculo = 0;
         this.idCliente = null;
         this.fechaRenta = new Fecha();
-        this.horaInicio = null;
-        this.horaFinal = null;
+        this.horaInicio = new Hora();
+        this.horaFinal = new Hora();
     }
 
     public void setIdRenta(int idRenta) {
@@ -56,13 +56,24 @@ public class Renta {
     public void setFechaRenta(Fecha fechaRenta) {
         this.fechaRenta = fechaRenta;
     }
-
-    public void setHoraInicio(String horaInicio) {
+    
+    public void setHoraInicio(Hora horaInicio){
         this.horaInicio = horaInicio;
     }
-
-    public void setHoraFinal(String horaFinal) {
+    
+    public void setHoraFinal(Hora horaFinal) {
         this.horaFinal = horaFinal;
+    }
+
+    public boolean setHoraInicio(int nHI1, int nHF1) {
+        horaInicio.setHora(nHI1, nHF1);
+        return horaInicio.horaCorrecta();    
+    }
+    
+    public boolean setHoraFinal(int nHI2, int nHF2) {
+        horaFinal.setHora(nHI2, nHF2);
+        return horaFinal.horaCorrecta();
+        
     }
 
     public int getIdRenta() {
@@ -82,11 +93,11 @@ public class Renta {
     }
 
     public String getHoraInicio() {
-        return horaInicio;
+        return horaInicio.getHora();
     }
 
     public String getHoraFinal() {
-        return horaFinal;
+        return horaFinal.getHora();
     }
     
     public String gtDatos(){
