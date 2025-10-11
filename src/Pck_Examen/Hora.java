@@ -20,14 +20,21 @@ public class Hora {
         this.num2 = num2;
     }
     
-//    public boolean horaCorrecta(){
-//        boolean num1Corr = false, num2Corr = false;
-//        num1Corr = (num1 >= 0 && num1 < 24);
-//        num2Corr = (num2 >= 0 && num2 <60);
-//        if(num1Corr && num2Corr){
-//            return true;
-////        }else{
-////            
-////        }
-//    }
+    public boolean horaCorrecta(){
+        boolean num1Corr = false, num2Corr = false;
+        num1Corr = (num1 >= 0 && num1 < 24);
+        num2Corr = (num2 >= 0 && num2 < 60);
+        if(num1Corr && num2Corr){
+            return true;
+        }else{
+            if (!num1Corr && !num2Corr) {
+                JOptionPane.showMessageDialog(null, "No corresponde a una Hora (0-23) ni a minutos (0-59) válidos", "Warning", 2);
+            }else if(!num1Corr){
+                JOptionPane.showMessageDialog(null, "No corresponde a una Hora (0-23) válida", "Warning", 2);
+            }else if(!num2Corr){
+                JOptionPane.showMessageDialog(null, "No corresponde a minutos (0-59) válidos", "Warning", 2);
+            }
+            return false;
+        }
+    }
 }
