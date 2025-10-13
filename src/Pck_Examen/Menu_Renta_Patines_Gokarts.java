@@ -481,7 +481,7 @@ public class Menu_Renta_Patines_Gokarts {
                              dc = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese dia de nacimiento del cliente", 
                                                                                 "Alta de un cliente", 3));
                              if(dc <= 0 || dc > 31){
-                                 JOptionPane.showInputDialog(null, "El dia de nacimiento debe ser mayor a cero pero menor a 31", 
+                                 JOptionPane.showMessageDialog(null, "El dia de nacimiento debe ser mayor a cero pero menor a 31", 
                                                             "Error de alta", 2);
                              }
                          }catch(NumberFormatException e){
@@ -495,7 +495,7 @@ public class Menu_Renta_Patines_Gokarts {
                              mc = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese mes de nacimiento del cliente", 
                                                                                 "Alta de un cliente", 3));
                              if(mc <= 0 || mc > 12){
-                                 JOptionPane.showInputDialog(null, "El mes de nacimiento debe ser mayor a cero pero menor a 12", 
+                                 JOptionPane.showMessageDialog(null, "El mes de nacimiento debe ser mayor a cero pero menor a 12", 
                                                             "Error de alta", 2);
                              }
                          }catch(NumberFormatException e){
@@ -508,14 +508,14 @@ public class Menu_Renta_Patines_Gokarts {
                          try{
                              ac = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese año de nacimiento del cliente", 
                                                                                 "Alta de un cliente", 3));
-                             if(ac > 2010){
-                                 JOptionPane.showInputDialog(null, "El año de nacimiento debe ser menor al 2010", 
+                             if(ac >= 2011 || ac <= 1925){
+                                 JOptionPane.showMessageDialog(null, "El año de nacimiento debe ser menor al 2010 y mayor a 1920", 
                                                             "Error de alta", 2);
                              }
                          }catch(NumberFormatException e){
                              JOptionPane.showMessageDialog(null, "El año de nacimiento debe ser numerico", "Error de alta", 2);
                          }
-                     }while(ac > 2010);
+                     }while(ac >= 2011 || ac <= 1925);
                      client.setFechaNacimiento(dc, mc, ac);
                      clientes.add(client);
                      //Se escribe los clientes en el archivo Clientes, mientras comentado para no generar nada
