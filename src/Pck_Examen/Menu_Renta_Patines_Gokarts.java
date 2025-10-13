@@ -517,7 +517,223 @@ public class Menu_Renta_Patines_Gokarts {
                     //escritura(clientes, "Clientes.txt");
                      
                     break;
-                case 4:
+                case 4: // Alta de una Renta 
+                    Renta renta = new Renta();
+                    int dh=0, mh=0, ah=0, hh=0, minH=0;
+                    idRenta = 0;
+                    idVehiculo = 0;
+                    idCliente = " ";
+                    idEx = -1; // Para la búsqueda
+                    
+                    // 1. ID de la Renta
+                    do {
+                        idRenta = 0;
+                        try {
+                            String input = JOptionPane.showInputDialog(null, "Ingresa el ID de la Renta:", "Alta de una Renta", 3);
+                            if (input == null) {idRenta = -1; break;} // Manejo de Cancelar
+                            idRenta = Integer.parseInt(input);
+                            if (idRenta <= 0) {
+                                JOptionPane.showMessageDialog(null, "El ID de la Renta debe ser positivo.", "Error", 0);
+                            }
+                        } catch (NumberFormatException e) {
+                            JOptionPane.showMessageDialog(null, "El ID de la Renta debe ser numérico.", "Error de entrada", 0);
+                        }
+                    } while (idRenta <= 0);
+                    if (idRenta == -1) break; // Sale si se canceló
+                    
+                    // Verificar si el ID de Renta ya existe
+                    idEx = buscarIdRenta(idRenta, rentas); 
+                    if (idEx != -1) {
+                        JOptionPane.showMessageDialog(null, "Ese ID de Renta ya ha sido registrado.", "Advertencia", 2);
+                        break;
+                    }
+                    renta.setIdRenta(idRenta);
+                    
+                    // 2. ID del Cliente (Verificación de Existencia)
+                    if (clientes.isEmpty()) {
+                        JOptionPane.showMessageDialog(null, "No hay clientes registrados.", "Error", 2);
+                        break;
+                    }
+                    
+                    idCliente = JOptionPane.showInputDialog(null, "Ingresa el ID del Cliente:", "Alta de una Renta", 3);
+                    if (idCliente == null) break; 
+
+                    int posCliente = buscarIdCliente(idCliente, clientes); 
+                    
+                    if (posCliente == -1) {
+                        JOptionPane.showMessageDialog(null, "Cliente no encontrado. Renta cancelada.", "Error", 2);
+                        break;
+                    }
+                    renta.setIdCliente(idCliente); 
+
+                    // 3. ID del Vehículo (Verificación de Existencia)
+                    if (vehiculos.isEmpty()) {
+                        JOptionPane.showMessageDialog(null, "No hay vehículos (Patines o Gokarts) registrados para rentar.", "Error", 2);
+                        break;
+                    }
+                    
+                    do {
+                        idVehiculo = 0;
+                        try {
+                            String input = JOptionPane.showInputDialog(null, "Ingresa el ID del Vehículo:", "Alta de una Renta", 3);
+                            if (input == null) {idVehiculo = -1; break;} // Manejo de Cancelar
+                            idVehiculo = Integer.parseInt(input);
+                            if (idVehiculo <= 0) {
+                                JOptionPane.showMessageDialog(null, "El ID del Vehículo debe ser positivo.", "Error", 0);
+                            }
+                        } catch (NumberFormatException e) {
+                            JOptionPane.showMessageDialog(null, "El ID del Vehículo debe ser numérico.", "Error de entrada", 0);
+                        }
+                    } while (idVehiculo <= 0);
+
+                    if (idVehiculo == -1) break; // Sale si se canceló
+
+                    int posVehiculo = buscarIdVehiculoEnLista(idVehiculo, vehiculos); 
+                    
+                    if (posVehiculo == -1) {
+                        JOptionPane.showMessageDialog(null, "Vehículo no encontrado. Renta cancelada.", "Error", 2);
+                        break;
+                    }
+                    renta.setIdVehiculo(idVehiculo); 
+                    
+                    // 4. Fecha de Renta (Día, Mes, Año)
+                    JOptionPane.showMessageDialog(null, "Ingresa la Fecha de Renta (Día/Mes/Año):", "Fecha de Renta", 3);
+                    
+                    // Días
+                    do{ 
+                        dh = 0;
+                        try{
+                            String input = JOptionPane.showInputDialog(null, "Día (1-31):", "Fecha de Renta", 3);
+                            if (input == null) {dh = -1; break;}
+                            dh = Integer.parseInt(input);
+                            if(dh <= 0 || dh > 31){ 
+                                JOptionPane.showMessageDialog(null, "Día no válido (1-31).", "Error de entrada", 2);
+                            }
+                        }catch(NumberFormatException e){
+                            JOptionPane.showMessageDialog(null, "El día debe ser numérico.", "Error de entrada", 2);
+                        }
+                    }while(dh <= 0 || dh > 31);
+                    if (dh == -1) break; 
+                    
+                    // Mes
+                    do{ 
+                        mh = 0;
+                        try{
+                            String input = JOptionPane.showInputDialog(null, "Mes (1-12):", "Fecha de Renta", 3);
+                            if (input == null) {mh = -1; break;}
+                            mh = Integer.parseInt(input);
+                            if(mh <= 0 || mh > 12){ 
+                                JOptionPane.showMessageDialog(null, "Mes no válido (1-12).", "Error de entrada", 2);
+                            }
+                        }catch(NumberFormatException e){
+                            JOptionPane.showMessageDialog(null, "El mes debe ser numérico.", "Error de entrada", 2);
+                        }
+                    }while(mh <= 0 || mh > 12);
+                    if (mh == -1) break;
+                    
+                    // Año
+                    do{ 
+                        ah = 0;
+                        try{
+                            String input = JOptionPane.showInputDialog(null, "Año (2020-2025):", "Fecha de Renta", 3);
+                            if (input == null) {ah = -1; break;}
+                            ah = Integer.parseInt(input);
+                            if(ah < 2020 || ah > 2025){ 
+                                JOptionPane.showMessageDialog(null, "Año no válido (2020-2025).", "Error de entrada", 2);
+                            }
+                        }catch(NumberFormatException e){
+                            JOptionPane.showMessageDialog(null, "El año debe ser numérico.", "Error de entrada", 2);
+                        }
+                    }while(ah < 2020 || ah > 2025);
+                    if (ah == -1) break; 
+                    
+                    // Se asume constructor Fecha(dia, mes, anio)
+                    fechaRenta = new Fecha(dh, mh, ah); 
+                    renta.setFechaRenta(fechaRenta);
+                    
+                    // 5. Hora de Inicio
+                    JOptionPane.showMessageDialog(null, "Ingresa la Hora de Inicio:", "Hora de Inicio", 3);
+                    
+                    // Hora Inicio
+                    do{ 
+                        hh = -1;
+                        try{
+                            String input = JOptionPane.showInputDialog(null, "Hora (0-23):", "Hora de Inicio", 3);
+                            if (input == null) {hh = -1; break;}
+                            hh = Integer.parseInt(input);
+                            if(hh < 0 || hh > 23){
+                                JOptionPane.showMessageDialog(null, "Hora no válida (0-23).", "Error de entrada", 2);
+                            }
+                        }catch(NumberFormatException e){
+                            JOptionPane.showMessageDialog(null, "La hora debe ser numérica.", "Error de entrada", 2);
+                        }
+                    }while(hh < 0 || hh > 23);
+                    if (hh == -1) break;
+
+                    // Minuto Inicio
+                    do{ 
+                        minH = -1;
+                        try{
+                            String input = JOptionPane.showInputDialog(null, "Minuto (0-59):", "Hora de Inicio", 3);
+                            if (input == null) {minH = -1; break;}
+                            minH = Integer.parseInt(input);
+                            if(minH < 0 || minH > 59){
+                                JOptionPane.showMessageDialog(null, "Minuto no válido (0-59).", "Error de entrada", 2);
+                            }
+                        }catch(NumberFormatException e){
+                            JOptionPane.showMessageDialog(null, "El minuto debe ser numérico.", "Error de entrada", 2);
+                        }
+                    }while(minH < 0 || minH > 59);
+                    if (minH == -1) break;
+
+                    // Se asume constructor Hora(hora, minuto)
+                    horaInicio = new Hora(hh, minH); 
+                    renta.setHoraInicio(horaInicio);
+                    
+                    // 6. Hora de Finalización
+                    JOptionPane.showMessageDialog(null, "Ingresa la Hora de Finalización:", "Hora de Finalización", 3);
+                    
+                    // Hora Final
+                    do{ 
+                        hh = -1;
+                        try{
+                            String input = JOptionPane.showInputDialog(null, "Hora (0-23):", "Hora de Finalización", 3);
+                            if (input == null) {hh = -1; break;}
+                            hh = Integer.parseInt(input);
+                            if(hh < 0 || hh > 23){
+                                JOptionPane.showMessageDialog(null, "Hora no válida (0-23).", "Error de entrada", 2);
+                            }
+                        }catch(NumberFormatException e){
+                            JOptionPane.showMessageDialog(null, "La hora debe ser numérica.", "Error de entrada", 2);
+                        }
+                    }while(hh < 0 || hh > 23);
+                    if (hh == -1) break;
+                    
+                    // Minuto Final
+                    do{ 
+                        minH = -1;
+                        try{
+                            String input = JOptionPane.showInputDialog(null, "Minuto (0-59):", "Hora de Finalización", 3);
+                            if (input == null) {minH = -1; break;}
+                            minH = Integer.parseInt(input);
+                            if(minH < 0 || minH > 59){
+                                JOptionPane.showMessageDialog(null, "Minuto no válido (0-59).", "Error de entrada", 2);
+                            }
+                        }catch(NumberFormatException e){
+                            JOptionPane.showMessageDialog(null, "El minuto debe ser numérico.", "Error de entrada", 2);
+                        }
+                    }while(minH < 0 || minH > 59);
+                    if (minH == -1) break;
+
+                    // Se asume constructor Hora(hora, minuto)
+                    horaFinal = new Hora(hh, minH); 
+                    renta.setHoraFinal(horaFinal);
+
+                    // 7. Agregar Renta a la lista
+                    rentas.add(renta);
+                    // Asumiendo que Renta tiene un método para obtener detalles
+                    JOptionPane.showMessageDialog(null, "Renta registrada con éxito.\n" + renta.gtDatos(), "Alta Exitosa", 1); 
+                    
                     break;
                 // inicio de la parte de joshua
                 case 5:
@@ -765,6 +981,7 @@ public class Menu_Renta_Patines_Gokarts {
         return pos;
     }
 
+
     //FUNCION DE ESCRITURA 
     public static <T> void escritura(ArrayList<T> lista, String nomArchivo) {
         FileOutputStream fout = null;
@@ -814,4 +1031,5 @@ public class Menu_Renta_Patines_Gokarts {
         }
         return lista;
     }
+
 }
