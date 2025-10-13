@@ -19,7 +19,7 @@ public class Menu_Renta_Patines_Gokarts {
         ArrayList<Vehiculo> lVehiculos = new ArrayList<>();
         ArrayList<Cliente> lClientes = new ArrayList<>();
         ArrayList<Renta> lRentas = new ArrayList<>();
-        int idVehiculo, anio, cilindrada, noLLantas, noRuedas, idRenta, op, idEx = -1, cont;
+        int idVehiculo, anio, cilindrada, noLLantas, noRuedas, idRenta, op, idEx = -1, cont, posPatines, posGokart;
         String modelo, marca, color, tipoPatin, materialBota, idCliente, nombre,
                 direccion, identificacion, tipoCliente, telefono;
         float precio, velocidadMaxima;
@@ -242,9 +242,66 @@ public class Menu_Renta_Patines_Gokarts {
 
                 // inicio de la parte de arath
                 case 9:
+                    // Consultar detalles de unos patines
+                    if (vehiculos.isEmpty()) {
+                        JOptionPane.showMessageDialog(null, "No hay vehiculos(patines) existentes", "Sin datos", 2);
+                    }
+                    idVehiculo = -1;
+                    stval = false;
+                    do {
+                        try {
+                            idVehiculo = Integer.parseInt(JOptionPane.showInputDialog(null,"Ingrese el ID de los patines a consultar: ",
+                                    "Detalles de patines", 3));
+                            if(idVehiculo <= 0){
+                                JOptionPane.showMessageDialog(null, "El ID debe ser positivo", "Error de entrada", 2);
+                            }else{
+                                stval = true;
+                            }
+                        }catch(NumberFormatException e){
+                            JOptionPane.showMessageDialog(null, "El ID solo debe contener valores NUMÉRICOS POSITIVOS", 
+                                    "ERROR", 2);
+                        }
+                    }while(!stval);
+                    posPatines = buscarIdVehiculo(idVehiculo, vehiculos, 1);
+                    if(posPatines == -1){
+                        JOptionPane.showMessageDialog(null,"No se encontraron patines con el ID ingresado", 
+                                "Error de búsqueda", 2);
+                    }else{
+                        JOptionPane.showMessageDialog(null, vehiculos.get(posPatines).getDatos(), "Detalles de patines", 1);
+                    }
                     break;
+                    
                 case 10:
+                    // Consultar dealles de un gokart
+                    if(vehiculos.isEmpty()){
+                        JOptionPane.showMessageDialog(null, "No hay vehiculos(Gokarts) existentes", "Sin datos", 2);
+                    }
+                    idVehiculo = -1;
+                    stval = false;
+                    do{
+                        try{
+                            idVehiculo = Integer.parseInt(JOptionPane.showInputDialog(null,"Ingrese el ID del Gokart a consultar: ",
+                                    "Detalles de Gokart", 3));
+                            if(idVehiculo <= 0){
+                                JOptionPane.showMessageDialog(null, "El ID debe tener valores positivos", "Error de entrada", 2);
+                            }else{
+                                stval = true;
+                            }
+                        }catch(NumberFormatException e){
+                            JOptionPane.showMessageDialog(null, "El ID solo puede contener valores NUMÉRICOS POSITIVOS",
+                                    "ERROR", 2);
+                        }
+                    }while(!stval);
+                    
+                    posGokart = buscarIdVehiculo(idVehiculo, vehiculos, 2);
+                    if(posGokart == -1){
+                        JOptionPane.showMessageDialog(null,"No se encontraron Gokarts con el ID ingresado", 
+                                "Error de búsqueda", 2);
+                    }else{
+                        JOptionPane.showMessageDialog(null,vehiculos.get(posGokart).getDatos(), "Detalles de Gokart", 2);
+                    }
                     break;
+                    
                 case 11:
                     break;
                 case 12:
