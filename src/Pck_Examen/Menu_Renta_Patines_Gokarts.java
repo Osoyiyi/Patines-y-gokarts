@@ -19,7 +19,7 @@ public class Menu_Renta_Patines_Gokarts {
         ArrayList<Vehiculo> lVehiculos = new ArrayList<>();
         ArrayList<Cliente> lClientes = new ArrayList<>();
         ArrayList<Renta> lRentas = new ArrayList<>();
-        int idVehiculo, anio, cilindrada, noLLantas, noRuedas, idRenta, op, idEx = -1, cont, posPatines, posGokart;
+        int idVehiculo, anio, cilindrada, noLLantas, noRuedas, idRenta, op, idEx = -1, cont, posPatines, posGokart, posCliente;
         int dc=0, mc=0, ac=2011;
         String modelo, marca, color, tipoPatin, materialBota, idCliente, nombre,
                 direccion, identificacion, tipoCliente, telefono;
@@ -813,7 +813,29 @@ public class Menu_Renta_Patines_Gokarts {
                     break;
 
                 case 11:
-
+                    //CONSULTAR DETALLES DE UN CLIENTE
+                    if(clientes.isEmpty()){
+                        JOptionPane.showMessageDialog(null,"No hay clientes registrados","Sin datos", 2);
+                        break;
+                    }
+                    idCliente = ""; //Se usa comilla para inicializar en vacio
+                    stval = false;
+                    do{
+                        idCliente = JOptionPane.showInputDialog(null, " Ingrese el ID del cliente a consultar: ", "Detalles de un cliente",3);
+                        if(idCliente == null || idCliente.trim().isEmpty()){
+                            JOptionPane.showMessageDialog(null,"La clave de cliente no puede ser vacia...","Error de entrada",2);
+                        }else{
+                            stval = true;
+                        }
+                    }while(!stval);
+                    
+                    //Metodo de busqueda del cliente
+                    posCliente = buscarIdCliente(idCliente, clientes);
+                    if(posCliente == -1){
+                        JOptionPane.showMessageDialog(null,"No se encontro un cliente con ID ingresado","Fallo de busqueda",2);
+                    }else{
+                        JOptionPane.showMessageDialog(null, clientes.get(posCliente).getDatos(), "Detalles del cliente",1);
+                    }
                     break;
                 case 12:
                     break;
