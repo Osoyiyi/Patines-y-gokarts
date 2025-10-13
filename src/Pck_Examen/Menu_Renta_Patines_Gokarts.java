@@ -1061,12 +1061,15 @@ public class Menu_Renta_Patines_Gokarts {
                     }
                     idRenta = -1;
                     stval = false;
+                    
                     do {
                         try {
                             idRenta = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese el id",
                                     "Eliminación de una renta", 3));
                             if (idRenta == 0) {
                                 JOptionPane.showInputDialog(null, "El id debe ser mayor a cero...", "Error...", 2);
+                            }else{
+                                stval = true;
                             }
                         } catch (NumberFormatException e) {
                             JOptionPane.showMessageDialog(null, "El id debe de ser numerico...", "Error...", 2);
