@@ -588,7 +588,7 @@ public class Menu_Renta_Patines_Gokarts {
 
                     if (idVehiculo == -1) break; // Sale si se canceló
 
-                    int posVehiculo = buscarIdVehiculoEnLista(idVehiculo, vehiculos); 
+                    int posVehiculo = buscarIdVehiculo(idVehiculo, vehiculos,1); 
                     
                     if (posVehiculo == -1) {
                         JOptionPane.showMessageDialog(null, "Vehículo no encontrado. Renta cancelada.", "Error", 2);
