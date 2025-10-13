@@ -20,6 +20,7 @@ public class Menu_Renta_Patines_Gokarts {
         ArrayList<Cliente> lClientes = new ArrayList<>();
         ArrayList<Renta> lRentas = new ArrayList<>();
         int idVehiculo, anio, cilindrada, noLLantas, noRuedas, idRenta, op, idEx = -1, cont, posPatines, posGokart;
+        int dc=0, mc=0, ac=2011;
         String modelo, marca, color, tipoPatin, materialBota, idCliente, nombre,
                 direccion, identificacion, tipoCliente, telefono;
         float precio, velocidadMaxima;
@@ -358,7 +359,156 @@ public class Menu_Renta_Patines_Gokarts {
 //                    escritura(vehiculos, "Vehiculos.txt");
 
                     break;
-                case 3:
+                                case 3:
+                    
+                    Cliente client = new Cliente();
+                    do {
+                        idCliente = JOptionPane.showInputDialog(null, "Ingresa el id  del cliente: ", "Alta de un Cliente", 3);
+                        stval = false;
+                        if (idCliente == null || idCliente.trim().isEmpty()
+                                || !idCliente.matches("^[A-Za-zÁÉÍÓÚáéíóúÑñ0-9 ]+$")) {
+                            //La expresión permite nombres como: 
+                            //GOFL2402, Roper, UAEH, Arathcpp
+                            //La expresión no permite nombres como:
+                            //-UAEH, GOFL2402-, Roper@, Arath--cpp
+                            JOptionPane.showMessageDialog(null, "No corresponde a un nombre de id valido",
+                                    "Warning", 2);
+                        } else {
+                            client.setIdCliente(idCliente);
+                            stval = true;
+                        }
+                    }while (stval == false);
+                    
+                    do {
+                        nombre = JOptionPane.showInputDialog(null, "Ingresa nombre del cliente: ", "Alta de un Cliente", 3);
+                        stval = false;
+                        if (nombre == null || nombre.trim().isEmpty()
+                                || !nombre.matches("^[A-Za-zÁÉÍÓÚáéíóúÑñ]+(?:[ -][A-Za-zÁÉÍÓÚáéíóúÑñ]+)*$")) {
+                            //La expresión permite nombres como: 
+                            //Jose Luis, Rainy, José, Alexis-Arath
+                            //La expresión no permite nombres como:
+                            //-Carlos, Rainy-, Arath//Alexis, Luis1234
+                            JOptionPane.showMessageDialog(null, "No corresponde a un nombre valido",
+                                    "Warning", 2);
+                        } else {
+                            client.setNombre(nombre);
+                            stval = true;
+                        }
+                    }while (stval == false);
+                    
+                     do {
+                        direccion = JOptionPane.showInputDialog(null, "Ingresa dirección del cliente: ", "Alta de un Cliente", 3);
+                        stval = false;
+                        if (direccion == null || direccion.trim().isEmpty()
+                                || !direccion.matches("^[A-Za-zÁÉÍÓÚáéíóúÑñ0-9.,#\\s-]+$")) {
+                            //La expresión permite nombres como: 
+                            //JAv. Juárez #23, Calle 5 de Mayo, Calle Hidalgo-poniente
+                            //La expresión no permite nombres como:
+                            //@Calle Falsa 123, --Calle Real
+                            JOptionPane.showMessageDialog(null, "No corresponde a una dirección valida",
+                                    "Warning", 2);
+                        } else {
+                            client.setDireccion(direccion);
+                            stval = true;
+                        }
+                    }while (stval == false);
+                     
+                     do {
+                        identificacion = JOptionPane.showInputDialog(null, "Ingresa identificación del cliente: ", "Alta de un Cliente", 3);
+                        stval = false;
+                        if (identificacion == null || identificacion.trim().isEmpty()
+                                || !identificacion.matches("^[A-Za-zÁÉÍÓÚáéíóúÑñ0-9]+$")) {
+                            //La expresión permite nombres como: 
+                            //RFCMX09, Cliente55, ID4589
+                            //La expresión no permite nombres como:
+                            //ABC 123, #ID4589, ID.45 
+                            JOptionPane.showMessageDialog(null, "No corresponde a una identificación valida",
+                                    "Warning", 2);
+                        } else {
+                            client.setIdentificacion(identificacion);
+                            stval = true;
+                        }
+                    }while (stval == false);
+                     
+                     do {
+                        tipoCliente = JOptionPane.showInputDialog(null, "Ingresa tipo de cliente: ", "Alta de un Cliente", 3);
+                        stval = false;
+                        if (tipoCliente == null || tipoCliente.trim().isEmpty()
+                                || !tipoCliente.matches("^[A-Za-zÁÉÍÓÚáéíóúÑñ]+(?:[ -][A-Za-zÁÉÍÓÚáéíóúÑñ]+)*$")) {
+                            //La expresión permite nombres como: 
+                            //Cliente VIP, Regular, Corporativo Frecuente
+                            //La expresión no permite nombres como:
+                            //VIP123, Cliente_VIP, Preimum@
+                            JOptionPane.showMessageDialog(null, "No corresponde a una tipo de cliente valido",
+                                    "Warning", 2);
+                        } else {
+                            client.setTipo(tipoCliente);
+                            stval = true;
+                        }
+                    }while (stval == false);
+                     
+                     do {
+                        telefono = JOptionPane.showInputDialog(null, "Ingresa telefono del cliente: ", "Alta de un Cliente", 3);
+                        stval = false;
+                        if (telefono == null || telefono.trim().isEmpty()
+                                || !telefono.matches("^[0-9]{7,15}$")) {
+                            //La expresión permite nombres como: 
+                            //5512345678, 9998887777, 1234567
+                            //La expresión no permite nombres como:
+                            //+52 5512345678, 55123-45678, tel5512345678  
+                            JOptionPane.showMessageDialog(null, "No corresponde a un telefono valido",
+                                    "Warning", 2);
+                        } else {
+                            client.setTelefono(telefono);
+                            stval = true;
+                        }
+                    }while (stval == false);
+                     
+                     do{
+                         dc = 0;
+                         try{
+                             dc = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese dia de nacimiento del cliente", 
+                                                                                "Alta de un cliente", 3));
+                             if(dc <= 0 || dc > 31){
+                                 JOptionPane.showInputDialog(null, "El dia de nacimiento debe ser mayor a cero pero menor a 31", 
+                                                            "Error de alta", 2);
+                             }
+                         }catch(NumberFormatException e){
+                             JOptionPane.showMessageDialog(null, "El dia de nacimiento debe ser numerico", "Error de alta", 2);
+                         }
+                     }while(dc <= 0 || dc >31);
+                     
+                     do{
+                         mc = 0;
+                         try{
+                             mc = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese mes de nacimiento del cliente", 
+                                                                                "Alta de un cliente", 3));
+                             if(mc <= 0 || mc > 12){
+                                 JOptionPane.showInputDialog(null, "El mes de nacimiento debe ser mayor a cero pero menor a 12", 
+                                                            "Error de alta", 2);
+                             }
+                         }catch(NumberFormatException e){
+                             JOptionPane.showMessageDialog(null, "El mes de nacimiento debe ser numerico", "Error de alta", 2);
+                         }
+                     }while(mc <= 0 || mc > 12);
+                     
+                     do{
+                         ac = 0;
+                         try{
+                             ac = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese año de nacimiento del cliente", 
+                                                                                "Alta de un cliente", 3));
+                             if(ac >= 2010){
+                                 JOptionPane.showInputDialog(null, "El año de nacimiento debe ser menor al 2010", 
+                                                            "Error de alta", 2);
+                             }
+                         }catch(NumberFormatException e){
+                             JOptionPane.showMessageDialog(null, "El año de nacimiento debe ser numerico", "Error de alta", 2);
+                         }
+                     }while(ac <= 0 || ac > 12);
+                     
+                     client.setFechaNacimiento(dc, mc, ac);
+                     
+                     clientes.add(client);
                     break;
                 case 4:
                     break;
@@ -541,13 +691,6 @@ public class Menu_Renta_Patines_Gokarts {
                     if(vehiculos.isEmpty()){
                         JOptionPane.showMessageDialog(null, "No hay datos existentes", "Sin datos", 2);
                     }
-                    
-                    stval = false;
-                    
-                        
-                        idCliente = JOptionPane.showInputDialog(null, "Ingrese id del cliente", "Eliminación de un cliente", 2);
-                        
-                    
                     break;
                 case 16:
                     break;
