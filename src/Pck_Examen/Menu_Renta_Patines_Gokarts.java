@@ -732,7 +732,7 @@ public class Menu_Renta_Patines_Gokarts {
                     // 7. Agregar Renta a la lista
                     rentas.add(renta);
                     // Asumiendo que Renta tiene un método para obtener detalles
-                    JOptionPane.showMessageDialog(null, "Renta registrada con éxito.\n" + renta.gtDatos(), "Alta Exitosa", 1); 
+                    JOptionPane.showMessageDialog(null, "Renta registrada con éxito.\n" + renta.getDatos(), "Alta Exitosa", 1); 
                     
                     break;
                 // inicio de la parte de joshua
