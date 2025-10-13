@@ -48,7 +48,7 @@ public class Menu_Renta_Patines_Gokarts {
                 + "\n17) Salir"
                 + "\nElige una opción: ";
         //Aquí va el proceso de lectura 
-
+        
         do {
             do {
                 op = 0;
@@ -359,11 +359,14 @@ public class Menu_Renta_Patines_Gokarts {
 //                    escritura(vehiculos, "Vehiculos.txt");
 
                     break;
-                                case 3:
+                        case 3:
                     
                     Cliente client = new Cliente();
                     do {
+                        do{
                         idCliente = JOptionPane.showInputDialog(null, "Ingresa el id  del cliente: ", "Alta de un Cliente", 3);
+                        cont = buscarIdCliente(idCliente,clientes);
+                        }while(cont == -1);
                         stval = false;
                         if (idCliente == null || idCliente.trim().isEmpty()
                                 || !idCliente.matches("^[A-Za-zÁÉÍÓÚáéíóúÑñ0-9 ]+$")) {
@@ -374,8 +377,9 @@ public class Menu_Renta_Patines_Gokarts {
                             JOptionPane.showMessageDialog(null, "No corresponde a un nombre de id valido",
                                     "Warning", 2);
                         } else {
-                            client.setIdCliente(idCliente);
-                            stval = true;
+                            
+                            
+                            
                         }
                     }while (stval == false);
                     
@@ -445,6 +449,7 @@ public class Menu_Renta_Patines_Gokarts {
                             client.setTipo(tipoCliente);
                             stval = true;
                         }
+                        
                     }while (stval == false);
                      
                      do {
@@ -504,11 +509,13 @@ public class Menu_Renta_Patines_Gokarts {
                          }catch(NumberFormatException e){
                              JOptionPane.showMessageDialog(null, "El año de nacimiento debe ser numerico", "Error de alta", 2);
                          }
-                     }while(ac <= 0 || ac > 12);
-                     
+                     }while(ac > 2010);
                      client.setFechaNacimiento(dc, mc, ac);
                      
                      clientes.add(client);
+                     //Se escribe los clientes en el archivo Clientes, mientras comentado para no generar nada
+                    //escritura(clientes, "Clientes.txt");
+                     
                     break;
                 case 4:
                     break;
@@ -528,6 +535,7 @@ public class Menu_Renta_Patines_Gokarts {
                     // Consultar detalles de unos patines
                     if (vehiculos.isEmpty()) {
                         JOptionPane.showMessageDialog(null, "No hay vehiculos(patines) existentes", "Sin datos", 2);
+                        break;
                     }
                     idVehiculo = -1;
                     stval = false;
@@ -543,6 +551,7 @@ public class Menu_Renta_Patines_Gokarts {
                         } catch (NumberFormatException e) {
                             JOptionPane.showMessageDialog(null, "El ID solo debe contener valores NUMÉRICOS POSITIVOS",
                                     "ERROR", 2);
+                            break;
                         }
                     } while (!stval);
                     posPatines = buscarIdVehiculo(idVehiculo, vehiculos, 1);
@@ -558,6 +567,7 @@ public class Menu_Renta_Patines_Gokarts {
                     // Consultar dealles de un gokart
                     if (vehiculos.isEmpty()) {
                         JOptionPane.showMessageDialog(null, "No hay vehiculos(Gokarts) existentes", "Sin datos", 2);
+                        break;
                     }
                     idVehiculo = -1;
                     stval = false;
@@ -573,6 +583,7 @@ public class Menu_Renta_Patines_Gokarts {
                         } catch (NumberFormatException e) {
                             JOptionPane.showMessageDialog(null, "El ID solo puede contener valores NUMÉRICOS POSITIVOS",
                                     "ERROR", 2);
+                            break;
                         }
                     } while (!stval);
 
@@ -616,6 +627,7 @@ public class Menu_Renta_Patines_Gokarts {
                             }
                         } catch (NumberFormatException e) {
                             JOptionPane.showMessageDialog(null, "El id debe ser numerico...", "Error de eliminación", 2);
+                            break;
 
                         }
                     } while (!stval);
@@ -663,6 +675,7 @@ public class Menu_Renta_Patines_Gokarts {
                             }
                         } catch (NumberFormatException e) {
                             JOptionPane.showMessageDialog(null, "El id debe ser numerico...", "Error de eliminación", 2);
+                            break;
                         }
                     } while (!stval);
                     
@@ -690,7 +703,12 @@ public class Menu_Renta_Patines_Gokarts {
                 case 15:
                     if(vehiculos.isEmpty()){
                         JOptionPane.showMessageDialog(null, "No hay datos existentes", "Sin datos", 2);
+                        break;
                     }
+                    idCliente = "";
+                    cont = buscarIdCliente(idCliente, clientes);
+                    
+                    
                     break;
                 case 16:
                     break;
@@ -716,7 +734,6 @@ public class Menu_Renta_Patines_Gokarts {
                 } else if (tipoV == 2 && v1 instanceof Gokart) {
                     return i;
                 }
-
             }
         }
         return -1;
