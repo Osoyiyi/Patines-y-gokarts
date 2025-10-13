@@ -101,7 +101,7 @@ public class Renta {
     }
     
     //comentario para un push de prueba
-    public String gtDatos(){
+    public String getDatos(){
         return "-------- RENTA -------"
                + "Id renta: " + getIdRenta()
                + "Id vehiculo: " + getIdVehiculo()
