@@ -558,7 +558,7 @@ public class Menu_Renta_Patines_Gokarts {
                     idCliente = JOptionPane.showInputDialog(null, "Ingresa el ID del Cliente:", "Alta de una Renta", 3);
                     if (idCliente == null) break; 
 
-                    int posCliente = buscarIdCliente(idCliente, clientes); 
+                    posCliente = buscarIdCliente(idCliente, clientes); 
                     
                     if (posCliente == -1) {
                         JOptionPane.showMessageDialog(null, "Cliente no encontrado. Renta cancelada.", "Error", 2);
