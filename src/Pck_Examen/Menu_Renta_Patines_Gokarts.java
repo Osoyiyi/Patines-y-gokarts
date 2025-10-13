@@ -19,7 +19,7 @@ public class Menu_Renta_Patines_Gokarts {
         ArrayList<Vehiculo> lVehiculos = new ArrayList<>();
         ArrayList<Cliente> lClientes = new ArrayList<>();
         ArrayList<Renta> lRentas = new ArrayList<>();
-        int idVehiculo, anio, cilindrada, noLLantas, noRuedas, idRenta, op, idEx = -1, cont=-1, posPatines, posGokart, posCliente;
+        int idVehiculo, anio, cilindrada, noLLantas, noRuedas, idRenta, op, idEx = -1, cont=-1, posPatines, posGokart, posCliente, posRenta;
         int dc=0, mc=0, ac=2011;
         String modelo, marca, color, tipoPatin, materialBota, idCliente, nombre,
                 direccion, identificacion, tipoCliente, telefono;
@@ -841,6 +841,30 @@ public class Menu_Renta_Patines_Gokarts {
                     }
                     break;
                 case 12:
+                    //Consultar una renta por ID
+                    if (rentas.isEmpty()) {
+                        JOptionPane.showMessageDialog(null, "No hay rentas registradas...", "Sin datos", 2);
+                        break;
+                    }
+                    idRenta = 0;
+                    stval = false;
+                    do {
+                        try {
+                            idRenta = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese el ID de renta al consultar: ", "Consultar unas renta", 3));
+                            if (idRenta <= 0) {
+                                JOptionPane.showMessageDialog(null, "El ID para la renta a consultar debe ser positiva", "Error de entrada", 2);
+                            }else{
+                                stval = true;
+                            }
+                        }catch(NumberFormatException e){
+                            JOptionPane.showMessageDialog(null, "El ID para la renta a consultar debe contener valores numericos", "ERROR", 2);
+                        }
+                    }while(!stval);
+                    
+                    posRenta = buscarIdRenta(idRenta,rentas);
+                    if(posRenta == -1){
+                        JOptionPane.showMessageDialog(null, "No se encontro una renta con el ID ingresado", "Fallo de busqueda", 2);
+                    }
                     break;
                 // fin de la parte de arath
 
