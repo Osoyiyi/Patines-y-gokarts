@@ -845,6 +845,7 @@ public class Menu_Renta_Patines_Gokarts {
                 // fin de la parte de arath
 
                 // inicio de la parte de luis
+                // eliminar patines
                 case 13:
                     //Buscar si el arreglo se encuentra vacio
                     if (vehiculos.isEmpty()) {
@@ -893,6 +894,8 @@ public class Menu_Renta_Patines_Gokarts {
                         JOptionPane.showMessageDialog(null, "Patines eliminados correctamente... ", "Eliminación exitosa", 3);
                     }
                     break;
+                    
+                    //eliminar gokarts
                 case 14:
                     //verifica que el arreglo tenga datos
                     if (vehiculos.isEmpty()) {
@@ -910,12 +913,12 @@ public class Menu_Renta_Patines_Gokarts {
                             idVehiculo = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese id del gokart",
                                     "Eliminación de gokart", 3));
                             if (idVehiculo <= 0) {
-                                JOptionPane.showMessageDialog(null, "El id debe de ser positivo", "Error de eliminación", 2);
+                                JOptionPane.showMessageDialog(null, "El id debe de ser positivo...", "Error...", 2);
                             } else {
                                 stval = true;
                             }
                         } catch (NumberFormatException e) {
-                            JOptionPane.showMessageDialog(null, "El id debe ser numerico...", "Error de eliminación", 2);
+                            JOptionPane.showMessageDialog(null, "El id debe ser numerico...", "Error...", 2);
                             break;
                         }
                     } while (!stval);
@@ -923,7 +926,7 @@ public class Menu_Renta_Patines_Gokarts {
                     //si el id existe realizara...
                     cont = buscarIdVehiculo(idVehiculo, vehiculos, 2);
                     if (cont == -1) {
-                        JOptionPane.showMessageDialog(null, "No se encontro el id...", "Error", 2);
+                        JOptionPane.showMessageDialog(null, "No se encontro el id...", "Error...", 2);
                         break;
                     } else {
                         
@@ -941,6 +944,8 @@ public class Menu_Renta_Patines_Gokarts {
                         JOptionPane.showMessageDialog(null, "Gokart eliminado correctamente... ", "Eliminación exitosa", 3);
                     }
                     break;
+                    
+                //eliminar clientes
                 case 15:
                     if(clientes.isEmpty()){
                         JOptionPane.showMessageDialog(null, "No hay datos existentes", "Sin datos", 2);
@@ -952,7 +957,7 @@ public class Menu_Renta_Patines_Gokarts {
                     do{
                         idCliente = JOptionPane.showInputDialog(null, "Ingresa id del cliente", "Eliminación de un cliente", 3);
                         if(idCliente == null || idCliente.isEmpty()){
-                            JOptionPane.showMessageDialog(null, "El id cliente no puede estar vacio", "Error", 2);
+                            JOptionPane.showMessageDialog(null, "El id cliente no puede estar vacio...", "Error...", 2);
                         }else{
                             stval = true;
                         }
@@ -971,11 +976,29 @@ public class Menu_Renta_Patines_Gokarts {
                         clientes.remove(posCliente);
                         JOptionPane.showMessageDialog(null, "El Cliente ha sido borrado exitosamente....", "Eliminación exitosa", 3);
                     }
-                    
-                    
-                    
                     break;
+                    
+                //eliminar rentas
                 case 16:
+                    if(rentas.isEmpty()){
+                        JOptionPane.showMessageDialog(null, "No hay datos existentes", "Sin datos", 2);
+                    }
+                    idRenta = -1;
+                    stval = false;
+                    do{
+                        try{
+                        idRenta = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese el id",
+                                                   "Eliminación de una renta", 3));
+                        if(idRenta == 0){
+                            JOptionPane.showInputDialog(null, "El id debe ser mayor a cero...", "Error...", 2);
+                        }
+                        }catch(NumberFormatException e){
+                            JOptionPane.showMessageDialog(null, "El id debe de ser numerico...", "Error...", 2);
+                        }
+                    }while(!stval);
+                    
+                    
+                    
                     break;
                 case 17:
                     break;
