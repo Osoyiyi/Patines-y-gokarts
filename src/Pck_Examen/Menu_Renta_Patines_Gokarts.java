@@ -335,17 +335,29 @@ public class Menu_Renta_Patines_Gokarts {
 
                         }
                     } while (!stval);
+                    
                     //si el id existe realizara...
                     cont = buscarIdVehiculo(idVehiculo, vehiculos, 1);
                     if (cont == -1) {
                         JOptionPane.showMessageDialog(null, "No se encontro el id...", "Error", 2);
                     } else {
+                        
+                        //se usa un for para ciclar entre los datos guardados de lsa renta
+                        //re realiza por si el cliente no ingresa la renta despues de agregar su vehiculo
+                        for(int i = 0; i<rentas.size(); i++){
+                            //se compara con el idvehiculo registrado en rentas con el idvehiculo para  que solo se borre
+                            //el archivo del vehiculo elegido
+                            if(rentas.get(i).getIdVehiculo() == idVehiculo){
+                                rentas.remove(i);
+                                i--;
+                            }
+                        }
                         vehiculos.remove(cont);
                         JOptionPane.showMessageDialog(null, "Patines eliminados correctamente... ", "Eliminación exitosa", 3);
                     }
                     break;
                 case 14:
-                    //verifica que el arregla tenga datos
+                    //verifica que el arreglo tenga datos
                     if (vehiculos.isEmpty()) {
                         JOptionPane.showMessageDialog(null, "No hay datos registrados", "Sin datos", 2);
                         break;
@@ -369,17 +381,39 @@ public class Menu_Renta_Patines_Gokarts {
                             JOptionPane.showMessageDialog(null, "El id debe ser numerico...", "Error de eliminación", 2);
                         }
                     } while (!stval);
+                    
                     //si el id existe realizara...
-                    cont = buscarIdVehiculo(idVehiculo, vehiculos, 1);
+                    cont = buscarIdVehiculo(idVehiculo, vehiculos, 2);
                     if (cont == -1) {
                         JOptionPane.showMessageDialog(null, "No se encontro el id...", "Error", 2);
                         break;
                     } else {
+                        
+                        //se usa un for para ciclar entre los datos guardados de lsa renta
+                        //re realiza por si el cliente no ingresa la renta despues de agregar su vehiculo
+                        for(int i = 0; i<rentas.size(); i++){
+                            //se compara con el idvehiculo registrado en rentas con el idvehiculo para  que solo se borre
+                            //el archivo del vehiculo elegido
+                            if(rentas.get(i).getIdVehiculo() == idVehiculo){
+                                rentas.remove(i);
+                                i--;
+                            }
+                        }
                         vehiculos.remove(cont);
                         JOptionPane.showMessageDialog(null, "Gokart eliminado correctamente... ", "Eliminación exitosa", 3);
                     }
                     break;
                 case 15:
+                    if(vehiculos.isEmpty()){
+                        JOptionPane.showMessageDialog(null, "No hay datos existentes", "Sin datos", 2);
+                    }
+                    
+                    stval = false;
+                    
+                        
+                        idCliente = JOptionPane.showInputDialog(null, "Ingrese id del cliente", "Eliminación de un cliente", 2);
+                        
+                    
                     break;
                 case 16:
                     break;
