@@ -64,7 +64,8 @@ public class Fecha {
             return false;
         }
     }
-    public String getFecha(){
+    @Override
+    public String toString(){
         return dia + "/" + mes + "/" + anio;
     }
 }
