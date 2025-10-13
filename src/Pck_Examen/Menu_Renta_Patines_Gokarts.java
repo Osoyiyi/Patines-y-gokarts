@@ -223,6 +223,139 @@ public class Menu_Renta_Patines_Gokarts {
                     //escritura(vehiculos, "Vehiculos.txt");
                     break;
                 case 2:
+                    //NUEVO ID DEL GOKART 
+                    do {
+                        idVehiculo = 0;
+                        try {
+                            idVehiculo = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingresa el ID del vehiculo: ",
+                                    "Alta de un Gokart", 3));
+                            if (idVehiculo <= 0) {
+                                JOptionPane.showMessageDialog(null, "El ID debe ser positivo", "Error de entrada", 0);
+                            }
+                        } catch (NumberFormatException e) {
+                            JOptionPane.showMessageDialog(null, "El ID debe contener valores numericos positivos ", "ERROR", 0);
+                        }
+                    } while (idVehiculo <= 0);
+
+                    idEx = buscarIdVehiculo(idVehiculo, vehiculos, 2);
+                    if (idEx != -1) {
+                        JOptionPane.showMessageDialog(null, "El ID ingresado ya ha sido registrado", "WARNING", 2);
+                        break;
+                    }
+
+                    Gokart gok = new Gokart();
+                    gok.setIdVehiculo(idVehiculo);
+
+                    //MODELO DEL GOKART
+                    do {
+                        modelo = JOptionPane.showInputDialog(null, "Ingresa el modelo: ", "Alta de un Gokart", 3);
+                        stval = false;
+                        if (modelo == null || modelo.trim().isEmpty() || !modelo.matches("^[A-Za-z0-9]+(?:[ -][A-Za-z0-9]+)*$")) {
+                            JOptionPane.showMessageDialog(null, "No corresponde a un nombre de modelo valido", "Warning", 2);
+                        } else {
+                            gok.setModelo(modelo);
+                            stval = true;
+                        }
+                    } while (stval == false);
+
+                    //MARCA DEL GOKART
+                    do {
+                        marca = JOptionPane.showInputDialog(null, "Ingresa la marca: ", "Alta de un Gokart", 3);
+                        stval = false;
+                        if (marca == null || marca.trim().isEmpty() || !marca.matches("^[A-Za-zÁÉÍÓÚáéíóúÑñ]+(?:[ -][A-Za-zÁÉÍÓÚáéíóúÑñ]+)*$")) {
+                            JOptionPane.showMessageDialog(null, "No corresponde a un nombre de marca valido", "Warning", 2);
+                        } else {
+                            gok.setMarca(marca);
+                            stval = true;
+                        }
+                    } while (stval == false);
+
+                    //ALTA DEL AÑO PARA EL  GOKART
+                    do {
+                        anio = 0;
+                        try {
+                            anio = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingresa el año: ", "Alta de un Gokart", 3));
+                            if (anio < 2000 || anio > 2025) {
+                                JOptionPane.showMessageDialog(null, "No corresponde a un año válido (2000-2025)", "Warning", 2);
+                            }
+                        } catch (NumberFormatException e) {
+                            JOptionPane.showMessageDialog(null, "El año debe ser numerico ", "Error de entrada", 0);
+                        }
+                    } while (anio < 2000 || anio > 2025);
+                    gok.setAnio(anio);
+
+                    //ALTA DE COLOR DEL GOKART}
+                    do {
+                        color = JOptionPane.showInputDialog(null, "Ingresa el color: ", "Alta de un Gokart", 3);
+                        stval = false;
+                        if (color == null || color.trim().isEmpty() || !color.matches("^[A-Za-zÁÉÍÓÚáéíóúÑñ]+(?:[ -][A-Za-zÁÉÍÓÚáéíóúÑñ]+)*$")) {
+                            JOptionPane.showMessageDialog(null, "No corresponde a un nombre de color valido", "Warning", 2);
+                        } else {
+                            gok.setColor(color);
+                            stval = true;
+                        }
+                    } while (stval == false);
+
+                    //ALTA DE PRECIO DEL GOKART
+                    do {
+                        precio = 0.0f;
+                        try {
+                            precio = Float.parseFloat(JOptionPane.showInputDialog(null, "Ingresa el precio", "Alta de un Gokart", 3));
+                            if (precio <= 0.0f) {
+                                JOptionPane.showMessageDialog(null, "El precio de ser mayor a 0", "WARNING", 2);
+                            }
+                        } catch (NumberFormatException e) {
+                            JOptionPane.showMessageDialog(null, "El precio debe ser un numero", "ERROR", 0);
+                        }
+                    } while (precio <= 0.0f);
+                    gok.setPrecio(precio);
+
+                    //ALTA DE CILINDRADA
+                    do {
+                        cilindrada = 0;
+                        try {
+                            cilindrada = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingresa la cilindrada (CC): ", "Alta de un Gokart", 3));
+                            if (cilindrada <= 0) {
+                                JOptionPane.showMessageDialog(null, "La cilindrada debe ser positiva", "Error", 0);
+                            }
+                        } catch (NumberFormatException e) {
+                            JOptionPane.showMessageDialog(null, "La cilindrada debe ser numerica ", "Error de entrada", 0);
+                        }
+                    } while (cilindrada <= 0);
+                    gok.setCilindrada(cilindrada);
+
+                    //NO. DE LLANTAS
+                    do {
+                        cilindrada = 0;
+                        try {
+                            cilindrada = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingresa la cilindrada (CC): ", "Alta de un Gokart", 3));
+                            if (cilindrada <= 0) {
+                                JOptionPane.showMessageDialog(null, "La cilindrada debe ser positiva", "Error", 0);
+                            }
+                        } catch (NumberFormatException e) {
+                            JOptionPane.showMessageDialog(null, "La cilindrada debe ser numerica ", "Error de entrada", 0);
+                        }
+                    } while (cilindrada <= 0);
+                    gok.setCilindrada(cilindrada);
+
+                    //VEL MAXIMA
+                    do {
+                        velocidadMaxima = 0.0f;
+                        try {
+                            velocidadMaxima = Float.parseFloat(JOptionPane.showInputDialog(null, "Ingresa la velocidad máxima (km/h): ", "Alta de un Gokart", 3));
+                            if (velocidadMaxima <= 0.0f) {
+                                JOptionPane.showMessageDialog(null, "La velocidad debe ser mayor a 0", "WARNING", 2);
+                            }
+                        } catch (NumberFormatException e) {
+                            JOptionPane.showMessageDialog(null, "La velocidad debe ser un numero", "ERROR", 0);
+                        }
+                    } while (velocidadMaxima <= 0.0f);
+                    gok.setVelocidadMaxima(velocidadMaxima);
+
+                    // Agregación de los nuevo datos al ArrayList de vehiculos
+                    vehiculos.add(gok);
+                    //Escritura del gokart en el archivo(De momento en comentario)
+//                    escritura(vehiculos, "Vehiculos.txt");
 
                     break;
                 case 3:
@@ -250,59 +383,60 @@ public class Menu_Renta_Patines_Gokarts {
                     stval = false;
                     do {
                         try {
-                            idVehiculo = Integer.parseInt(JOptionPane.showInputDialog(null,"Ingrese el ID de los patines a consultar: ",
+                            idVehiculo = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese el ID de los patines a consultar: ",
                                     "Detalles de patines", 3));
-                            if(idVehiculo <= 0){
+                            if (idVehiculo <= 0) {
                                 JOptionPane.showMessageDialog(null, "El ID debe ser positivo", "Error de entrada", 2);
-                            }else{
+                            } else {
                                 stval = true;
                             }
-                        }catch(NumberFormatException e){
-                            JOptionPane.showMessageDialog(null, "El ID solo debe contener valores NUMÉRICOS POSITIVOS", 
+                        } catch (NumberFormatException e) {
+                            JOptionPane.showMessageDialog(null, "El ID solo debe contener valores NUMÉRICOS POSITIVOS",
                                     "ERROR", 2);
                         }
-                    }while(!stval);
+                    } while (!stval);
                     posPatines = buscarIdVehiculo(idVehiculo, vehiculos, 1);
-                    if(posPatines == -1){
-                        JOptionPane.showMessageDialog(null,"No se encontraron patines con el ID ingresado", 
+                    if (posPatines == -1) {
+                        JOptionPane.showMessageDialog(null, "No se encontraron patines con el ID ingresado",
                                 "Error de búsqueda", 2);
-                    }else{
+                    } else {
                         JOptionPane.showMessageDialog(null, vehiculos.get(posPatines).getDatos(), "Detalles de patines", 1);
                     }
                     break;
-                    
+
                 case 10:
                     // Consultar dealles de un gokart
-                    if(vehiculos.isEmpty()){
+                    if (vehiculos.isEmpty()) {
                         JOptionPane.showMessageDialog(null, "No hay vehiculos(Gokarts) existentes", "Sin datos", 2);
                     }
                     idVehiculo = -1;
                     stval = false;
-                    do{
-                        try{
-                            idVehiculo = Integer.parseInt(JOptionPane.showInputDialog(null,"Ingrese el ID del Gokart a consultar: ",
+                    do {
+                        try {
+                            idVehiculo = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese el ID del Gokart a consultar: ",
                                     "Detalles de Gokart", 3));
-                            if(idVehiculo <= 0){
+                            if (idVehiculo <= 0) {
                                 JOptionPane.showMessageDialog(null, "El ID debe tener valores positivos", "Error de entrada", 2);
-                            }else{
+                            } else {
                                 stval = true;
                             }
-                        }catch(NumberFormatException e){
+                        } catch (NumberFormatException e) {
                             JOptionPane.showMessageDialog(null, "El ID solo puede contener valores NUMÉRICOS POSITIVOS",
                                     "ERROR", 2);
                         }
-                    }while(!stval);
-                    
+                    } while (!stval);
+
                     posGokart = buscarIdVehiculo(idVehiculo, vehiculos, 2);
-                    if(posGokart == -1){
-                        JOptionPane.showMessageDialog(null,"No se encontraron Gokarts con el ID ingresado", 
+                    if (posGokart == -1) {
+                        JOptionPane.showMessageDialog(null, "No se encontraron Gokarts con el ID ingresado",
                                 "Error de búsqueda", 2);
-                    }else{
-                        JOptionPane.showMessageDialog(null,vehiculos.get(posGokart).getDatos(), "Detalles de Gokart", 2);
+                    } else {
+                        JOptionPane.showMessageDialog(null, vehiculos.get(posGokart).getDatos(), "Detalles de Gokart", 2);
                     }
                     break;
-                    
+
                 case 11:
+
                     break;
                 case 12:
                     break;
