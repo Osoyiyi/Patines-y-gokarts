@@ -19,7 +19,7 @@ public class Menu_Renta_Patines_Gokarts {
         ArrayList<Vehiculo> lVehiculos = new ArrayList<>();
         ArrayList<Cliente> lClientes = new ArrayList<>();
         ArrayList<Renta> lRentas = new ArrayList<>();
-        int idVehiculo, anio, cilindrada, noLLantas, noRuedas, idRenta, op, idEx = -1, cont, posPatines, posGokart, posCliente;
+        int idVehiculo, anio, cilindrada, noLLantas, noRuedas, idRenta, op, idEx = -1, cont=-1, posPatines, posGokart, posCliente;
         int dc=0, mc=0, ac=2011;
         String modelo, marca, color, tipoPatin, materialBota, idCliente, nombre,
                 direccion, identificacion, tipoCliente, telefono;
@@ -363,10 +363,9 @@ public class Menu_Renta_Patines_Gokarts {
                     
                     Cliente client = new Cliente();
                     do {
-                        do{
+                        
                         idCliente = JOptionPane.showInputDialog(null, "Ingresa el id  del cliente: ", "Alta de un Cliente", 3);
-                        cont = buscarIdCliente(idCliente,clientes);
-                        }while(cont == -1);
+                        
                         stval = false;
                         if (idCliente == null || idCliente.trim().isEmpty()
                                 || !idCliente.matches("^[A-Za-zÁÉÍÓÚáéíóúÑñ0-9 ]+$")) {
@@ -376,11 +375,11 @@ public class Menu_Renta_Patines_Gokarts {
                             //-UAEH, GOFL2402-, Roper@, Arath--cpp
                             JOptionPane.showMessageDialog(null, "No corresponde a un nombre de id valido",
                                     "Warning", 2);
-                        } else {
-                            
-                            
-                            
+                        }else {
+                        client.setIdCliente(idCliente);
+                        stval = true;
                         }
+                        
                     }while (stval == false);
                     
                     do {
@@ -502,7 +501,7 @@ public class Menu_Renta_Patines_Gokarts {
                          try{
                              ac = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese año de nacimiento del cliente", 
                                                                                 "Alta de un cliente", 3));
-                             if(ac >= 2010){
+                             if(ac > 2010){
                                  JOptionPane.showInputDialog(null, "El año de nacimiento debe ser menor al 2010", 
                                                             "Error de alta", 2);
                              }
@@ -511,7 +510,6 @@ public class Menu_Renta_Patines_Gokarts {
                          }
                      }while(ac > 2010);
                      client.setFechaNacimiento(dc, mc, ac);
-                     
                      clientes.add(client);
                      //Se escribe los clientes en el archivo Clientes, mientras comentado para no generar nada
                     //escritura(clientes, "Clientes.txt");
@@ -520,10 +518,8 @@ public class Menu_Renta_Patines_Gokarts {
                 case 4: // Alta de una Renta 
                     Renta renta = new Renta();
                     int dh=0, mh=0, ah=0, hh=0, minH=0;
-                    idRenta = 0;
                     idVehiculo = 0;
-                    idCliente = " ";
-                    idEx = -1; // Para la búsqueda
+                    idCliente = "";
                     
                     // 1. ID de la Renta
                     do {
@@ -939,12 +935,36 @@ public class Menu_Renta_Patines_Gokarts {
                     }
                     break;
                 case 15:
-                    if(vehiculos.isEmpty()){
+                    if(clientes.isEmpty()){
                         JOptionPane.showMessageDialog(null, "No hay datos existentes", "Sin datos", 2);
                         break;
                     }
                     idCliente = "";
-                    cont = buscarIdCliente(idCliente, clientes);
+                    stval = false;
+                    
+                    do{
+                        idCliente = JOptionPane.showInputDialog(null, "Ingresa id del cliente", "Eliminación de un cliente", 3);
+                        if(idCliente == null || idCliente.isEmpty()){
+                            JOptionPane.showMessageDialog(null, "El id cliente no puede estar vacio", "Error", 2);
+                        }else{
+                            stval = true;
+                        }
+                    }while(!stval);
+                    
+                    posCliente = buscarIdCliente(idCliente, clientes);
+                    if(posCliente == -1){
+                        JOptionPane.showMessageDialog(null, "El id no existe...", "Error...",2);
+                    }else{
+                        for(int i = 0; i<rentas.size(); i++){
+                            if(rentas.get(i).getIdCliente().equals(idCliente)){
+                                rentas.remove(i);
+                                i--;
+                            }
+                        }
+                        clientes.remove(posCliente);
+                        JOptionPane.showMessageDialog(null, "El Cliente ha sido borrado exitosamente....", "Eliminación exitosa", 3);
+                    }
+                    
                     
                     
                     break;
