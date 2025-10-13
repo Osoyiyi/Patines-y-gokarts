@@ -71,8 +71,15 @@ public class Menu_Renta_Patines_Gokarts {
                     do {
                         idVehiculo = 0;
                         try {
-                            idVehiculo = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingresa el id-Vehiculo: ",
-                                    "Alta de un par de patines", 3));
+                            do{
+                                idVehiculo = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingresa el id-Vehiculo: ",
+                                        "Alta de un par de patines", 3));
+                                idEx = buscarIdVehiculo(idVehiculo, vehiculos, 1);
+                                if (idEx != -1) {
+                                    JOptionPane.showMessageDialog(null, "Ese id de Vehiculo ya ah sido registrado..", "Warning", 2);
+                                }
+                            }while(idEx != -1 );
+                    
                             if (idVehiculo <= 0) {
                                 JOptionPane.showMessageDialog(null, "El id-Vehiculo debe ser positivo", "Error", 0);
                             }
