@@ -26,7 +26,7 @@ public class Menu_Renta_Patines_Gokarts {
         ArrayList<Vehiculo> lVehiculos = new ArrayList<>();
         ArrayList<Cliente> lClientes = new ArrayList<>();
         ArrayList<Renta> lRentas = new ArrayList<>();
-        int idVehiculo, anio, cilindrada, noLLantas, noRuedas, idRenta, op, idEx = -1, cont = -1,
+        int idVehiculo, anio, cilindrada, noLlantas, noRuedas, idRenta, op, idEx = -1, cont = -1,
                 posPatines, posGokart, posCliente, posRenta,IdVeRenta, posVe, posCli;
         int dc = 0, mc = 0, ac = 2011;
         String modelo, marca, color, tipoPatin, materialBota, idCliente, nombre,
@@ -232,7 +232,7 @@ public class Menu_Renta_Patines_Gokarts {
                             JOptionPane.showMessageDialog(null, "El num de ruedas debe ser numerico ", "Error de entrada", 0);
                         }
 
-                    } while (noRuedas < 0 || noRuedas > 8);
+                    } while (noRuedas < 1 || noRuedas > 8);
                     pat.setNoRuedas(noRuedas);
                     //Se agrega al ArrayList de Vehículos
                     vehiculos.add(pat);
@@ -343,17 +343,17 @@ public class Menu_Renta_Patines_Gokarts {
 
                     //NO. DE LLANTAS
                     do {
-                        cilindrada = 0;
+                        noLlantas = 0;
                         try {
-                            cilindrada = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingresa la cilindrada (CC): ", "Alta de un Gokart", 3));
-                            if (cilindrada <= 0) {
-                                JOptionPane.showMessageDialog(null, "La cilindrada debe ser positiva", "Error", 0);
+                            noLlantas = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingresa El no. de llantas", "Alta de un Gokart", 3));
+                            if ( noLlantas <= 0) {
+                                JOptionPane.showMessageDialog(null, "No. Llantas debe ser positiva", "Error", 0);
                             }
                         } catch (NumberFormatException e) {
-                            JOptionPane.showMessageDialog(null, "La cilindrada debe ser numerica ", "Error de entrada", 0);
+                            JOptionPane.showMessageDialog(null, "No. llantas debe ser numerica ", "Error de entrada", 0);
                         }
-                    } while (cilindrada <= 0);
-                    gok.setCilindrada(cilindrada);
+                    } while (noLlantas  <= 0);
+                    gok.setNoLlantas(noLlantas);
 
                     //VEL MAXIMA
                     do {
@@ -798,6 +798,10 @@ public class Menu_Renta_Patines_Gokarts {
                     break;
                
                 case 5:
+                    if(vehiculos.isEmpty()){
+                        JOptionPane.showMessageDialog(null, "No hay vehiculos para listar...", "Error", 2);
+                        break;
+                    }
                     lista = String.format("%-10s %-20s %-10s %-10s %-15s %-15s %-8s\n",
                                         "Id", "Modelo", "Color", "Precio", "Tipo", "Material", "Ruedas");
                     lista += "-----------------------------------------------------------------------------------------------------------------\n";
@@ -818,6 +822,10 @@ public class Menu_Renta_Patines_Gokarts {
                     JOptionPane.showMessageDialog(null, lista, "LISTA DE PATINES", 1);
                     break;
                 case 6:
+                    if(vehiculos.isEmpty()){
+                        JOptionPane.showMessageDialog(null, "No hay vehiculos para listar...", "Error", 2);
+                        break;
+                    }
                     lista = String.format("%-10s %-20s %-10s %-10s %-10s %-8s\n",
                                         "IdVehiculo", "Modelo", "Color", "Precio", "Cilindradas", "No.Llantas");
                     lista += "-----------------------------------------------------------------------------------------------------------------\n";
@@ -836,8 +844,12 @@ public class Menu_Renta_Patines_Gokarts {
                     JOptionPane.showMessageDialog(null, lista, "LISTA DE GOKARTS", 1);
                     break;
                 case 7: 
+                    if(clientes.isEmpty()){
+                        JOptionPane.showMessageDialog(null, "No hay clientes para listar...", "Error", 2);
+                        break;
+                    }
                     lista = String.format("%-10s %-20s %-20s %-20s %-15s %-15s\n",
-                                        "IdVehiculo", "Modelo", "Color", "Precio", "Cilindradas", "No.Llantas");
+                                        "IdCliente", "Nombre", "Identificación", "Dirección", "Tipo", "Telefono");
                     lista += "-----------------------------------------------------------------------------------------------------------------\n";
                     for (Cliente v : clientes) {
                             lista += String.format("%-10s %-20s %-20s %-20s %-15s %-15s\n",
@@ -851,6 +863,10 @@ public class Menu_Renta_Patines_Gokarts {
                     JOptionPane.showMessageDialog(null, lista, "LISTA DE CLIENTES", 1);
                     break;
                 case 8:
+                    if(rentas.isEmpty()){
+                        JOptionPane.showMessageDialog(null, "No hay rentas para listar...", "Error", 2);
+                        break;
+                    }
                     lista = String.format("%-10s %-20s %-10s %-10s %-15s %-15s %-8s\n",
                                         "IdRenta", "IdVehiculo", "IdCliente", "Fecha", "Renta", "Hora", "Inicio");
                     lista += "-----------------------------------------------------------------------------------------------------------------\n";
