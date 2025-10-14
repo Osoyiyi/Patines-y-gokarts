@@ -23,9 +23,6 @@ public class Menu_Renta_Patines_Gokarts {
         ArrayList<Vehiculo> vehiculos = new ArrayList<>();
         ArrayList<Cliente> clientes = new ArrayList<>();
         ArrayList<Renta> rentas = new ArrayList<>();
-        ArrayList<Vehiculo> lVehiculos = new ArrayList<>();
-        ArrayList<Cliente> lClientes = new ArrayList<>();
-        ArrayList<Renta> lRentas = new ArrayList<>();
         int idVehiculo, anio, cilindrada, noLlantas, noRuedas, idRenta, op, idEx = -1, idEx2 = -1, cont = -1,
                 posPatines, posGokart, posCliente, posRenta,IdVeRenta, posVe, posCli;
         int dc = 0, mc = 0, ac = 2011, num1, num2;
