@@ -102,12 +102,12 @@ public class Renta {
     
     //comentario para un push de prueba
     public String getDatos(){
-        return "-------- RENTA -------"
+        return "-------- RENTA -------\n"
                + "Id renta: " + getIdRenta()
-               + "Id vehiculo: " + getIdVehiculo()
-               + "Id cliente: " + getIdCliente()
-               + "Fecha renta: " + getFechaRenta()
-               + "Hora de inicio: " + getHoraInicio()
-               + "Hora del final: " + getHoraFinal();
+               + "\nId vehiculo: " + getIdVehiculo()
+               + "\nId cliente: " + getIdCliente()
+               + "\nFecha renta: " + getFechaRenta()
+               + "\nHora de inicio: " + getHoraInicio()
+               + "\nHora del final: " + getHoraFinal();
     }
 }

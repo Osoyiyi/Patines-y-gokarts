@@ -19,10 +19,12 @@ public class Menu_Renta_Patines_Gokarts {
         ArrayList<Vehiculo> lVehiculos = new ArrayList<>();
         ArrayList<Cliente> lClientes = new ArrayList<>();
         ArrayList<Renta> lRentas = new ArrayList<>();
-        int idVehiculo, anio, cilindrada, noLLantas, noRuedas, idRenta, op, idEx = -1, cont = -1, posPatines, posGokart, posCliente, posRenta;
+        int idVehiculo, anio, cilindrada, noLLantas, noRuedas, idRenta, op, idEx = -1, cont = -1,
+                posPatines, posGokart, posCliente, posRenta,IdVeRenta, posVe, posCli;
         int dc = 0, mc = 0, ac = 2011;
         String modelo, marca, color, tipoPatin, materialBota, idCliente, nombre,
-                direccion, identificacion, tipoCliente, telefono;
+                direccion, identificacion, tipoCliente, telefono, auxID, DatosVe,
+                idClienteRenta, datosCliente, datosRenta, msjFinal;
         float precio, velocidadMaxima;
         Fecha fechaNacimiento, fechaRenta;
         Hora horaInicio, horaFinal;
@@ -897,22 +899,69 @@ public class Menu_Renta_Patines_Gokarts {
                     }
                     idRenta = 0;
                     stval = false;
-                    do {
-                        try {
-                            idRenta = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese el ID de renta al consultar: ", "Consultar unas renta", 3));
-                            if (idRenta <= 0) {
-                                JOptionPane.showMessageDialog(null, "El ID para la renta a consultar debe ser positiva", "Error de entrada", 2);
-                            } else {
-                                stval = true;
+                    do{
+                        //Asignamos una variable auxiliar para el ingreso del ID y asi poder lograr cancelar el metodo si el usuario cancela
+                        auxID = JOptionPane.showInputDialog(null,"Ingresel el ID  de la renta a consultar: ","Cetalle de una renta",3);
+                        if(auxID == null){
+                            idRenta = -1;
+                            stval = true;
+                            //Si es vacio la opción es decir, cancelar esto nos regresa al menu principal
+                        }else{
+                            //Lado contrario si el ID no es un vacio procede a asignarse la variable auxiliar en un Integer para proceder con la conversion de texto a dato num.
+                            try{
+                                idRenta = Integer.parseInt(auxID);
+                                if(idRenta <= 0){
+                                    JOptionPane.showMessageDialog(null, "El ID de la renta debe ser positivo","Warning",2);
+                                }else{
+                                    stval = true;
+                                }
+                            }catch(NumberFormatException e){
+                                JOptionPane.showMessageDialog(null, "El ID a ingresar debe ser numérico","ERROR",2);
                             }
-                        } catch (NumberFormatException e) {
-                            JOptionPane.showMessageDialog(null, "El ID para la renta a consultar debe contener valores numericos", "ERROR", 2);
                         }
-                    } while (!stval);
-
+                    }while(!stval);
+                    if(idRenta <= 0) break; //Aseguramos que se cierre o se haga el salto del case si no se ingreso un ID valido
+                    //Se evita la busqueda con un ID menor a cero y asegurar que no se generen errores 
+                    
                     posRenta = buscarIdRenta(idRenta, rentas);
-                    if (posRenta == -1) {
-                        JOptionPane.showMessageDialog(null, "No se encontro una renta con el ID ingresado", "Fallo de busqueda", 2);
+                    if(posRenta == -1){
+                        JOptionPane.showMessageDialog(null,"No se encontro una renta con el ID ingresado", "Busqueda fallida",2);
+                    }else{
+                        Renta rentaConsultada = rentas.get(posRenta);
+                        
+                        //Obtencion de detalles del vehiculo con la renta
+                        IdVeRenta = rentaConsultada.getIdVehiculo();
+                        posVe = buscarIdVehiculo(IdVeRenta, vehiculos,1);
+                        if(posVe == -1){
+                            posVe = buscarIdVehiculo(IdVeRenta, vehiculos, 2);
+                        }
+                        
+                        if(posVe != -1){
+                            DatosVe =vehiculos.get(posVe).getDatos();
+                        }else{
+                            DatosVe = "Error: El vehiculo asociado con el ID ingresado no se ha encontrado";
+                        }
+                        
+                        //Metodo para obtener detalles del cliente
+                        idClienteRenta = rentaConsultada.getIdCliente();
+                        posCli = buscarIdCliente(idClienteRenta, clientes);
+                        
+                        if(posCli != -1){
+                            datosCliente = clientes.get(posCli).getDatos();
+                        }else{
+                            datosCliente = "Error: El ID ingresado de renta no tiene asociadoo un cliente";
+                        }
+                        
+                        //Obtener datos de la renta
+                        datosRenta = rentaConsultada.getDatos().replace("ID renta:", "\nId renta:");
+                        
+                        msjFinal = "---DETALLE DE UNA RENTA---\n"+
+                                   DatosVe +"\n" +
+                                   datosCliente +"\n" +
+                                   "DATOS DE LA RENTA\n" +
+                                   datosRenta;
+                        
+                        JOptionPane.showMessageDialog(null, msjFinal,"Detalles de renta",1);
                     }
                     break;
                 // fin de la parte de arath
