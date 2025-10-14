@@ -6,9 +6,11 @@
 
 package Pck_Examen;
 import Pck_Fecha.Fecha;
+import java.io.Serializable;
 
 
-public class Cliente {
+public class Cliente implements Serializable {
+    private static final long serialVersionUID = 2L;
     private String idCliente;
     private String nombre;
     private String direccion;

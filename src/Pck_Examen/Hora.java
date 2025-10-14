@@ -6,9 +6,10 @@
 
 package Pck_Examen;
 
+import java.io.Serializable;
 import javax.swing.JOptionPane;
 
-public class Hora {
+public class Hora implements Serializable{
     private int num1;
     private int num2;
     

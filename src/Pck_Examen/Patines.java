@@ -6,7 +6,10 @@
 
 package Pck_Examen;
 
-public class Patines extends Vehiculo {
+import java.io.Serializable;
+
+public class Patines extends Vehiculo implements Serializable {
+    private static final long serialVersionUID = 2L;
     private String tipo;
     private String materialBota;
     private int noRuedas;

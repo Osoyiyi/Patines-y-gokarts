@@ -57,7 +57,9 @@ public class Menu_Renta_Patines_Gokarts {
                 + "\n17) Salir"
                 + "\nElige una opción: ";
         //Aquí va el proceso de lectura 
-
+                vehiculos = lectura("Vehiculos.txt");
+                clientes  = lectura("Clientes.txt");
+                rentas    = lectura("Rentas.txt");
         do {
             do {
                 op = 0;
@@ -237,7 +239,7 @@ public class Menu_Renta_Patines_Gokarts {
                     //Se agrega al ArrayList de Vehículos
                     vehiculos.add(pat);
                     //Se escribe los patines en el archivo vehículos, mientras comentado para no generar nada
-                    //escritura(vehiculos, "Vehiculos.txt");
+                    escritura(vehiculos, "Vehiculos.txt");
                     break;
                 case 2:
                     //NUEVO ID DEL GOKART 
@@ -372,7 +374,7 @@ public class Menu_Renta_Patines_Gokarts {
                     // Agregación de los nuevo datos al ArrayList de vehiculos
                     vehiculos.add(gok);
                     //Escritura del gokart en el archivo(De momento en comentario)
-//                    escritura(vehiculos, "Vehiculos.txt");
+                      escritura(vehiculos, "Vehiculos.txt");
 
                     break;
                 case 3:
@@ -528,7 +530,7 @@ public class Menu_Renta_Patines_Gokarts {
                     client.setFechaNacimiento(dc, mc, ac);
                     clientes.add(client);
                     //Se escribe los clientes en el archivo Clientes, mientras comentado para no generar nada
-                    //escritura(clientes, "Clientes.txt");
+                    escritura(clientes, "Clientes.txt");
 
                     break;
                 case 4: // Alta de una Renta 
@@ -695,6 +697,7 @@ public class Menu_Renta_Patines_Gokarts {
                     }while(stval == false);
                     ren.setHoraFinal(horaFinal);
                     rentas.add(ren);
+                    escritura(rentas, "Rentas.txt");
                     break;
                
                 case 5:
@@ -720,6 +723,7 @@ public class Menu_Renta_Patines_Gokarts {
                     }
                     //hola papus
                     JOptionPane.showMessageDialog(null, lista, "LISTA DE PATINES", 1);
+                    
                     break;
                 case 6:
                     if(vehiculos.isEmpty()){
@@ -991,6 +995,7 @@ public class Menu_Renta_Patines_Gokarts {
                             }
                         }
                         vehiculos.remove(cont);
+                        escritura(vehiculos, "Vehiculos.txt");
                         JOptionPane.showMessageDialog(null, "Patines eliminados correctamente... ", "Eliminación exitosa", 3);
                     }
                     break;
@@ -1041,6 +1046,7 @@ public class Menu_Renta_Patines_Gokarts {
                             }
                         }
                         vehiculos.remove(cont);
+                        escritura(vehiculos, "Vehiculos.txt");
                         JOptionPane.showMessageDialog(null, "Gokart eliminado correctamente... ", "Eliminación exitosa", 3);
                     }
                     break;
@@ -1078,6 +1084,7 @@ public class Menu_Renta_Patines_Gokarts {
                         JOptionPane.showMessageDialog(null, "El Cliente ha sido borrado exitosamente....",
                                                       "Eliminación exitosa", 3);
                     }
+                    escritura(clientes,"Clientes.txt");
                     break;
 
                 //eliminar rentas
@@ -1109,12 +1116,14 @@ public class Menu_Renta_Patines_Gokarts {
                         JOptionPane.showMessageDialog(null, "No se encontro el id...", "Error...", 2);
                     } else {
                         rentas.remove(cont);
+                        escritura(rentas, "Rentas.txt");
                         JOptionPane.showMessageDialog(null, "La renta ha sido eliminada exitosamente...",
                                                       "Eliminación exitosa", 3);
                     }
                     break;
                     
                 case 17:
+                    
                     break;
                     
                 default:
@@ -1193,7 +1202,8 @@ public class Menu_Renta_Patines_Gokarts {
     }
 
     //FUNCION DE LECTURA
-    public static <T> ArrayList<T> lectura(ArrayList<T> lista, String nomArchivo) {
+    public static <T> ArrayList<T> lectura(String nomArchivo) {
+        ArrayList<T> lista = new ArrayList<>();
         FileInputStream fin = null;
         try {
             fin = new FileInputStream(nomArchivo);

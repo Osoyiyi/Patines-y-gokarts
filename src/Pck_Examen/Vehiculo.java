@@ -6,7 +6,10 @@
 
 package Pck_Examen;
 
-public class Vehiculo {
+import java.io.Serializable;
+
+public class Vehiculo implements Serializable{
+    private static final long serialVersionUID = 2L;
     protected int idVehiculo;
     protected String modelo;
     protected String marca;
