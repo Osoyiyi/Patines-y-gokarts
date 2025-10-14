@@ -931,9 +931,9 @@ public class Menu_Renta_Patines_Gokarts {
                         
                         //Obtencion de detalles del vehiculo con la renta
                         IdVeRenta = rentaConsultada.getIdVehiculo();
-                        posVe = buscarIdVehiculo(IdVeRenta, vehiculos,1);
+                        posVe = buscarIdVehiculo(IdVeRenta, vehiculos,1);//Buscar patines rentados
                         if(posVe == -1){
-                            posVe = buscarIdVehiculo(IdVeRenta, vehiculos, 2);
+                            posVe = buscarIdVehiculo(IdVeRenta, vehiculos, 2);//O buscar gokart rentado
                         }
                         
                         if(posVe != -1){
@@ -958,7 +958,7 @@ public class Menu_Renta_Patines_Gokarts {
                         msjFinal = "---DETALLE DE UNA RENTA---\n"+
                                    DatosVe +"\n" +
                                    datosCliente +"\n" +
-                                   "DATOS DE LA RENTA\n" +
+                                   "---DATOS DE LA RENTA---\n" +
                                    datosRenta;
                         
                         JOptionPane.showMessageDialog(null, msjFinal,"Detalles de renta",1);
