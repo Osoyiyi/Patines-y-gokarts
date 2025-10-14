@@ -1,5 +1,12 @@
+//Godínez Hernández Alberto Carlos
+//González Flor José Luis
+//Lara Hernández Alexis Arath
+//Redondo Perez Rainy
+//Trejo Hernández Joshua
+
 package Pck_Examen;
 
+import Pck_Fecha.Fecha;
 import java.io.EOFException;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -24,7 +31,7 @@ public class Menu_Renta_Patines_Gokarts {
         int dc = 0, mc = 0, ac = 2011;
         String modelo, marca, color, tipoPatin, materialBota, idCliente, nombre,
                 direccion, identificacion, tipoCliente, telefono, auxID, DatosVe,
-                idClienteRenta, datosCliente, datosRenta, msjFinal;
+                idClienteRenta, datosCliente, datosRenta, msjFinal, lista = "";
         float precio, velocidadMaxima;
         Fecha fechaNacimiento, fechaRenta;
         Hora horaInicio, horaFinal;
@@ -789,18 +796,75 @@ public class Menu_Renta_Patines_Gokarts {
                     JOptionPane.showMessageDialog(null, "Renta registrada con éxito.\n" + renta.getDatos(), "Alta Exitosa", 1);
 
                     break;
-                // inicio de la parte de joshua
+               
                 case 5:
+                    lista = String.format("%-10s %-20s %-10s %-10s %-15s %-15s %-8s\n",
+                                        "Id", "Modelo", "Color", "Precio", "Tipo", "Material", "Ruedas");
+                    lista += "-----------------------------------------------------------------------------------------------------------------\n";
+                    for (Vehiculo v : vehiculos) {
+                        if (v instanceof Patines) {
+                            Patines p = (Patines) v;
+                            lista += String.format("%-10d %-20s %-10s %-10.2f %-15s %-15s %-8d\n",
+                                    p.getIdVehiculo(),
+                                    p.getModelo(),
+                                    p.getColor(),
+                                    p.getPrecio(),
+                                    p.getTipo(),
+                                    p.getMaterialBota(),
+                                    p.getNoRuedas());
+                        }
+                    }
+                    //hola papus
+                    JOptionPane.showMessageDialog(null, lista, "LISTA DE PATINES", 1);
                     break;
                 case 6:
+                    lista = String.format("%-10s %-20s %-10s %-10s %-10s %-8s\n",
+                                        "IdVehiculo", "Modelo", "Color", "Precio", "Cilindradas", "No.Llantas");
+                    lista += "-----------------------------------------------------------------------------------------------------------------\n";
+                    for (Vehiculo v : vehiculos) {
+                        if (v instanceof Gokart) {
+                            Gokart p = (Gokart) v;
+                            lista += String.format("%-10d %-20s %-10s %-10.2f %-10s %-8d\n",
+                                    p.getIdVehiculo(),
+                                    p.getModelo(),
+                                    p.getColor(),
+                                    p.getPrecio(),
+                                    p.getCilindrada(),
+                                    p.getNoLlantas());
+                        }
+                    }
+                    JOptionPane.showMessageDialog(null, lista, "LISTA DE GOKARTS", 1);
                     break;
-                case 7:
+                case 7: 
+                    lista = String.format("%-10s %-20s %-20s %-20s %-15s %-15s\n",
+                                        "IdVehiculo", "Modelo", "Color", "Precio", "Cilindradas", "No.Llantas");
+                    lista += "-----------------------------------------------------------------------------------------------------------------\n";
+                    for (Cliente v : clientes) {
+                            lista += String.format("%-10s %-20s %-20s %-20s %-15s %-15s\n",
+                                    v.getIdCliente(),
+                                    v.getNombre(),
+                                    v.getIdentificacion(),
+                                    v.getDireccion(),
+                                    v.getTipo(),
+                                    v.getTelefono());
+                        }
+                    JOptionPane.showMessageDialog(null, lista, "LISTA DE CLIENTES", 1);
                     break;
                 case 8:
+                    lista = String.format("%-10s %-20s %-10s %-10s %-15s %-15s %-8s\n",
+                                        "IdRenta", "IdVehiculo", "IdCliente", "Fecha", "Renta", "Hora", "Inicio");
+                    lista += "-----------------------------------------------------------------------------------------------------------------\n";
+                    for (Renta v : rentas) {
+                            lista += String.format("%-10d %-10s %-15s %-15s %-15s\n",
+                                    v.getIdRenta(),
+                                    v.getIdVehiculo(),
+                                    v.getIdCliente(),
+                                    v.getFechaRenta(),
+                                    v.getHoraInicio());
+                        }
+                    JOptionPane.showMessageDialog(null, lista, "LISTA DE RENTAS", 1);
                     break;
-                // fin de la parte de joshua
 
-                // inicio de la parte de arath
                 case 9:
                     // Consultar detalles de unos patines
                     if (vehiculos.isEmpty()) {
@@ -964,9 +1028,7 @@ public class Menu_Renta_Patines_Gokarts {
                         JOptionPane.showMessageDialog(null, msjFinal,"Detalles de renta",1);
                     }
                     break;
-                // fin de la parte de arath
-
-                // inicio de la parte de luis
+               
                 // eliminar patines
                 case 13:
                     //Buscar si el arreglo se encuentra vacio
@@ -1142,7 +1204,7 @@ public class Menu_Renta_Patines_Gokarts {
                 default:
                     JOptionPane.showMessageDialog(null, "La opción no existe...", "Error", 2);
                     break;
-                //fin de la parte de luis
+                
             }
         } while (op != 17);
 

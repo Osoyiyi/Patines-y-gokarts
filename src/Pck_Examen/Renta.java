@@ -1,5 +1,13 @@
+//Godínez Hernández Alberto Carlos
+//González Flor José Luis
+//Lara Hernandez Alexis Arath
+//Redondo Perez Rainy
+//Trejo Hernández Joshua
+
 
 package Pck_Examen;
+import Pck_Fecha.Fecha;
+
 
 public class Renta {
     private int idRenta;
