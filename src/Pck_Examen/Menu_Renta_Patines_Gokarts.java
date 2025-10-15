@@ -24,7 +24,7 @@ public class Menu_Renta_Patines_Gokarts {
         ArrayList<Renta> rentas = new ArrayList<>();
         int idVehiculo, anio, cilindrada, noLlantas, noRuedas, idRenta, op, idEx = -1, idEx2 = -1, cont = -1,
                 posPatines, posGokart, posCliente, posRenta, IdVeRenta, posVe, posCli;
-        int dc = 0, mc = 0, ac = 2011, num1, num2;
+        int dc = 0, mc = 0, ac = 2011, num1, num2, contPatines, contGokart;
         String modelo, marca, color, tipoPatin, materialBota, idCliente, nombre,
                 direccion, identificacion, tipoCliente, telefono, auxID, DatosVe,
                 idClienteRenta, datosCliente, datosRenta, msjFinal, lista = "";
@@ -237,21 +237,23 @@ public class Menu_Renta_Patines_Gokarts {
                     do {
                         idVehiculo = 0;
                         try {
-                            idVehiculo = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingresa el ID del vehículo: ",
-                                    "Alta de un Gokart", 3));
+                            do {
+                                idVehiculo = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingresa el ID del vehículo: ",
+                                        "Alta de Gokart", 3));
+                                idEx = buscarIdVehiculo(idVehiculo, vehiculos, 2);
+                                if (idEx != -1) {
+                                    JOptionPane.showMessageDialog(null, "Ese ID de Vehiculo ya ha sido registrado.", "Warning", 2);
+                                }
+                            } while (idEx != -1);
+
                             if (idVehiculo <= 0) {
-                                JOptionPane.showMessageDialog(null, "El ID debe ser positivo.", "Error de entrada", 0);
+                                JOptionPane.showMessageDialog(null, "El ID Vehiculo debe ser positivo.", "Error", 0);
                             }
                         } catch (NumberFormatException e) {
-                            JOptionPane.showMessageDialog(null, "El ID debe contener valores numéricos positivos.", "ERROR", 0);
+                            JOptionPane.showMessageDialog(null, "El ID del vehículo debe ser numérico.", "Error de entrada", 0);
                         }
-                    } while (idVehiculo <= 0);
 
-                    idEx = buscarIdVehiculo(idVehiculo, vehiculos, 2);
-                    if (idEx != -1) {
-                        JOptionPane.showMessageDialog(null, "El ID ingresado ya ha sido registrado", "WARNING", 2);
-                        break;
-                    }
+                    } while (idVehiculo <= 0);
 
                     Gokart gok = new Gokart();
                     gok.setIdVehiculo(idVehiculo);
@@ -690,7 +692,8 @@ public class Menu_Renta_Patines_Gokarts {
                     break;
 
                 case 5:
-                    if (vehiculos.isEmpty()) {
+                    contPatines = 0;
+                    if (vehiculos.isEmpty() ) {
                         JOptionPane.showMessageDialog(null, "No hay vehiculos para listar...", "Error", 2);
                         break;
                     }
@@ -700,6 +703,7 @@ public class Menu_Renta_Patines_Gokarts {
                     for (Vehiculo v : vehiculos) {
                         if (v instanceof Patines) {
                             Patines p = (Patines) v;
+                            contPatines++;
                             lista += String.format("%-10d %-20s %-10s %-10.2f %-15s %-15s %-8d\n",
                                     p.getIdVehiculo(),
                                     p.getModelo(),
@@ -711,10 +715,15 @@ public class Menu_Renta_Patines_Gokarts {
                         }
                     }
                     //hola papus
-                    JOptionPane.showMessageDialog(null, lista, "LISTA DE PATINES", 1);
+                    if(contPatines > 0){
+                        JOptionPane.showMessageDialog(null, lista, "LISTA DE PATINES", 1);
+                    }else{ 
+                        JOptionPane.showMessageDialog(null," No se encontraron patines para listar","Sin datos",1);
+                    }
 
                     break;
                 case 6:
+                    contGokart = 0;
                     if (vehiculos.isEmpty()) {
                         JOptionPane.showMessageDialog(null, "No hay vehiculos para listar...", "Error", 2);
                         break;
@@ -725,6 +734,7 @@ public class Menu_Renta_Patines_Gokarts {
                     for (Vehiculo v : vehiculos) {
                         if (v instanceof Gokart) {
                             Gokart p = (Gokart) v;
+                            contGokart++;
                             lista += String.format("%-10d %-20s %-10s %-10.2f %-10s %-8d\n",
                                     p.getIdVehiculo(),
                                     p.getModelo(),
@@ -734,7 +744,11 @@ public class Menu_Renta_Patines_Gokarts {
                                     p.getNoLlantas());
                         }
                     }
-                    JOptionPane.showMessageDialog(null, lista, "LISTA DE GOKARTS", 1);
+                    if(contGokart > 0){
+                        JOptionPane.showMessageDialog(null, lista, "LISTA DE GOKARTS", 1);
+                    }else{
+                        JOptionPane.showMessageDialog(null,"No se encontraron Gakarts para listar...","Sin datos",1);
+                    }
                     break;
                 case 7:
                     if (clientes.isEmpty()) {
@@ -1049,7 +1063,7 @@ public class Menu_Renta_Patines_Gokarts {
                         if(rentaEliminada){
                             JOptionPane.showMessageDialog(null, "Renta asociada eliminada correctamente...", "Eliminación exitosa", 3);
                         }else{
-                            JOptionPane.showMessageDialog(null,"Sin renta asociada.", "Sin rentaa",-1);
+                            JOptionPane.showMessageDialog(null,"Sin renta asociada.", "Sin renta",-1);
                         }
                         vehiculos.remove(cont);
                         escritura(vehiculos, "Vehiculos.txt");
@@ -1137,12 +1151,12 @@ public class Menu_Renta_Patines_Gokarts {
                     break;
 
                 case 17:
-                    JOptionPane.showMessageDialog(null, "Gracias por usar este pgrograma...\n"
+                    JOptionPane.showMessageDialog(null, "Gracias por usar este programa...\n"
                             + "Elaborado por:\n"
                             + "Godínez Hernández Alberto Carlos\n"
                             + "González Flor José Luis\n"
                             + "Lara Hernández Alexis Arath\n"
-                            + "Redondo Perez Rainy\n"
+                            + "Redondo Pérez Rainy\n"
                             + "Trejo Hernández Joshua\n"
                             + "Adios <3", "Copyritght", 1);
                     break;
