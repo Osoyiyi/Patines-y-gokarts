@@ -3,7 +3,6 @@
 //Lara Hernández Alexis Arath
 //Redondo Perez Rainy
 //Trejo Hernández Joshua
-
 package Pck_Examen;
 
 import Pck_Fecha.Fecha;
@@ -24,7 +23,7 @@ public class Menu_Renta_Patines_Gokarts {
         ArrayList<Cliente> clientes = new ArrayList<>();
         ArrayList<Renta> rentas = new ArrayList<>();
         int idVehiculo, anio, cilindrada, noLlantas, noRuedas, idRenta, op, idEx = -1, idEx2 = -1, cont = -1,
-                posPatines, posGokart, posCliente, posRenta,IdVeRenta, posVe, posCli;
+                posPatines, posGokart, posCliente, posRenta, IdVeRenta, posVe, posCli;
         int dc = 0, mc = 0, ac = 2011, num1, num2;
         String modelo, marca, color, tipoPatin, materialBota, idCliente, nombre,
                 direccion, identificacion, tipoCliente, telefono, auxID, DatosVe,
@@ -32,7 +31,7 @@ public class Menu_Renta_Patines_Gokarts {
         float precio, velocidadMaxima;
         Fecha fechaNacimiento, fechaRenta;
         Hora horaInicio = new Hora(), horaFinal = new Hora();
-        boolean stval, valH;
+        boolean stval, valH, rentaEliminada = false;
         //MENU-------------------------------------------
         String menu = "----- RENTA DE PATINES Y GOKARTS -----"
                 + "\n1) Alta de un par de patines"
@@ -54,9 +53,9 @@ public class Menu_Renta_Patines_Gokarts {
                 + "\n17) Salir"
                 + "\nElige una opción: ";
         //Aquí va el proceso de lectura 
-                vehiculos = lectura("Vehiculos.txt");
-                clientes  = lectura("Clientes.txt");
-                rentas    = lectura("Rentas.txt");
+        vehiculos = lectura("Vehiculos.txt");
+        clientes = lectura("Clientes.txt");
+        rentas = lectura("Rentas.txt");
         do {
             do {
                 op = 0;
@@ -80,28 +79,23 @@ public class Menu_Renta_Patines_Gokarts {
                         idVehiculo = 0;
                         try {
                             do {
-                                idVehiculo = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingresa el id-Vehiculo: ",
+                                idVehiculo = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingresa el ID del vehículo: ",
                                         "Alta de un par de patines", 3));
                                 idEx = buscarIdVehiculo(idVehiculo, vehiculos, 1);
                                 if (idEx != -1) {
-                                    JOptionPane.showMessageDialog(null, "Ese id de Vehiculo ya ah sido registrado..", "Warning", 2);
+                                    JOptionPane.showMessageDialog(null, "Ese ID de Vehiculo ya ah sido registrado.", "Warning", 2);
                                 }
                             } while (idEx != -1);
 
                             if (idVehiculo <= 0) {
-                                JOptionPane.showMessageDialog(null, "El id-Vehiculo debe ser positivo", "Error", 0);
+                                JOptionPane.showMessageDialog(null, "El ID Vehiculo debe ser positivo.", "Error", 0);
                             }
                         } catch (NumberFormatException e) {
-                            JOptionPane.showMessageDialog(null, "El id-Vehiculo debe ser numerico ", "Error de entrada", 0);
+                            JOptionPane.showMessageDialog(null, "El ID del vehículo debe ser numérico.", "Error de entrada", 0);
                         }
 
                     } while (idVehiculo <= 0);
-                    idEx = buscarIdVehiculo(idVehiculo, vehiculos, 1);
-                    if (idEx != -1) {
-                        JOptionPane.showMessageDialog(null, "Ese id de Vehiculo ya ah sido registrado..", "Warning", 2);
-                        break;
-                    }
-
+                    
                     Patines pat = new Patines();
                     pat.setIdVehiculo(idVehiculo);
                     //Modelo************************
@@ -114,7 +108,7 @@ public class Menu_Renta_Patines_Gokarts {
                             //CX-5, A4, GT-R, Corolla Cross
                             //La expresión no permite nombres como:
                             //-GT, Focus--RS, Civic@2024
-                            JOptionPane.showMessageDialog(null, "No corresponde a un nombre de modelo valido",
+                            JOptionPane.showMessageDialog(null, "No corresponde a un nombre de modelo válido.",
                                     "Warning", 2);
                         } else {
                             pat.setModelo(modelo);
@@ -131,7 +125,7 @@ public class Menu_Renta_Patines_Gokarts {
                             //Ford, Mercedes-Benz, Land Rover
                             //La expresión no permite nombres como:
                             //-Ford, BMW-, Audi@@
-                            JOptionPane.showMessageDialog(null, "No corresponde a un nombre de marca valido",
+                            JOptionPane.showMessageDialog(null, "No corresponde a un nombre de marca válido.",
                                     "Warning", 2);
                         } else {
                             pat.setMarca(marca);
@@ -149,7 +143,7 @@ public class Menu_Renta_Patines_Gokarts {
                                         "Warning", 2);
                             }
                         } catch (NumberFormatException e) {
-                            JOptionPane.showMessageDialog(null, "El año debe ser numerico ", "Error de entrada", 0);
+                            JOptionPane.showMessageDialog(null, "El año debe ser numérico.", "Error de entrada", 0);
                         }
                     } while (anio < 2000 || anio > 2025);
                     pat.setAnio(anio);
@@ -163,7 +157,7 @@ public class Menu_Renta_Patines_Gokarts {
                             //Rojo, Rojo-Mate, Azul Marino, Gris-Plata
                             //La expresión no permite nombres como:
                             //-Rojo, -Rojo, Verde--Lima, " "Rojo-Mate
-                            JOptionPane.showMessageDialog(null, "No corresponde a un nombre de color valido",
+                            JOptionPane.showMessageDialog(null, "No corresponde a un nombre de color válido.",
                                     "Warning", 2);
                         } else {
                             pat.setColor(color);
@@ -174,13 +168,13 @@ public class Menu_Renta_Patines_Gokarts {
                     do {
                         precio = 0.0f;
                         try {
-                            precio = Float.parseFloat(JOptionPane.showInputDialog(null, "Ingresa el precio",
+                            precio = Float.parseFloat(JOptionPane.showInputDialog(null, "Ingresa el precio: ",
                                     "Alta de un par de patines", 3));
                             if (precio <= 0.0f) {
-                                JOptionPane.showMessageDialog(null, "El precio de ser mayor a 0", "WARNING", 2);
+                                JOptionPane.showMessageDialog(null, "El precio debe ser mayor a 0.", "WARNING", 2);
                             }
                         } catch (NumberFormatException e) {
-                            JOptionPane.showMessageDialog(null, "El precio debe ser un numero", "ERROR", 0);
+                            JOptionPane.showMessageDialog(null, "El precio debe ser un número.", "ERROR", 0);
                         }
                     } while (precio <= 0.0f);
                     pat.setPrecio(precio);
@@ -194,7 +188,7 @@ public class Menu_Renta_Patines_Gokarts {
                             //Inline, Roller, Roller-Inline, Patín de hielo
                             //La expresión no permite nombres como:
                             //-Inline, Roller-, Patín123, " "Inline
-                            JOptionPane.showMessageDialog(null, "No corresponde a un nombre de tipo de patín valido",
+                            JOptionPane.showMessageDialog(null, "No corresponde a un nombre de tipo de patín válido.",
                                     "Warning", 2);
                         } else {
                             pat.setTipo(tipoPatin);
@@ -203,7 +197,7 @@ public class Menu_Renta_Patines_Gokarts {
                     } while (stval == false);
                     //Material de Bota********
                     do {
-                        materialBota = JOptionPane.showInputDialog(null, "Ingresa el Material de la bota: ", "Alta de un par de patines", 3);
+                        materialBota = JOptionPane.showInputDialog(null, "Ingresa el material de la bota: ", "Alta de un par de patines", 3);
                         stval = false;
                         if (materialBota == null || materialBota.trim().isEmpty()
                                 || !materialBota.matches("^[A-Za-zÁÉÍÓÚáéíóúÑñ]+(?:[ -/][A-Za-zÁÉÍÓÚáéíóúÑñ]+)*$")) {
@@ -211,7 +205,7 @@ public class Menu_Renta_Patines_Gokarts {
                             //Cuero, Cuero Sintético, Nylon/Poliéster, Cuero-Plástico
                             //La expresión no permite nombres como:
                             //-Cuero, Cuero-, Nylon//Poliéster, Cuero123
-                            JOptionPane.showMessageDialog(null, "No corresponde a un nombre de material de bota valido",
+                            JOptionPane.showMessageDialog(null, "No corresponde a un nombre de material de bota válido",
                                     "Warning", 2);
                         } else {
                             pat.setMaterialBota(materialBota);
@@ -222,13 +216,13 @@ public class Menu_Renta_Patines_Gokarts {
                     do {
                         noRuedas = -1;
                         try {
-                            noRuedas = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingresa el num de ruedas: ",
+                            noRuedas = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingresa el número de ruedas ",
                                     "Alta de un par de patines", 3));
                             if (noRuedas < 0 || noRuedas > 8) {
-                                JOptionPane.showMessageDialog(null, "El num de ruedas debe estar entre (0-8)", "Error", 0);
+                                JOptionPane.showMessageDialog(null, "El número de ruedas debe estar entre (0-8)", "Error", 0);
                             }
                         } catch (NumberFormatException e) {
-                            JOptionPane.showMessageDialog(null, "El num de ruedas debe ser numerico ", "Error de entrada", 0);
+                            JOptionPane.showMessageDialog(null, "El número de ruedas debe ser numérico.", "Error de entrada", 0);
                         }
 
                     } while (noRuedas < 1 || noRuedas > 8);
@@ -243,13 +237,13 @@ public class Menu_Renta_Patines_Gokarts {
                     do {
                         idVehiculo = 0;
                         try {
-                            idVehiculo = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingresa el ID del vehiculo: ",
+                            idVehiculo = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingresa el ID del vehículo: ",
                                     "Alta de un Gokart", 3));
                             if (idVehiculo <= 0) {
-                                JOptionPane.showMessageDialog(null, "El ID debe ser positivo", "Error de entrada", 0);
+                                JOptionPane.showMessageDialog(null, "El ID debe ser positivo.", "Error de entrada", 0);
                             }
                         } catch (NumberFormatException e) {
-                            JOptionPane.showMessageDialog(null, "El ID debe contener valores numericos positivos ", "ERROR", 0);
+                            JOptionPane.showMessageDialog(null, "El ID debe contener valores numéricos positivos.", "ERROR", 0);
                         }
                     } while (idVehiculo <= 0);
 
@@ -267,7 +261,7 @@ public class Menu_Renta_Patines_Gokarts {
                         modelo = JOptionPane.showInputDialog(null, "Ingresa el modelo: ", "Alta de un Gokart", 3);
                         stval = false;
                         if (modelo == null || modelo.trim().isEmpty() || !modelo.matches("^[A-Za-z0-9]+(?:[ -][A-Za-z0-9]+)*$")) {
-                            JOptionPane.showMessageDialog(null, "No corresponde a un nombre de modelo valido", "Warning", 2);
+                            JOptionPane.showMessageDialog(null, "No corresponde a un nombre de modelo válido.", "Warning", 2);
                         } else {
                             gok.setModelo(modelo);
                             stval = true;
@@ -279,7 +273,7 @@ public class Menu_Renta_Patines_Gokarts {
                         marca = JOptionPane.showInputDialog(null, "Ingresa la marca: ", "Alta de un Gokart", 3);
                         stval = false;
                         if (marca == null || marca.trim().isEmpty() || !marca.matches("^[A-Za-zÁÉÍÓÚáéíóúÑñ]+(?:[ -][A-Za-zÁÉÍÓÚáéíóúÑñ]+)*$")) {
-                            JOptionPane.showMessageDialog(null, "No corresponde a un nombre de marca valido", "Warning", 2);
+                            JOptionPane.showMessageDialog(null, "No corresponde a un nombre de marca válido.", "Warning", 2);
                         } else {
                             gok.setMarca(marca);
                             stval = true;
@@ -295,7 +289,7 @@ public class Menu_Renta_Patines_Gokarts {
                                 JOptionPane.showMessageDialog(null, "No corresponde a un año válido (2000-2025)", "Warning", 2);
                             }
                         } catch (NumberFormatException e) {
-                            JOptionPane.showMessageDialog(null, "El año debe ser numerico ", "Error de entrada", 0);
+                            JOptionPane.showMessageDialog(null, "El año debe ser numérico.", "Error de entrada", 0);
                         }
                     } while (anio < 2000 || anio > 2025);
                     gok.setAnio(anio);
@@ -305,7 +299,7 @@ public class Menu_Renta_Patines_Gokarts {
                         color = JOptionPane.showInputDialog(null, "Ingresa el color: ", "Alta de un Gokart", 3);
                         stval = false;
                         if (color == null || color.trim().isEmpty() || !color.matches("^[A-Za-zÁÉÍÓÚáéíóúÑñ]+(?:[ -][A-Za-zÁÉÍÓÚáéíóúÑñ]+)*$")) {
-                            JOptionPane.showMessageDialog(null, "No corresponde a un nombre de color valido", "Warning", 2);
+                            JOptionPane.showMessageDialog(null, "No corresponde a un nombre de color válido.", "Warning", 2);
                         } else {
                             gok.setColor(color);
                             stval = true;
@@ -316,12 +310,12 @@ public class Menu_Renta_Patines_Gokarts {
                     do {
                         precio = 0.0f;
                         try {
-                            precio = Float.parseFloat(JOptionPane.showInputDialog(null, "Ingresa el precio", "Alta de un Gokart", 3));
+                            precio = Float.parseFloat(JOptionPane.showInputDialog(null, "Ingresa el precio: ", "Alta de un Gokart", 3));
                             if (precio <= 0.0f) {
-                                JOptionPane.showMessageDialog(null, "El precio de ser mayor a 0", "WARNING", 2);
+                                JOptionPane.showMessageDialog(null, "El precio debe ser mayor a 0.", "WARNING", 2);
                             }
                         } catch (NumberFormatException e) {
-                            JOptionPane.showMessageDialog(null, "El precio debe ser un numero", "ERROR", 0);
+                            JOptionPane.showMessageDialog(null, "El precio debe ser un número.", "ERROR", 0);
                         }
                     } while (precio <= 0.0f);
                     gok.setPrecio(precio);
@@ -332,7 +326,7 @@ public class Menu_Renta_Patines_Gokarts {
                         try {
                             cilindrada = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingresa la cilindrada (CC): ", "Alta de un Gokart", 3));
                             if (cilindrada <= 0) {
-                                JOptionPane.showMessageDialog(null, "La cilindrada debe ser positiva", "Error", 0);
+                                JOptionPane.showMessageDialog(null, "La cilindrada debe ser numérica.", "Error", 0);
                             }
                         } catch (NumberFormatException e) {
                             JOptionPane.showMessageDialog(null, "La cilindrada debe ser numerica ", "Error de entrada", 0);
@@ -344,14 +338,14 @@ public class Menu_Renta_Patines_Gokarts {
                     do {
                         noLlantas = 0;
                         try {
-                            noLlantas = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingresa El no. de llantas", "Alta de un Gokart", 3));
-                            if ( noLlantas <= 0) {
-                                JOptionPane.showMessageDialog(null, "No. Llantas debe ser positiva", "Error", 0);
+                            noLlantas = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingresa el número de llantas: ", "Alta de un Gokart", 3));
+                            if (noLlantas <= 0 || noLlantas > 4) {
+                                JOptionPane.showMessageDialog(null, "El número de llantas debe ser mayor a 0 y menor a 4.", "Error", 0);
                             }
                         } catch (NumberFormatException e) {
-                            JOptionPane.showMessageDialog(null, "No. llantas debe ser numerica ", "Error de entrada", 0);
+                            JOptionPane.showMessageDialog(null, "El número de llantas debe ser numérica.", "Error de entrada", 0);
                         }
-                    } while (noLlantas  <= 0);
+                    } while (noLlantas <= 0 || noLlantas > 4);
                     gok.setNoLlantas(noLlantas);
 
                     //VEL MAXIMA
@@ -360,10 +354,10 @@ public class Menu_Renta_Patines_Gokarts {
                         try {
                             velocidadMaxima = Float.parseFloat(JOptionPane.showInputDialog(null, "Ingresa la velocidad máxima (km/h): ", "Alta de un Gokart", 3));
                             if (velocidadMaxima <= 0.0f) {
-                                JOptionPane.showMessageDialog(null, "La velocidad debe ser mayor a 0", "WARNING", 2);
+                                JOptionPane.showMessageDialog(null, "La velocidad debe ser mayor a 0.", "WARNING", 2);
                             }
                         } catch (NumberFormatException e) {
-                            JOptionPane.showMessageDialog(null, "La velocidad debe ser un numero", "ERROR", 0);
+                            JOptionPane.showMessageDialog(null, "La velocidad debe ser un número.o", "ERROR", 0);
                         }
                     } while (velocidadMaxima <= 0.0f);
                     gok.setVelocidadMaxima(velocidadMaxima);
@@ -371,42 +365,39 @@ public class Menu_Renta_Patines_Gokarts {
                     // Agregación de los nuevo datos al ArrayList de vehiculos
                     vehiculos.add(gok);
                     //Escritura del gokart en el archivo(De momento en comentario)
-                      escritura(vehiculos, "Vehiculos.txt");
+                    escritura(vehiculos, "Vehiculos.txt");
 
                     break;
                 case 3:
 
                     Cliente client = new Cliente();
                     do {
-
-                        idCliente = JOptionPane.showInputDialog(null, "Ingresa el id  del cliente: ", "Alta de un Cliente", 3);
-
+                        idCliente = JOptionPane.showInputDialog(null, "Ingresa el ID del cliente:", "Alta de un Cliente", 3);
                         stval = false;
                         if (idCliente == null || idCliente.trim().isEmpty()
                                 || !idCliente.matches("^[A-Za-zÁÉÍÓÚáéíóúÑñ0-9 ]+$")) {
-                            //La expresión permite nombres como: 
-                            //GOFL2402, Roper, UAEH, Arathcpp
-                            //La expresión no permite nombres como:
-                            //-UAEH, GOFL2402-, Roper@, Arath--cpp
-                            JOptionPane.showMessageDialog(null, "No corresponde a un nombre de id valido",
+                            // La expresión permite nombres como: 
+                            // GOFL2402, Roper, UAEH, Arathcpp
+                            // La expresión no permite nombres como:
+                            // -UAEH, GOFL2402-, Roper@, Arath--cpp
+                            JOptionPane.showMessageDialog(null, "No corresponde a un ID válido",
                                     "Warning", 2);
                         } else {
                             client.setIdCliente(idCliente);
                             stval = true;
                         }
-
                     } while (stval == false);
 
                     do {
-                        nombre = JOptionPane.showInputDialog(null, "Ingresa nombre del cliente: ", "Alta de un Cliente", 3);
+                        nombre = JOptionPane.showInputDialog(null, "Ingresa el nombre del cliente:", "Alta de un Cliente", 3);
                         stval = false;
                         if (nombre == null || nombre.trim().isEmpty()
                                 || !nombre.matches("^[A-Za-zÁÉÍÓÚáéíóúÑñ]+(?:[ -][A-Za-zÁÉÍÓÚáéíóúÑñ]+)*$")) {
-                            //La expresión permite nombres como: 
-                            //Jose Luis, Rainy, José, Alexis-Arath
-                            //La expresión no permite nombres como:
-                            //-Carlos, Rainy-, Arath//Alexis, Luis1234
-                            JOptionPane.showMessageDialog(null, "No corresponde a un nombre valido",
+                            // La expresión permite nombres como: 
+                            // Jose Luis, Rainy, José, Alexis-Arath
+                            // La expresión no permite nombres como:
+                            // -Carlos, Rainy-, Arath//Alexis, Luis1234
+                            JOptionPane.showMessageDialog(null, "No corresponde a un nombre válido",
                                     "Warning", 2);
                         } else {
                             client.setNombre(nombre);
@@ -415,15 +406,15 @@ public class Menu_Renta_Patines_Gokarts {
                     } while (stval == false);
 
                     do {
-                        direccion = JOptionPane.showInputDialog(null, "Ingresa dirección del cliente: ", "Alta de un Cliente", 3);
+                        direccion = JOptionPane.showInputDialog(null, "Ingresa la dirección del cliente:", "Alta de un Cliente", 3);
                         stval = false;
                         if (direccion == null || direccion.trim().isEmpty()
                                 || !direccion.matches("^[A-Za-zÁÉÍÓÚáéíóúÑñ0-9.,#\\s-]+$")) {
-                            //La expresión permite nombres como: 
-                            //JAv. Juárez #23, Calle 5 de Mayo, Calle Hidalgo-poniente
-                            //La expresión no permite nombres como:
-                            //@Calle Falsa 123, --Calle Real
-                            JOptionPane.showMessageDialog(null, "No corresponde a una dirección valida",
+                            // La expresión permite nombres como: 
+                            // JAv. Juárez #23, Calle 5 de Mayo, Calle Hidalgo-poniente
+                            // La expresión no permite nombres como:
+                            // @Calle Falsa 123, --Calle Real
+                            JOptionPane.showMessageDialog(null, "No corresponde a una dirección válida",
                                     "Warning", 2);
                         } else {
                             client.setDireccion(direccion);
@@ -432,15 +423,15 @@ public class Menu_Renta_Patines_Gokarts {
                     } while (stval == false);
 
                     do {
-                        identificacion = JOptionPane.showInputDialog(null, "Ingresa identificación del cliente: ", "Alta de un Cliente", 3);
+                        identificacion = JOptionPane.showInputDialog(null, "Ingresa la identificación del cliente:", "Alta de un Cliente", 3);
                         stval = false;
                         if (identificacion == null || identificacion.trim().isEmpty()
                                 || !identificacion.matches("^[A-Za-zÁÉÍÓÚáéíóúÑñ0-9]+$")) {
-                            //La expresión permite nombres como: 
-                            //RFCMX09, Cliente55, ID4589
-                            //La expresión no permite nombres como:
-                            //ABC 123, #ID4589, ID.45 
-                            JOptionPane.showMessageDialog(null, "No corresponde a una identificación valida",
+                            // La expresión permite nombres como: 
+                            // RFCMX09, Cliente55, ID4589
+                            // La expresión no permite nombres como:
+                            // ABC 123, #ID4589, ID.45 
+                            JOptionPane.showMessageDialog(null, "No corresponde a una identificación válida",
                                     "Warning", 2);
                         } else {
                             client.setIdentificacion(identificacion);
@@ -449,33 +440,32 @@ public class Menu_Renta_Patines_Gokarts {
                     } while (stval == false);
 
                     do {
-                        tipoCliente = JOptionPane.showInputDialog(null, "Ingresa tipo de cliente: ", "Alta de un Cliente", 3);
+                        tipoCliente = JOptionPane.showInputDialog(null, "Ingresa el tipo de cliente:", "Alta de un Cliente", 3);
                         stval = false;
                         if (tipoCliente == null || tipoCliente.trim().isEmpty()
                                 || !tipoCliente.matches("^[A-Za-zÁÉÍÓÚáéíóúÑñ]+(?:[ -][A-Za-zÁÉÍÓÚáéíóúÑñ]+)*$")) {
-                            //La expresión permite nombres como: 
-                            //Cliente VIP, Regular, Corporativo Frecuente
-                            //La expresión no permite nombres como:
-                            //VIP123, Cliente_VIP, Preimum@
-                            JOptionPane.showMessageDialog(null, "No corresponde a una tipo de cliente valido",
+                            // La expresión permite nombres como: 
+                            // Cliente VIP, Regular, Corporativo Frecuente
+                            // La expresión no permite nombres como:
+                            // VIP123, Cliente_VIP, Preimum@
+                            JOptionPane.showMessageDialog(null, "No corresponde a un tipo de cliente válido",
                                     "Warning", 2);
                         } else {
                             client.setTipo(tipoCliente);
                             stval = true;
                         }
-
                     } while (stval == false);
 
                     do {
-                        telefono = JOptionPane.showInputDialog(null, "Ingresa telefono del cliente: ", "Alta de un Cliente", 3);
+                        telefono = JOptionPane.showInputDialog(null, "Ingresa el teléfono del cliente:", "Alta de un Cliente", 3);
                         stval = false;
                         if (telefono == null || telefono.trim().isEmpty()
                                 || !telefono.matches("^[0-9]{7,15}$")) {
-                            //La expresión permite nombres como: 
-                            //5512345678, 9998887777, 1234567
-                            //La expresión no permite nombres como:
-                            //+52 5512345678, 55123-45678, tel5512345678  
-                            JOptionPane.showMessageDialog(null, "No corresponde a un telefono valido",
+                            // La expresión permite nombres como: 
+                            // 5512345678, 9998887777, 1234567
+                            // La expresión no permite nombres como:
+                            // +52 5512345678, 55123-45678, tel5512345678 
+                            JOptionPane.showMessageDialog(null, "No corresponde a un teléfono válido",
                                     "Warning", 2);
                         } else {
                             client.setTelefono(telefono);
@@ -486,47 +476,47 @@ public class Menu_Renta_Patines_Gokarts {
                     do {
                         dc = 0;
                         try {
-                            dc = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese dia de nacimiento del cliente",
+                            dc = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese el día de nacimiento del cliente",
                                     "Alta de un cliente", 3));
                             if (dc <= 0 || dc > 31) {
-                                JOptionPane.showMessageDialog(null, "El dia de nacimiento debe ser mayor a cero pero menor a 31",
+                                JOptionPane.showMessageDialog(null, "El día de nacimiento debe ser mayor a cero pero menor a 31",
                                         "Error de alta", 2);
                             }
                         } catch (NumberFormatException e) {
-                            JOptionPane.showMessageDialog(null, "El dia de nacimiento debe ser numerico", "Error de alta", 2);
+                            JOptionPane.showMessageDialog(null, "El día de nacimiento debe ser numérico", "Error de alta", 2);
                         }
                     } while (dc <= 0 || dc > 31);
 
                     do {
                         mc = 0;
                         try {
-                            mc = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese mes de nacimiento del cliente",
+                            mc = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese el mes de nacimiento del cliente",
                                     "Alta de un cliente", 3));
                             if (mc <= 0 || mc > 12) {
                                 JOptionPane.showMessageDialog(null, "El mes de nacimiento debe ser mayor a cero pero menor a 12",
                                         "Error de alta", 2);
                             }
                         } catch (NumberFormatException e) {
-                            JOptionPane.showMessageDialog(null, "El mes de nacimiento debe ser numerico", "Error de alta", 2);
+                            JOptionPane.showMessageDialog(null, "El mes de nacimiento debe ser numérico", "Error de alta", 2);
                         }
                     } while (mc <= 0 || mc > 12);
 
                     do {
                         ac = 0;
                         try {
-                            ac = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese año de nacimiento del cliente",
+                            ac = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese el año de nacimiento del cliente",
                                     "Alta de un cliente", 3));
                             if (ac >= 2011 || ac <= 1925) {
-                                JOptionPane.showMessageDialog(null, "El año de nacimiento debe ser menor al 2010 y mayor a 1920",
+                                JOptionPane.showMessageDialog(null, "El año de nacimiento debe ser menor a 2011 y mayor a 1925",
                                         "Error de alta", 2);
                             }
                         } catch (NumberFormatException e) {
-                            JOptionPane.showMessageDialog(null, "El año de nacimiento debe ser numerico", "Error de alta", 2);
+                            JOptionPane.showMessageDialog(null, "El año de nacimiento debe ser numérico", "Error de alta", 2);
                         }
                     } while (ac >= 2011 || ac <= 1925);
                     client.setFechaNacimiento(dc, mc, ac);
                     clientes.add(client);
-                    //Se escribe los clientes en el archivo Clientes, mientras comentado para no generar nada
+                    // Se escribe los clientes en el archivo Clientes, mientras comentado para no generar nada
                     escritura(clientes, "Clientes.txt");
 
                     break;
@@ -535,63 +525,65 @@ public class Menu_Renta_Patines_Gokarts {
                         idRenta = 0;
                         try {
                             do {
-                                idRenta = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingresa el id-Renta: ",
-                                        "Alta de una Renta", 3));
+                                idRenta = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingresa el ID de la renta:",
+                                        "Alta de una Renta", 3)); 
                                 idEx = buscarIdRenta(idRenta, rentas);
                                 if (idEx != -1) {
-                                    JOptionPane.showMessageDialog(null, "Ese id de Renta ya ah sido registrado..", "Warning", 2);
+                                    JOptionPane.showMessageDialog(null, "Ese ID de Renta ya ha sido registrado.", "Warning", 2); 
                                 }
                             } while (idEx != -1);
 
                             if (idRenta <= 0) {
-                                JOptionPane.showMessageDialog(null, "El id-Renta debe ser positivo", "Error", 0);
+                                JOptionPane.showMessageDialog(null, "El ID de Renta debe ser positivo", "Error", 0); 
                             }
                         } catch (NumberFormatException e) {
-                            JOptionPane.showMessageDialog(null, "El id-Renta debe ser numérico ", "Error de entrada", 0);
+                            JOptionPane.showMessageDialog(null, "El ID de Renta debe ser numérico", "Error de entrada", 0); 
                         }
                     } while (idRenta <= 0);
-                    Renta ren  = new Renta();
+                    Renta ren = new Renta();
                     ren.setIdRenta(idRenta);
                     //ID VEHÍCULO
                     do {
                         idVehiculo = 0;
                         try {
-                            idVehiculo = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingresa el id-Vehiculo: ",
-                                         "Alta de una renta", 3));
+                            idVehiculo = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingresa el ID del vehículo:",
+                                    "Alta de una renta", 3)); // Corregido 'id-Vehiculo' y eliminado espacio
                             if (idVehiculo <= 0) {
-                                JOptionPane.showMessageDialog(null, "El id-Vehiculo debe ser positivo", "Error", 0);
-                            }else{
+                                JOptionPane.showMessageDialog(null, "El ID del vehículo debe ser positivo", "Error", 0); 
+                            } else {
                                 idEx = buscarIdVehiculo(idVehiculo, vehiculos, 1);
                                 idEx2 = buscarIdVehiculo(idVehiculo, vehiculos, 2);
                                 if (idEx == -1 && idEx2 == -1) {
-                                    JOptionPane.showMessageDialog(null, "Ese id de Vehiculo No ah sido registrado..", "Warning", 2);
+                                    JOptionPane.showMessageDialog(null, "Ese ID de vehículo no ha sido registrado.", "Warning", 2); 
                                     idVehiculo = -1;
                                 }
                             }
                         } catch (NumberFormatException e) {
-                            JOptionPane.showMessageDialog(null, "El id-Vehiculo debe ser numerico ", "Error de entrada", 0);
+                            JOptionPane.showMessageDialog(null, "El ID del vehículo debe ser numérico", "Error de entrada", 0);
+                            break;
                         }
                     } while (idVehiculo <= 0);
                     ren.setIdVehiculo(idVehiculo);
                     //ID CLIENTE*********************
                     do {
 
-                        idCliente = JOptionPane.showInputDialog(null, "Ingresa el id  del cliente: ", "Alta de una Renta", 3);
+                        idCliente = JOptionPane.showInputDialog(null, "Ingresa el ID del cliente:", "Alta de una Renta", 3); 
 
                         stval = false;
                         if (idCliente == null || idCliente.trim().isEmpty()
                                 || !idCliente.matches("^[A-Za-zÁÉÍÓÚáéíóúÑñ0-9 ]+$")) {
-                            //La expresión permite nombres como: 
-                            //GOFL2402, Roper, UAEH, Arathcpp
-                            //La expresión no permite nombres como:
-                            //-UAEH, GOFL2402-, Roper@, Arath--cpp
-                            JOptionPane.showMessageDialog(null, "No corresponde a un nombre de id valido",
-                                    "Warning", 2);
+                            // La expresión permite nombres como: 
+                            // GOFL2402, Roper, UAEH, Arathcpp
+                            // La expresión no permite nombres como:
+                            // -UAEH, GOFL2402-, Roper@, Arath--cpp
+                            JOptionPane.showMessageDialog(null, "No corresponde a un ID válido",
+                                    "Warning", 2); // Corregido 'nombre de id valido' a 'ID válido'
                         } else {
                             idEx = buscarIdCliente(idCliente, clientes);
-                            if(idEx == -1){
-                                JOptionPane.showMessageDialog(null, "Ese id de Cliente No ah sido registrado..", "Warning", 2);
-                            }else{
+                            if (idEx == -1) {
+                                JOptionPane.showMessageDialog(null, "Ese ID de Cliente no ha sido registrado.", "Warning", 2); 
+                                break;
+                            } else {
                                 stval = true;
                             }
                         }
@@ -599,111 +591,111 @@ public class Menu_Renta_Patines_Gokarts {
                     } while (stval == false);
                     ren.setIdCliente(idCliente);
                     //FECHA*************************
-                        do {
-                            dc = 0;
-                            try {
-                                dc = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese día de la fecha-Renta",
-                                        "Alta de una renta", 3));
-                                if (dc <= 0 || dc > 31) {
-                                    JOptionPane.showMessageDialog(null, "El día de la fecha-Renta debe ser mayor a cero pero menor a 31",
-                                            "Error de alta", 2);
-                                }
-                            } catch (NumberFormatException e) {
-                                JOptionPane.showMessageDialog(null, "El día de fecha-Renta debe ser numérico", "Error de alta", 2);
+                    do {
+                        dc = 0;
+                        try {
+                            dc = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese el día de la fecha de la renta",
+                                    "Alta de una renta", 3)); // Corregido 'día' y 'fecha-Renta'
+                            if (dc <= 0 || dc > 31) {
+                                JOptionPane.showMessageDialog(null, "El día de la fecha de la renta debe ser mayor a cero pero menor a 31",
+                                        "Error de alta", 2); // Corregido 'fecha-Renta'
                             }
-                        } while (dc <= 0 || dc > 31);
+                        } catch (NumberFormatException e) {
+                            JOptionPane.showMessageDialog(null, "El día de la fecha de la renta debe ser numérico", "Error de alta", 2); 
+                        }
+                    } while (dc <= 0 || dc > 31);
 
-                        do {
-                            mc = 0;
-                            try {
-                                mc = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese mes de la fecha-Renta",
-                                        "Alta de una Renta", 3));
-                                if (mc <= 0 || mc > 12) {
-                                    JOptionPane.showMessageDialog(null, "El mes de la fecha-Renta debe ser mayor a cero pero menor a 12",
-                                            "Error de alta", 2);
-                                }
-                            } catch (NumberFormatException e) {
-                                JOptionPane.showMessageDialog(null, "El mes de la fecha-Renta debe ser numérico", "Error de alta", 2);
+                    do {
+                        mc = 0;
+                        try {
+                            mc = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese el mes de la fecha de la renta",
+                                    "Alta de una Renta", 3)); // Corregido 'fecha-Renta'
+                            if (mc <= 0 || mc > 12) {
+                                JOptionPane.showMessageDialog(null, "El mes de la fecha de la renta debe ser mayor a cero pero menor a 12",
+                                        "Error de alta", 2); // Corregido 'fecha-Renta'
                             }
-                        } while (mc <= 0 || mc > 12);
+                        } catch (NumberFormatException e) {
+                            JOptionPane.showMessageDialog(null, "El mes de la fecha de la renta debe ser numérico", "Error de alta", 2); 
+                        }
+                    } while (mc <= 0 || mc > 12);
 
-                        do {
-                            ac = 0;
-                            try {
-                                ac = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese año de la fecha-Renta",
-                                        "Alta de un cliente", 3));
-                                if (ac < 2023 || ac > 2025) {
-                                    JOptionPane.showMessageDialog(null, "El año de la fecha-Renta debe estar entre (2023-2025)",
-                                            "Error de alta", 2);
-                                }
-                            } catch (NumberFormatException e) {
-                                JOptionPane.showMessageDialog(null, "El año de la fecha-Renta debe ser numerico", "Error de alta", 2);
+                    do {
+                        ac = 0;
+                        try {
+                            ac = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese el año de la fecha de la renta",
+                                    "Alta de una Renta", 3)); // Corregido 'año'
+                            if (ac < 2023 || ac > 2025) {
+                                JOptionPane.showMessageDialog(null, "El año de la fecha de la renta debe estar entre (2023-2025)",
+                                        "Error de alta", 2); // Corregido 'año' y 'fecha-Renta'
                             }
-                        } while (ac < 2023 || ac > 2025);
-                        ren.setFechaRenta(dc, mc, ac);
+                        } catch (NumberFormatException e) {
+                            JOptionPane.showMessageDialog(null, "El año de la fecha de la renta debe ser numérico", "Error de alta", 2); 
+                        }
+                    } while (ac < 2023 || ac > 2025);
+                    ren.setFechaRenta(dc, mc, ac);
                     //HORA INICIO ************************
-                    do{
+                    do {
                         stval = false;
-                        do{
+                        do {
                             num1 = 0;
-                            try{
-                                num1 = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingresa la hora de Inicio: ", "Alta de una renta", 3));
-                            }catch(NumberFormatException e){
-                                JOptionPane.showMessageDialog(null, "La hora de Inicio debe ser numérica", "Error de alta", 2);
+                            try {
+                                num1 = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingresa la hora de inicio:", "Alta de una renta", 3)); 
+                            } catch (NumberFormatException e) {
+                                JOptionPane.showMessageDialog(null, "La hora de inicio debe ser numérica", "Error de alta", 2); 
                             }
-                        }while(num1 <= 0);
-                        do{
+                        } while (num1 <= 0);
+                        do {
                             num2 = 0;
-                            try{
-                                num2 = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingresa los minutos de la Hora de Inicio: ", "Alta de una renta", 3));
-                            }catch(NumberFormatException e){
-                                JOptionPane.showMessageDialog(null, "los minutos de la Hora de Inicio deben ser numéricos", "Error de alta", 2);
+                            try {
+                                num2 = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingresa los minutos de la hora de inicio:", "Alta de una renta", 3)); 
+                            } catch (NumberFormatException e) {
+                                JOptionPane.showMessageDialog(null, "Los minutos de la hora de inicio deben ser numéricos", "Error de alta", 2); 
                             }
-                        }while(num2 < 0);
+                        } while (num2 < 0);
                         horaInicio.setHora(num1, num2);
                         valH = horaInicio.horaCorrecta();
-                        if(valH){
+                        if (valH) {
                             stval = true;
                         }
-                    }while(stval == false);
+                    } while (stval == false);
                     ren.setHoraInicio(horaInicio);
                     //HORA FINAL ************************
-                    do{
+                    do {
                         stval = false;
-                        do{
+                        do {
                             num1 = 0;
-                            try{
-                                num1 = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingresa la hora del Fin: ", "Alta de una renta", 3));
-                            }catch(NumberFormatException e){
-                                JOptionPane.showMessageDialog(null, "La hora del Fin debe ser numérica", "Error de alta", 2);
+                            try {
+                                num1 = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingresa la hora de fin:", "Alta de una renta", 3)); 
+                            } catch (NumberFormatException e) {
+                                JOptionPane.showMessageDialog(null, "La hora de fin debe ser numérica", "Error de alta", 2); 
                             }
-                        }while(num1 <= 0);
-                        do{
+                        } while (num1 <= 0);
+                        do {
                             num2 = 0;
-                            try{
-                                num2 = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingresa los minutos de la Hora del Fin: ", "Alta de una renta", 3));
-                            }catch(NumberFormatException e){
-                                JOptionPane.showMessageDialog(null, "los minutos de la Hora del Fin deben ser numéricos", "Error de alta", 2);
+                            try {
+                                num2 = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingresa los minutos de la hora de fin:", "Alta de una renta", 3));
+                            } catch (NumberFormatException e) {
+                                JOptionPane.showMessageDialog(null, "Los minutos de la hora de fin deben ser numéricos", "Error de alta", 2); 
                             }
-                        }while(num2 < 0);
+                        } while (num2 < 0);
                         horaFinal.setHora(num1, num2);
                         valH = horaFinal.horaCorrecta();
-                        if(valH){
+                        if (valH) {
                             stval = true;
                         }
-                    }while(stval == false);
+                    } while (stval == false);
                     ren.setHoraFinal(horaFinal);
                     rentas.add(ren);
                     escritura(rentas, "Rentas.txt");
                     break;
-               
+
                 case 5:
-                    if(vehiculos.isEmpty()){
+                    if (vehiculos.isEmpty()) {
                         JOptionPane.showMessageDialog(null, "No hay vehiculos para listar...", "Error", 2);
                         break;
                     }
                     lista = String.format("%-10s %-20s %-10s %-10s %-15s %-15s %-8s\n",
-                                        "Id", "Modelo", "Color", "Precio", "Tipo", "Material", "Ruedas");
+                            "Id", "Modelo", "Color", "Precio", "Tipo", "Material", "Ruedas");
                     lista += "-----------------------------------------------------------------------------------------------------------------\n";
                     for (Vehiculo v : vehiculos) {
                         if (v instanceof Patines) {
@@ -720,15 +712,15 @@ public class Menu_Renta_Patines_Gokarts {
                     }
                     //hola papus
                     JOptionPane.showMessageDialog(null, lista, "LISTA DE PATINES", 1);
-                    
+
                     break;
                 case 6:
-                    if(vehiculos.isEmpty()){
+                    if (vehiculos.isEmpty()) {
                         JOptionPane.showMessageDialog(null, "No hay vehiculos para listar...", "Error", 2);
                         break;
                     }
                     lista = String.format("%-10s %-20s %-10s %-10s %-10s %-8s\n",
-                                        "IdVehiculo", "Modelo", "Color", "Precio", "Cilindradas", "No.Llantas");
+                            "IdVehiculo", "Modelo", "Color", "Precio", "Cilindradas", "No.Llantas");
                     lista += "-----------------------------------------------------------------------------------------------------------------\n";
                     for (Vehiculo v : vehiculos) {
                         if (v instanceof Gokart) {
@@ -744,41 +736,41 @@ public class Menu_Renta_Patines_Gokarts {
                     }
                     JOptionPane.showMessageDialog(null, lista, "LISTA DE GOKARTS", 1);
                     break;
-                case 7: 
-                    if(clientes.isEmpty()){
+                case 7:
+                    if (clientes.isEmpty()) {
                         JOptionPane.showMessageDialog(null, "No hay clientes para listar...", "Error", 2);
                         break;
                     }
                     lista = String.format("%-10s %-20s %-20s %-20s %-15s %-15s\n",
-                                        "IdCliente", "Nombre", "Identificación", "Dirección", "Tipo", "Telefono");
+                            "IdCliente", "Nombre", "Identificación", "Dirección", "Tipo", "Telefono");
                     lista += "-----------------------------------------------------------------------------------------------------------------\n";
                     for (Cliente v : clientes) {
-                            lista += String.format("%-10s %-20s %-20s %-20s %-15s %-15s\n",
-                                    v.getIdCliente(),
-                                    v.getNombre(),
-                                    v.getIdentificacion(),
-                                    v.getDireccion(),
-                                    v.getTipo(),
-                                    v.getTelefono());
-                        }
+                        lista += String.format("%-10s %-20s %-20s %-20s %-15s %-15s\n",
+                                v.getIdCliente(),
+                                v.getNombre(),
+                                v.getIdentificacion(),
+                                v.getDireccion(),
+                                v.getTipo(),
+                                v.getTelefono());
+                    }
                     JOptionPane.showMessageDialog(null, lista, "LISTA DE CLIENTES", 1);
                     break;
                 case 8:
-                    if(rentas.isEmpty()){
+                    if (rentas.isEmpty()) {
                         JOptionPane.showMessageDialog(null, "No hay rentas para listar...", "Error", 2);
                         break;
                     }
                     lista = String.format("%-10s %-20s %-10s %-10s %-15s %-15s %-8s\n",
-                                        "IdRenta", "IdVehiculo", "IdCliente", "Fecha", "Renta", "Hora", "Inicio");
+                            "IdRenta", "IdVehiculo", "IdCliente", "Fecha", "Renta", "Hora", "Inicio");
                     lista += "-----------------------------------------------------------------------------------------------------------------\n";
                     for (Renta v : rentas) {
-                            lista += String.format("%-10d %-10s %-15s %-15s %-15s\n",
-                                    v.getIdRenta(),
-                                    v.getIdVehiculo(),
-                                    v.getIdCliente(),
-                                    v.getFechaRenta(),
-                                    v.getHoraInicio());
-                        }
+                        lista += String.format("%-10d %-10s %-15s %-15s %-15s\n",
+                                v.getIdRenta(),
+                                v.getIdVehiculo(),
+                                v.getIdCliente(),
+                                v.getFechaRenta(),
+                                v.getHoraInicio());
+                    }
                     JOptionPane.showMessageDialog(null, lista, "LISTA DE RENTAS", 1);
                     break;
 
@@ -880,72 +872,73 @@ public class Menu_Renta_Patines_Gokarts {
                     }
                     idRenta = 0;
                     stval = false;
-                    do{
+                    do {
                         //Asignamos una variable auxiliar para el ingreso del ID y asi poder lograr cancelar el metodo si el usuario cancela
-                        auxID = JOptionPane.showInputDialog(null,"Ingresel el ID  de la renta a consultar: ","Cetalle de una renta",3);
-                        if(auxID == null){
+                        auxID = JOptionPane.showInputDialog(null, "Ingresel el ID  de la renta a consultar: ", "Cetalle de una renta", 3);
+                        if (auxID == null) {
                             idRenta = -1;
                             stval = true;
                             //Si es vacio la opción es decir, cancelar esto nos regresa al menu principal
-                        }else{
+                        } else {
                             //Lado contrario si el ID no es un vacio procede a asignarse la variable auxiliar en un Integer para proceder con la conversion de texto a dato num.
-                            try{
+                            try {
                                 idRenta = Integer.parseInt(auxID);
-                                if(idRenta <= 0){
-                                    JOptionPane.showMessageDialog(null, "El ID de la renta debe ser positivo","Warning",2);
-                                }else{
+                                if (idRenta <= 0) {
+                                    JOptionPane.showMessageDialog(null, "El ID de la renta debe ser positivo", "Warning", 2);
+                                } else {
                                     stval = true;
                                 }
-                            }catch(NumberFormatException e){
-                                JOptionPane.showMessageDialog(null, "El ID a ingresar debe ser numérico","ERROR",2);
+                            } catch (NumberFormatException e) {
+                                JOptionPane.showMessageDialog(null, "El ID a ingresar debe ser numérico", "ERROR", 2);
                             }
                         }
-                    }while(!stval);
-                    if(idRenta <= 0) break; //Aseguramos que se cierre o se haga el salto del case si no se ingreso un ID valido
-                    //Se evita la busqueda con un ID menor a cero y asegurar que no se generen errores 
-                    
+                    } while (!stval);
+                    if (idRenta <= 0) {
+                        break; //Aseguramos que se cierre o se haga el salto del case si no se ingreso un ID valido
+                    }                    //Se evita la busqueda con un ID menor a cero y asegurar que no se generen errores 
+
                     posRenta = buscarIdRenta(idRenta, rentas);
-                    if(posRenta == -1){
-                        JOptionPane.showMessageDialog(null,"No se encontro una renta con el ID ingresado", "Busqueda fallida",2);
-                    }else{
+                    if (posRenta == -1) {
+                        JOptionPane.showMessageDialog(null, "No se encontro una renta con el ID ingresado", "Busqueda fallida", 2);
+                    } else {
                         Renta rentaConsultada = rentas.get(posRenta);
-                        
+
                         //Obtencion de detalles del vehiculo con la renta
                         IdVeRenta = rentaConsultada.getIdVehiculo();
-                        posVe = buscarIdVehiculo(IdVeRenta, vehiculos,1);//Buscar patines rentados
-                        if(posVe == -1){
+                        posVe = buscarIdVehiculo(IdVeRenta, vehiculos, 1);//Buscar patines rentados
+                        if (posVe == -1) {
                             posVe = buscarIdVehiculo(IdVeRenta, vehiculos, 2);//O buscar gokart rentado
                         }
-                        
-                        if(posVe != -1){
-                            DatosVe =vehiculos.get(posVe).getDatos();
-                        }else{
+
+                        if (posVe != -1) {
+                            DatosVe = vehiculos.get(posVe).getDatos();
+                        } else {
                             DatosVe = "Error: El vehiculo asociado con el ID ingresado no se ha encontrado";
                         }
-                        
+
                         //Metodo para obtener detalles del cliente
                         idClienteRenta = rentaConsultada.getIdCliente();
                         posCli = buscarIdCliente(idClienteRenta, clientes);
-                        
-                        if(posCli != -1){
+
+                        if (posCli != -1) {
                             datosCliente = clientes.get(posCli).getDatos();
-                        }else{
+                        } else {
                             datosCliente = "Error: El ID ingresado de renta no tiene asociadoo un cliente";
                         }
-                        
+
                         //Obtener datos de la renta
                         datosRenta = rentaConsultada.getDatos().replace("ID renta:", "\nId renta:");
-                        
-                        msjFinal = "---DETALLE DE UNA RENTA---\n"+
-                                   DatosVe +"\n" +
-                                   datosCliente +"\n" +
-                                   "---DATOS DE LA RENTA---\n" +
-                                   datosRenta;
-                        
-                        JOptionPane.showMessageDialog(null, msjFinal,"Detalles de renta",1);
+
+                        msjFinal = "---DETALLE DE UNA RENTA---\n"
+                                + DatosVe + "\n"
+                                + datosCliente + "\n"
+                                + "---DATOS DE LA RENTA---\n"
+                                + datosRenta;
+
+                        JOptionPane.showMessageDialog(null, msjFinal, "Detalles de renta", 1);
                     }
                     break;
-               
+
                 // eliminar patines
                 case 13:
                     //Buscar si el arreglo se encuentra vacio
@@ -961,24 +954,23 @@ public class Menu_Renta_Patines_Gokarts {
                     //ciclo para repetir hasta que el id sea valido
                     do {
                         try {
-                            idVehiculo = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese id de los patines",
+                            idVehiculo = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese ID de los patines",
                                     "Eliminación de unos patines", 3));
                             if (idVehiculo <= 0) {
-                                JOptionPane.showMessageDialog(null, "El id debe de ser positivo", "Error de eliminación", 2);
+                                JOptionPane.showMessageDialog(null, "El ID debe de ser positivo", "Error", 2);
                             } else {
                                 stval = true;
                             }
                         } catch (NumberFormatException e) {
-                            JOptionPane.showMessageDialog(null, "El id debe ser numerico...", "Error de eliminación", 2);
+                            JOptionPane.showMessageDialog(null, "El ID debe ser numérico...", "Error", 2);
                             break;
-
                         }
                     } while (!stval);
 
                     //si el id existe realizara...
                     cont = buscarIdVehiculo(idVehiculo, vehiculos, 1);
                     if (cont == -1) {
-                        JOptionPane.showMessageDialog(null, "No se encontro el id...", "Error", 2);
+                        JOptionPane.showMessageDialog(null, "No se encontro el ID.", "Error", 2);
                     } else {
 
                         //se usa un for para ciclar entre los datos guardados de lsa renta
@@ -989,11 +981,20 @@ public class Menu_Renta_Patines_Gokarts {
                             if (rentas.get(i).getIdVehiculo() == idVehiculo) {
                                 rentas.remove(i);
                                 i--;
+                                rentaEliminada = true;
+                            }else{
+                                JOptionPane.showMessageDialog(null, "Renta asociada no encontrada", "Sin renta",1);
                             }
+                        }
+                        if(rentaEliminada){
+                           JOptionPane.showMessageDialog(null, "Renta asociada eliminada correctamente...", "Eliminación exitosa", 3); 
+                        }else{
+                            JOptionPane.showMessageDialog(null, "Sin renta asociada", "Sin renta", -1);
                         }
                         vehiculos.remove(cont);
                         escritura(vehiculos, "Vehiculos.txt");
                         JOptionPane.showMessageDialog(null, "Patines eliminados correctamente... ", "Eliminación exitosa", 3);
+                        
                     }
                     break;
 
@@ -1012,15 +1013,15 @@ public class Menu_Renta_Patines_Gokarts {
                     //ciclo para repetir hasta que el id sea valido
                     do {
                         try {
-                            idVehiculo = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese id del gokart",
+                            idVehiculo = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese ID del gokart",
                                     "Eliminación de gokart", 3));
                             if (idVehiculo <= 0) {
-                                JOptionPane.showMessageDialog(null, "El id debe de ser positivo...", "Error...", 2);
+                                JOptionPane.showMessageDialog(null, "El ID debe de ser positivo...", "Error", 2);
                             } else {
                                 stval = true;
                             }
                         } catch (NumberFormatException e) {
-                            JOptionPane.showMessageDialog(null, "El id debe ser numerico...", "Error...", 2);
+                            JOptionPane.showMessageDialog(null, "El ID debe ser numerico...", "Error", 2);
                             break;
                         }
                     } while (!stval);
@@ -1028,23 +1029,32 @@ public class Menu_Renta_Patines_Gokarts {
                     //si el id existe realizara...
                     cont = buscarIdVehiculo(idVehiculo, vehiculos, 2);
                     if (cont == -1) {
-                        JOptionPane.showMessageDialog(null, "No se encontro el id...", "Error...", 2);
+                        JOptionPane.showMessageDialog(null, "No se encontro el ID.", "Error", 2);
                         break;
+                        
                     } else {
-
+                        
                         //se usa un for para ciclar entre los datos guardados de lsa renta
                         //re realiza por si el cliente no ingresa la renta despues de agregar su vehiculo
                         for (int i = 0; i < rentas.size(); i++) {
                             //se compara con el idvehiculo registrado en rentas con el idvehiculo para  que solo se borre
                             //el archivo del vehiculo elegido
+                            
                             if (rentas.get(i).getIdVehiculo() == idVehiculo) {
                                 rentas.remove(i);
+                                rentaEliminada = true;
                                 i--;
                             }
                         }
+                        if(rentaEliminada){
+                            JOptionPane.showMessageDialog(null, "Renta asociada eliminada correctamente...", "Eliminación exitosa", 3);
+                        }else{
+                            JOptionPane.showMessageDialog(null,"Sin renta asociada.", "Sin rentaa",-1);
+                        }
                         vehiculos.remove(cont);
                         escritura(vehiculos, "Vehiculos.txt");
-                        JOptionPane.showMessageDialog(null, "Gokart eliminado correctamente... ", "Eliminación exitosa", 3);
+                        JOptionPane.showMessageDialog(null, "Gokart eliminado correctamente...", "Eliminación exitosa", 3);
+                        
                     }
                     break;
 
@@ -1058,10 +1068,10 @@ public class Menu_Renta_Patines_Gokarts {
                     stval = false;
 
                     do {
-                        idCliente = JOptionPane.showInputDialog(null, "Ingresa id del cliente", 
-                                                                "Eliminación de un cliente", 3);
+                        idCliente = JOptionPane.showInputDialog(null, "Ingrese ID del cliente",
+                                "Eliminación de un cliente", 3);
                         if (idCliente == null || idCliente.isEmpty()) {
-                            JOptionPane.showMessageDialog(null, "El id cliente no puede estar vacio...", "Error...", 2);
+                            JOptionPane.showMessageDialog(null, "El ID cliente no puede estar vacio...", "Error", 2);
                         } else {
                             stval = true;
                         }
@@ -1069,19 +1079,26 @@ public class Menu_Renta_Patines_Gokarts {
 
                     posCliente = buscarIdCliente(idCliente, clientes);
                     if (posCliente == -1) {
-                        JOptionPane.showMessageDialog(null, "El id no existe...", "Error...", 2);
+                        JOptionPane.showMessageDialog(null, "El ID no existe...", "Error", 2);
                     } else {
+                        rentaEliminada = false;
                         for (int i = 0; i < rentas.size(); i++) {
                             if (rentas.get(i).getIdCliente().equals(idCliente)) {
                                 rentas.remove(i);
+                                rentaEliminada = true;
                                 i--;
                             }
                         }
+                        if(rentaEliminada){
+                            JOptionPane.showMessageDialog(null, "Renta asociada eliminada correctamente...", "Eliminación exitosa", 3);
+                        }else{
+                            JOptionPane.showMessageDialog(null,"Sin renta asociada.", "Sin renta",-1);
+                        }
                         clientes.remove(posCliente);
                         JOptionPane.showMessageDialog(null, "El Cliente ha sido borrado exitosamente....",
-                                                      "Eliminación exitosa", 3);
+                                "Eliminación exitosa", 3);
                     }
-                    escritura(clientes,"Clientes.txt");
+                    escritura(clientes, "Clientes.txt");
                     break;
 
                 //eliminar rentas
@@ -1092,41 +1109,48 @@ public class Menu_Renta_Patines_Gokarts {
                     }
                     idRenta = -1;
                     stval = false;
-                    
+
                     do {
                         try {
-                            idRenta = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese el id",
+                            idRenta = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese el ID de la renta",
                                     "Eliminación de una renta", 3));
                             if (idRenta == 0) {
-                                JOptionPane.showInputDialog(null, "El id debe ser mayor a cero...", "Error...", 2);
-                            }else{
+                                JOptionPane.showInputDialog(null, "El ID debe ser mayor a cero...", "Error", 2);
+                            } else {
                                 stval = true;
                             }
                         } catch (NumberFormatException e) {
-                            JOptionPane.showMessageDialog(null, "El id debe de ser numerico...", "Error...", 2);
+                            JOptionPane.showMessageDialog(null, "El ID debe de ser numerico...", "Error", 2);
                         }
                         break;
                     } while (!stval);
 
                     cont = buscarIdRenta(idRenta, rentas);
                     if (cont == -1) {
-                        JOptionPane.showMessageDialog(null, "No se encontro el id...", "Error...", 2);
+                        JOptionPane.showMessageDialog(null, "No se encontro el ID...", "Error", 2);
                     } else {
                         rentas.remove(cont);
                         escritura(rentas, "Rentas.txt");
                         JOptionPane.showMessageDialog(null, "La renta ha sido eliminada exitosamente...",
-                                                      "Eliminación exitosa", 3);
+                                "Eliminación exitosa", 3);
                     }
                     break;
-                    
+
                 case 17:
-                    
+                    JOptionPane.showMessageDialog(null, "Gracias por usar este pgrograma...\n"
+                            + "Elaborado por:\n"
+                            + "Godínez Hernández Alberto Carlos\n"
+                            + "González Flor José Luis\n"
+                            + "Lara Hernández Alexis Arath\n"
+                            + "Redondo Perez Rainy\n"
+                            + "Trejo Hernández Joshua\n"
+                            + "Adios <3", "Copyritght", 1);
                     break;
-                    
+
                 default:
                     JOptionPane.showMessageDialog(null, "La opción no existe...", "Error", 2);
                     break;
-                
+
             }
         } while (op != 17);
 
