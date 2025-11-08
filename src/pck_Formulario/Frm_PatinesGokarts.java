@@ -34,7 +34,7 @@ public class Frm_PatinesGokarts extends javax.swing.JFrame {
 
         jLabel1.setText("Hola pupus :d");
 
-        jButton1.setText("Pero si jala o nah??");
+        jButton1.setText("CHARLIE ES GEY");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -51,18 +51,18 @@ public class Frm_PatinesGokarts extends javax.swing.JFrame {
                         .addGap(227, 227, 227)
                         .addComponent(jLabel1))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(201, 201, 201)
+                        .addGap(200, 200, 200)
                         .addComponent(jButton1)))
-                .addContainerGap(255, Short.MAX_VALUE))
+                .addContainerGap(329, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(84, 84, 84)
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton1)
-                .addContainerGap(193, Short.MAX_VALUE))
+                .addContainerGap(199, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
