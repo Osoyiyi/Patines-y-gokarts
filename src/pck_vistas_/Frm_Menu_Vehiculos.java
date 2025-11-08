@@ -1,18 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
-package pck_Formulario;
 
-/**
- *
- * @author Charlie_Hdzz
- */
+package pck_vistas_;
+
 public class Frm_Menu_Vehiculos extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Frm_Menu_Renta_Patines_Gokarts
-     */
     public Frm_Menu_Vehiculos() {
         initComponents();
     }
@@ -76,8 +66,6 @@ public class Frm_Menu_Vehiculos extends javax.swing.JFrame {
 
         lb_Anio.setFont(new java.awt.Font("Cambria", 1, 18)); // NOI18N
         lb_Anio.setText("Año:");
-
-        jyc_Anio.setFont(new java.awt.Font("Cambria", 0, 18)); // NOI18N
 
         lb_Color.setFont(new java.awt.Font("Cambria", 1, 18)); // NOI18N
         lb_Color.setText("Color:");
