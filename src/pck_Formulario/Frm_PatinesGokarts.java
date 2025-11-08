@@ -34,7 +34,7 @@ public class Frm_PatinesGokarts extends javax.swing.JFrame {
 
         jLabel1.setText("Hola pupus :d");
 
-        jButton1.setText("CHARLIE ES GEY");
+        jButton1.setText("LUIS ES GAY");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
