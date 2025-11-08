@@ -8,12 +8,12 @@ package pck_Formulario;
  *
  * @author Charlie_Hdzz
  */
-public class Frm_Menu_Renta_Patines_Gokarts extends javax.swing.JFrame {
+public class Frm_Menu_Vehiculos extends javax.swing.JFrame {
 
     /**
      * Creates new form Frm_Menu_Renta_Patines_Gokarts
      */
-    public Frm_Menu_Renta_Patines_Gokarts() {
+    public Frm_Menu_Vehiculos() {
         initComponents();
     }
 
@@ -56,74 +56,75 @@ public class Frm_Menu_Renta_Patines_Gokarts extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 153));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Menú de Vehículos", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Cambria", 3, 24), new java.awt.Color(0, 0, 204))); // NOI18N
 
-        lb_idVehiculo.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        lb_idVehiculo.setFont(new java.awt.Font("Cambria", 1, 18)); // NOI18N
         lb_idVehiculo.setText("Id Vehículo:");
 
-        ct_idVehiculo.setFont(new java.awt.Font("Cambria", 0, 14)); // NOI18N
+        ct_idVehiculo.setFont(new java.awt.Font("Cambria", 0, 18)); // NOI18N
 
-        lb_Modelo.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        lb_Modelo.setFont(new java.awt.Font("Cambria", 1, 18)); // NOI18N
         lb_Modelo.setText("Modelo:");
 
-        ct_Modelo.setFont(new java.awt.Font("Cambria", 0, 14)); // NOI18N
+        ct_Modelo.setFont(new java.awt.Font("Cambria", 0, 18)); // NOI18N
 
-        lb_Marca.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        lb_Marca.setFont(new java.awt.Font("Cambria", 1, 18)); // NOI18N
         lb_Marca.setText("Marca:");
 
-        ct_Marca.setFont(new java.awt.Font("Cambria", 0, 14)); // NOI18N
+        ct_Marca.setFont(new java.awt.Font("Cambria", 0, 18)); // NOI18N
 
-        lb_Anio.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        lb_Anio.setFont(new java.awt.Font("Cambria", 1, 18)); // NOI18N
         lb_Anio.setText("Año:");
 
-        jyc_Anio.setFont(new java.awt.Font("Cambria", 0, 14)); // NOI18N
+        jyc_Anio.setFont(new java.awt.Font("Cambria", 0, 18)); // NOI18N
 
-        lb_Color.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        lb_Color.setFont(new java.awt.Font("Cambria", 1, 18)); // NOI18N
         lb_Color.setText("Color:");
 
-        lb_Precio.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        lb_Precio.setFont(new java.awt.Font("Cambria", 1, 18)); // NOI18N
         lb_Precio.setText("Precio:");
 
-        ct_Precio.setFont(new java.awt.Font("Cambria", 0, 14)); // NOI18N
+        ct_Precio.setFont(new java.awt.Font("Cambria", 0, 18)); // NOI18N
 
-        ct_Color.setFont(new java.awt.Font("Cambria", 0, 14)); // NOI18N
+        ct_Color.setFont(new java.awt.Font("Cambria", 0, 18)); // NOI18N
 
-        lb_tipoVehiculo.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        lb_tipoVehiculo.setFont(new java.awt.Font("Cambria", 1, 18)); // NOI18N
         lb_tipoVehiculo.setText("Tipo Vehiculo:");
 
-        cmb_tipoVehiculo.setFont(new java.awt.Font("Cambria", 0, 14)); // NOI18N
+        cmb_tipoVehiculo.setFont(new java.awt.Font("Cambria", 0, 18)); // NOI18N
         cmb_tipoVehiculo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Gokart", "Patines" }));
 
-        lb_Cilindrada.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        lb_Cilindrada.setFont(new java.awt.Font("Cambria", 1, 18)); // NOI18N
         lb_Cilindrada.setText("Cilindrada:");
 
-        ct_Cilindrada.setFont(new java.awt.Font("Cambria", 0, 14)); // NOI18N
+        ct_Cilindrada.setFont(new java.awt.Font("Cambria", 0, 18)); // NOI18N
 
-        lb_noLLantas.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        lb_noLLantas.setFont(new java.awt.Font("Cambria", 1, 18)); // NOI18N
         lb_noLLantas.setText("No LLantas:");
 
-        lb_velocidadMaxima.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        lb_velocidadMaxima.setFont(new java.awt.Font("Cambria", 1, 18)); // NOI18N
         lb_velocidadMaxima.setText("Velocidad Máxima:");
 
-        ct_velocidadMaxima.setFont(new java.awt.Font("Cambria", 0, 14)); // NOI18N
+        ct_velocidadMaxima.setFont(new java.awt.Font("Cambria", 0, 18)); // NOI18N
 
-        cmb_noLLantas.setFont(new java.awt.Font("Cambria", 0, 14)); // NOI18N
+        cmb_noLLantas.setFont(new java.awt.Font("Cambria", 0, 18)); // NOI18N
         cmb_noLLantas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "4", "6", "8" }));
 
-        lb_Tipo.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        lb_Tipo.setFont(new java.awt.Font("Cambria", 1, 18)); // NOI18N
         lb_Tipo.setText("Tipo:");
 
-        ct_Tipo.setFont(new java.awt.Font("Cambria", 0, 14)); // NOI18N
+        ct_Tipo.setFont(new java.awt.Font("Cambria", 0, 18)); // NOI18N
 
-        lb_materialBota.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        lb_materialBota.setFont(new java.awt.Font("Cambria", 1, 18)); // NOI18N
         lb_materialBota.setText("Material Bota:");
 
-        ct_materialBota.setFont(new java.awt.Font("Cambria", 0, 14)); // NOI18N
+        ct_materialBota.setFont(new java.awt.Font("Cambria", 0, 18)); // NOI18N
 
-        ct_noRuedas.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        ct_noRuedas.setFont(new java.awt.Font("Cambria", 1, 18)); // NOI18N
         ct_noRuedas.setText("No Ruedas:");
 
-        cmb_noRuedas.setFont(new java.awt.Font("Cambria", 0, 14)); // NOI18N
+        cmb_noRuedas.setFont(new java.awt.Font("Cambria", 0, 18)); // NOI18N
         cmb_noRuedas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2", "3", "4", "5", "6", "7", "8" }));
         cmb_noRuedas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -151,8 +152,8 @@ public class Frm_Menu_Renta_Patines_Gokarts extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(ct_idVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(lb_Modelo, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                                .addComponent(lb_Modelo)
+                                .addGap(2, 2, 2))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -160,52 +161,51 @@ public class Frm_Menu_Renta_Patines_Gokarts extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(ct_Cilindrada, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(lb_Marca, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(lb_Marca)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(ct_Marca, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(35, 35, 35)))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(lb_Anio, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(28, 28, 28)
-                                        .addComponent(jyc_Anio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(lb_Color, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(ct_Modelo, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(12, 12, 12)
-                                        .addComponent(lb_Precio)
-                                        .addGap(9, 9, 9)))
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(ct_Color, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
-                                    .addComponent(ct_Precio))
-                                .addContainerGap(32, Short.MAX_VALUE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                        .addComponent(lb_Tipo, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(ct_Tipo, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(52, 52, 52))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(1, 1, 1)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                                .addComponent(lb_Anio, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(jyc_Anio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(lb_Color, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addComponent(ct_Modelo, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(12, 12, 12)
+                                                .addComponent(lb_Precio)))
+                                        .addGap(9, 9, 9)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addComponent(ct_Color, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
+                                            .addComponent(ct_Precio)))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                        .addGap(214, 214, 214)
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addComponent(ct_noRuedas, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(23, 23, 23)
+                                                .addComponent(ct_noRuedas)
+                                                .addGap(18, 18, 18)
                                                 .addComponent(cmb_noRuedas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                             .addGroup(jPanel1Layout.createSequentialGroup()
                                                 .addComponent(lb_materialBota)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(ct_materialBota, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))))))))
+                                                .addComponent(ct_materialBota, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addGap(0, 12, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(lb_Tipo)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(ct_Tipo, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(64, 64, 64))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(lb_velocidadMaxima, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lb_velocidadMaxima)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(ct_velocidadMaxima, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -266,14 +266,14 @@ public class Frm_Menu_Renta_Patines_Gokarts extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(203, Short.MAX_VALUE))
+                .addContainerGap(156, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(171, Short.MAX_VALUE))
+                .addContainerGap(147, Short.MAX_VALUE))
         );
 
         pack();
@@ -300,20 +300,21 @@ public class Frm_Menu_Renta_Patines_Gokarts extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Frm_Menu_Renta_Patines_Gokarts.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Frm_Menu_Vehiculos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Frm_Menu_Renta_Patines_Gokarts.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Frm_Menu_Vehiculos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Frm_Menu_Renta_Patines_Gokarts.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Frm_Menu_Vehiculos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Frm_Menu_Renta_Patines_Gokarts.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Frm_Menu_Vehiculos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Frm_Menu_Renta_Patines_Gokarts().setVisible(true);
+                new Frm_Menu_Vehiculos().setVisible(true);
             }
         });
     }
