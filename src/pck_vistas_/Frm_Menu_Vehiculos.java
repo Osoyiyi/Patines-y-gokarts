@@ -1,6 +1,7 @@
 
 package pck_vistas_;
 
+import javax.swing.JOptionPane;
 import pck_datos_.RentasPG_DB;
 
 public class Frm_Menu_Vehiculos extends javax.swing.JFrame {
@@ -34,6 +35,44 @@ public class Frm_Menu_Vehiculos extends javax.swing.JFrame {
         cmb_noLLantas.setSelectedIndex(-1);
         cmb_noRuedas.setSelectedIndex(-1);
         tb_datosV.clearSelection();
+    }
+    private void agregar_actualizar(boolean agregar, boolean flag){
+        int idVehiculo = 0, anio = 0, cilindrada = 0, noLLantas = 0, noRuedas = 0;
+        String modelo = null, marca = null, color = null, tipo = null, materialBota = null;
+        boolean valido = true;
+        float precio = 0.0f, velocidadMaxima = 0.0f;
+        
+        try{
+            idVehiculo = Integer.parseInt(ct_idVehiculo.getText());
+            
+        }catch(NumberFormatException e){
+            JOptionPane.showMessageDialog(null, "El dato Id Vehículo debe ser numérico verifique", "Warning", 2);
+            ct_idVehiculo.setText("");
+            valido  = false;
+        }
+        ct_Modelo.getText();
+        if (modelo == null || modelo.isBlank()
+                                || !modelo.matches("^[A-Za-z0-9]+(?:[ -][A-Za-z0-9]+)*$")) {
+            JOptionPane.showMessageDialog(null, "No corresponde a un nombre de modelo válido.", "Warning", 2);
+            ct_Modelo.setText("");
+            valido = false;
+        }
+        try{
+            precio = Float.parseFloat(ct_Precio.getText());
+        }catch(NumberFormatException e){
+            JOptionPane.showMessageDialog(null, "El dato Precio debe ser decimal verifique", "Warning", 2);
+            ct_Precio.setText("");
+            valido  = false;
+        }
+        ct_Marca.getText();
+        if (marca == null || marca.isBlank()
+                                || !marca.matches("^[A-Za-zÁÉÍÓÚáéíóúÑñ]+(?:[ -][A-Za-zÁÉÍÓÚáéíóúÑñ]+)*$")) {
+            JOptionPane.showMessageDialog(null, "No corresponde a un nombre de marca válido.",
+            "Warning", 2);
+            ct_Marca.setText("");
+            valido = false;
+        }
+        
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
