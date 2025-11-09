@@ -36,43 +36,146 @@ public class Frm_Menu_Vehiculos extends javax.swing.JFrame {
         cmb_noRuedas.setSelectedIndex(-1);
         tb_datosV.clearSelection();
     }
-    private void agregar_actualizar(boolean agregar, boolean flag){
+    private void agregar_actualizar(boolean agregar){
         int idVehiculo = 0, anio = 0, cilindrada = 0, noLLantas = 0, noRuedas = 0;
         String modelo = null, marca = null, color = null, tipo = null, materialBota = null;
-        boolean valido = true;
+        boolean valido = true, flag = false;
         float precio = 0.0f, velocidadMaxima = 0.0f;
         
         try{
             idVehiculo = Integer.parseInt(ct_idVehiculo.getText());
-            
+            if(idVehiculo <= 0){
+                JOptionPane.showMessageDialog(null, "El dato Id Vehículo debe ser Positivo verifique", "Warning", 2);
+                ct_idVehiculo.setText("");
+                valido = false;
+            }
         }catch(NumberFormatException e){
-            JOptionPane.showMessageDialog(null, "El dato Id Vehículo debe ser numérico verifique", "Warning", 2);
+            JOptionPane.showMessageDialog(null, "El dato Id Vehículo debe ser Entero verifique", "Warning", 2);
             ct_idVehiculo.setText("");
             valido  = false;
         }
-        ct_Modelo.getText();
+        modelo = ct_Modelo.getText();
         if (modelo == null || modelo.isBlank()
                                 || !modelo.matches("^[A-Za-z0-9]+(?:[ -][A-Za-z0-9]+)*$")) {
-            JOptionPane.showMessageDialog(null, "No corresponde a un nombre de modelo válido.", "Warning", 2);
-            ct_Modelo.setText("");
-            valido = false;
+                            JOptionPane.showMessageDialog(null, "No corresponde a un nombre de Modelo válido.",
+                            "Warning", 2);
+                            //La expresión permite nombres como: 
+                            //CX-5, A4, GT-R, Corolla Cross
+                            //La expresión no permite nombres como:
+                            //-GT, Focus--RS, Civic@2024
+                            ct_Modelo.setText("");
+                            valido = false;
         }
         try{
             precio = Float.parseFloat(ct_Precio.getText());
+            if(precio <= 0){
+                JOptionPane.showMessageDialog(null, "El Precio debe ser positivo verifique", "Warning", 2);
+                ct_Precio.setText("");
+                valido = false;
+            }
         }catch(NumberFormatException e){
             JOptionPane.showMessageDialog(null, "El dato Precio debe ser decimal verifique", "Warning", 2);
             ct_Precio.setText("");
             valido  = false;
         }
-        ct_Marca.getText();
+        marca = ct_Marca.getText();
         if (marca == null || marca.isBlank()
                                 || !marca.matches("^[A-Za-zÁÉÍÓÚáéíóúÑñ]+(?:[ -][A-Za-zÁÉÍÓÚáéíóúÑñ]+)*$")) {
-            JOptionPane.showMessageDialog(null, "No corresponde a un nombre de marca válido.",
-            "Warning", 2);
-            ct_Marca.setText("");
-            valido = false;
+                            JOptionPane.showMessageDialog(null, "No corresponde a un nombre de Marca válido.",
+                            "Warning", 2);
+                            //La expresión permite nombres como: 
+                            //Ford, Mercedes-Benz, Land Rover
+                            //La expresión no permite nombres como:
+                            //-Ford, BMW-, Audi@@
+                            ct_Marca.setText("");
+                            valido = false;
         }
-        
+        anio = jyc_Anio.getYear();
+        if(anio == 0){
+            JOptionPane.showMessageDialog(null, "Debe seleccionar un Año...", "Warning", 2);
+            valido = false;
+        }else if(anio < 2000 || anio > 2025){
+            JOptionPane.showMessageDialog(null, "No corresponde a un Año válido (2000-2025)", "Warning", 2);
+            valido = false;
+            jyc_Anio.setYear(0);
+        }
+        color = ct_Color.getText();
+        if (color == null || color.isBlank()
+                                || !color.matches("^[A-Za-zÁÉÍÓÚáéíóúÑñ]+(?:[ -][A-Za-zÁÉÍÓÚáéíóúÑñ]+)*$")) {
+                            //La expresión permite nombres como: 
+                            //Rojo, Rojo-Mate, Azul Marino, Gris-Plata
+                            //La expresión no permite nombres como:
+                            //-Rojo, -Rojo, Verde--Lima, " "Rojo-Mate
+                            JOptionPane.showMessageDialog(null, "No corresponde a un nombre de Color válido.",
+                            "Warning", 2);
+                            ct_Color.setText("");
+                            valido = false;
+        }
+        if(cmb_tipoVehiculo.getSelectedIndex() == -1){
+            JOptionPane.showMessageDialog(null, "Debe seleccionar un Tipo de Vehículo...", "Warning", 2);
+            valido = false;
+        }else{
+            if(cmb_tipoVehiculo.getSelectedIndex() == 0){
+                try{
+                    cilindrada = Integer.parseInt(ct_Cilindrada.getText());
+                    if(cilindrada <= 0){
+                        JOptionPane.showMessageDialog(null, "La Cilindrada debe ser positiva verifique", "Warning", 2);
+                        ct_Cilindrada.setText("");
+                        valido = false;
+                    }
+                }catch(NumberFormatException e){
+                    JOptionPane.showMessageDialog(null, "El dato Cilindrada debe ser numérico verifique", "Warning", 2);
+                    ct_Cilindrada.setText("");
+                    valido  = false;
+                }
+                if(cmb_noLLantas.getSelectedIndex() == -1){
+                    JOptionPane.showMessageDialog(null, "Debe seleccionar un No de LLantas...", "Warning", 2);
+                    valido = false;
+                }
+                try{
+                    velocidadMaxima = Float.parseFloat(ct_velocidadMaxima.getText());
+                    if(velocidadMaxima <= 0){
+                        JOptionPane.showMessageDialog(null, "La Velocidad Máxima debe ser positiva verifique", "Warning", 2);
+                        ct_velocidadMaxima.setText("");
+                        valido = false;
+                    }
+                }catch(NumberFormatException e){
+                    JOptionPane.showMessageDialog(null, "El dato Velocidad Máxima debe ser decimal verifique", "Warning", 2);
+                    ct_velocidadMaxima.setText("");
+                    valido  = false;
+                }
+            }else if(cmb_tipoVehiculo.getSelectedIndex() == 1){
+                tipo = ct_Tipo.getText();
+                if (tipo == null || tipo.isBlank()
+                                || !tipo.matches("^[A-Za-zÁÉÍÓÚáéíóúÑñ]+(?:[ -][A-Za-zÁÉÍÓÚáéíóúÑñ]+)*$")) {
+                            //La expresión permite nombres como: 
+                            //Inline, Roller, Roller-Inline, Patín de hielo
+                            //La expresión no permite nombres como:
+                            //-Inline, Roller-, Patín123, " "Inline
+                            JOptionPane.showMessageDialog(null, "No corresponde a un nombre de tipo de patín válido.",
+                            "Warning", 2);
+                            ct_Tipo.setText("");
+                            valido = false;
+                }
+                materialBota = ct_materialBota.getText();
+                if (materialBota == null || materialBota.isBlank()
+                                || !materialBota.matches("^[A-Za-zÁÉÍÓÚáéíóúÑñ]+(?:[ -/][A-Za-zÁÉÍÓÚáéíóúÑñ]+)*$")) {
+                            //La expresión permite nombres como: 
+                            //Cuero, Cuero Sintético, Nylon/Poliéster, Cuero-Plástico
+                            //La expresión no permite nombres como:
+                            //-Cuero, Cuero-, Nylon//Poliéster, Cuero123
+                            JOptionPane.showMessageDialog(null, "No corresponde a un nombre de material de bota válido",
+                            "Warning", 2);
+                            ct_materialBota.setText("");
+                            valido = false;
+                }
+                if(cmb_noRuedas.getSelectedIndex() == -1){
+                    JOptionPane.showMessageDialog(null, "Debe seleccionar un No de Ruedas...", "Warning", 2);
+                    valido = false;
+                }
+            }
+        }
+            
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
