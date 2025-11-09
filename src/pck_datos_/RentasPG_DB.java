@@ -111,4 +111,106 @@ public class RentasPG_DB {
         }
         return DTM;
     }
+    public int agregarV(int idVehiculo, String modelo, String marca, int anio, String color,
+                                 float precio){
+        int res = 0;
+        String SQL_INSERT = "INSERT INTO vehiculos(idVehiculo, modelo, marca, anio, color, precio) VALUES(?,?,?,?,?,?)";
+        try {
+            PS = CN.getConnection().prepareStatement(SQL_INSERT);
+            PS.setInt(1, idVehiculo);
+            PS.setString(2, modelo);
+            PS.setString(3, marca);
+            PS.setInt(4, anio);
+            PS.setString(5, color);
+            PS.setFloat(6, precio);
+            res = PS.executeUpdate();
+        }catch(SQLException e){
+            JOptionPane.showMessageDialog(null, "Error al agregar vehículo: " + e.getMessage(), "ERROR", 0);
+        }finally{
+            PS = null;
+            CN.close();
+        }
+        return res;
+    }
+    public int agregarG(int idVehiculo, int cilindrada, int noLLantas, float velocidadMaxima) {
+        int res = 0;
+        String SQL_INSERT = "INSERT INTO gokarts(idVehiculo, cilindrada, noLLantas, velocidadMaxima) VALUES(?,?,?,?)";
+        try {
+            PS = CN.getConnection().prepareStatement(SQL_INSERT);
+            PS.setInt(1, idVehiculo);
+            PS.setInt(2, cilindrada);
+            PS.setInt(3, noLLantas);
+            PS.setFloat(4, velocidadMaxima);
+            res = PS.executeUpdate();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al agregar gokart: " + e.getMessage(), "ERROR", 0);
+        } finally {
+            PS = null;
+            CN.close();
+        }
+        return res;
+    }
+    public int agregarP(int idVehiculo, String tipo, String materialBota, int noRuedas){
+        int res = 0;
+        String SQL_INSERT = "INSERT INTO patines (idVehiculo, tipo, materialBota, noRuedas) VALUES(?,?,?,?)";
+        try {
+            PS = CN.getConnection().prepareStatement(SQL_INSERT);
+            PS.setInt(1, idVehiculo);
+            PS.setString(2, tipo);
+            PS.setString(3, materialBota);
+            PS.setInt(4, noRuedas);
+            res = PS.executeUpdate();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al agregar patines: " + e.getMessage(), "ERROR", 0);
+        } finally {
+            PS = null;
+            CN.close();
+        }
+        return res;
+    }
+    public int agregarRegistroGoKart(int idVehiculo, String modelo, String marca, int anio, String color, float precio,
+                                  int cilindrada, int noLLantas, float velocidadMaxima) {
+        int v = agregarV(idVehiculo, modelo, marca, anio, color, precio);
+        int g = agregarG(idVehiculo, cilindrada, noLLantas, velocidadMaxima);
+
+        if (v > 0 && g > 0) {
+            JOptionPane.showMessageDialog(null, "GoKart registrado correctamente.", "Registro Gokart", 1);
+            return 1;
+        } else {
+            JOptionPane.showMessageDialog(null, "Error al registrar GoKart.", "Registro Gokart", 2);
+            return 0;
+        }
+    }
+    public int agregarRegistroPatines(int idVehiculo, String modelo, String marca, int anio, String color, float precio,
+                                    String tipo, String materialBota, int noRuedas){
+        int v = agregarV(idVehiculo, modelo, marca, anio, color, precio);
+        int p = agregarP(idVehiculo, tipo, materialBota, noRuedas);
+        if (v > 0 && p > 0) {
+            JOptionPane.showMessageDialog(null, "Patines registrados correctamente.", "Registro Patines", 1);
+            return 1;
+        } else {
+            JOptionPane.showMessageDialog(null, "Error al registrar Patines.", "Registro Patines", 2);
+            return 0;
+        }
+    }
+    public boolean existeV(int idVehiculo){
+        boolean existe = false;
+        String SQL_EXISTE = "SELECT idVehiculo FROM vehiculos WHERE idVehiculo = ?";
+        try {
+            PS = CN.getConnection().prepareStatement(SQL_EXISTE);
+            PS.setInt(1, idVehiculo);
+            RS = PS.executeQuery();
+
+            if (RS.next()) {
+                existe = true;
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al verificar existencia: " + e.getMessage(), "Error", 2);
+        } finally {
+            PS = null;
+            RS = null;
+            CN.close();
+        }
+        return existe;
+    }
 }

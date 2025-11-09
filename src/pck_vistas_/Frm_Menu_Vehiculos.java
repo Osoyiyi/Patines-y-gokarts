@@ -11,12 +11,14 @@ public class Frm_Menu_Vehiculos extends javax.swing.JFrame {
         RPGDB = new RentasPG_DB();
         this.setLocationRelativeTo(null);
         this.limpiar();
-        //this.listar(true);
+        this.listar();
     }
-    private void listar(boolean flag){
-        if(flag){
+    private void listar(){
+        if(cmb_tipoVehiculo.getSelectedIndex() == -1){
+            
+        }else if(cmb_tipoVehiculo.getSelectedIndex() == 0){
             tb_datosV.setModel(RPGDB.getDatosVG());
-        }else{
+        }else if(cmb_tipoVehiculo.getSelectedIndex() == 1){
             tb_datosV.setModel(RPGDB.getDatosVP());
         }
     }
@@ -37,9 +39,9 @@ public class Frm_Menu_Vehiculos extends javax.swing.JFrame {
         tb_datosV.clearSelection();
     }
     private void agregar_actualizar(boolean agregar){
-        int idVehiculo = 0, anio = 0, cilindrada = 0, noLLantas = 0, noRuedas = 0;
+        int idVehiculo = 0, anio = 0, cilindrada = 0, noLLantas = 0, noRuedas = 0, res = 0;
         String modelo = null, marca = null, color = null, tipo = null, materialBota = null;
-        boolean valido = true, flag = false;
+        boolean valido = true;
         float precio = 0.0f, velocidadMaxima = 0.0f;
         
         try{
@@ -177,9 +179,46 @@ public class Frm_Menu_Vehiculos extends javax.swing.JFrame {
                 }else{
                     noRuedas = Integer.parseInt(cmb_noRuedas.getSelectedItem().toString());
                 }
-            }
+            }    
         }
-            
+        if(valido && agregar && cmb_tipoVehiculo.getSelectedIndex() == 0){
+            if(RPGDB.existeV(idVehiculo)){
+                JOptionPane.showMessageDialog(null,"Ese idVehiculo ya ha sido registrado, Verifique...", 
+                "Warning", 2);
+                ct_idVehiculo.setText("");
+                ct_idVehiculo.setEditable(true);
+                valido = false;
+            }
+            if(valido){
+                res = RPGDB.agregarRegistroGoKart(idVehiculo, modelo, marca, anio, color, precio, cilindrada
+                        , noLLantas, velocidadMaxima);
+            }
+        }else if(valido && !agregar && cmb_tipoVehiculo.getSelectedIndex() == 0){
+            res = RPGDB.agregarRegistroGoKart(idVehiculo, modelo, marca, anio, color, precio, cilindrada
+                        , noLLantas, velocidadMaxima);
+        }else if(valido && agregar && cmb_tipoVehiculo.getSelectedIndex() == 1){
+            if(RPGDB.existeV(idVehiculo)){
+                JOptionPane.showMessageDialog(null,"Ese idVehiculo ya ha sido registrado, Verifique...", 
+                "Warning", 2);
+                ct_idVehiculo.setText("");
+                ct_idVehiculo.setEditable(true);
+                valido = false;
+            }
+            if(valido){
+                res = RPGDB.agregarRegistroPatines(idVehiculo, modelo, marca, anio, color, precio,
+                        tipo, materialBota, noRuedas);
+            }
+        }else if(valido && !agregar && cmb_tipoVehiculo.getSelectedIndex() == 1){
+            res = RPGDB.agregarRegistroPatines(idVehiculo, modelo, marca, anio, color, precio,
+                    tipo, materialBota, noRuedas);
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "No se puede seguir con el proceso, Todos los datos deben ser válidos", "ERROR", 0);
+        }
+        if(res > 0){
+            this.limpiar();
+            this.listar();
+        }
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
