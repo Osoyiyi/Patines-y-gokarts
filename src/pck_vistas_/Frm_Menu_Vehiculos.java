@@ -11,14 +11,14 @@ public class Frm_Menu_Vehiculos extends javax.swing.JFrame {
         RPGDB = new RentasPG_DB();
         this.setLocationRelativeTo(null);
         this.limpiar();
-        this.listar();
+        this.listar(-1);
     }
-    private void listar(){
-        if(cmb_tipoVehiculo.getSelectedIndex() == -1){
+    private void listar(int temp){
+        if(temp == -1){
             
-        }else if(cmb_tipoVehiculo.getSelectedIndex() == 0){
+        }else if(temp == 0){
             tb_datosV.setModel(RPGDB.getDatosVG());
-        }else if(cmb_tipoVehiculo.getSelectedIndex() == 1){
+        }else if(temp == 1){
             tb_datosV.setModel(RPGDB.getDatosVP());
         }
     }
@@ -39,7 +39,7 @@ public class Frm_Menu_Vehiculos extends javax.swing.JFrame {
         tb_datosV.clearSelection();
     }
     private void agregar_actualizar(boolean agregar){
-        int idVehiculo = 0, anio = 0, cilindrada = 0, noLLantas = 0, noRuedas = 0, res = 0;
+        int idVehiculo = 0, anio = 0, cilindrada = 0, noLLantas = 0, noRuedas = 0, res = 0, temp = -1;
         String modelo = null, marca = null, color = null, tipo = null, materialBota = null;
         boolean valido = true;
         float precio = 0.0f, velocidadMaxima = 0.0f;
@@ -190,10 +190,12 @@ public class Frm_Menu_Vehiculos extends javax.swing.JFrame {
                 valido = false;
             }
             if(valido){
+                temp = 0;
                 res = RPGDB.agregarRegistroGoKart(idVehiculo, modelo, marca, anio, color, precio, cilindrada
                         , noLLantas, velocidadMaxima);
             }
         }else if(valido && !agregar && cmb_tipoVehiculo.getSelectedIndex() == 0){
+            temp = 0;
             res = RPGDB.agregarRegistroGoKart(idVehiculo, modelo, marca, anio, color, precio, cilindrada
                         , noLLantas, velocidadMaxima);
         }else if(valido && agregar && cmb_tipoVehiculo.getSelectedIndex() == 1){
@@ -205,10 +207,12 @@ public class Frm_Menu_Vehiculos extends javax.swing.JFrame {
                 valido = false;
             }
             if(valido){
+                temp = 1;
                 res = RPGDB.agregarRegistroPatines(idVehiculo, modelo, marca, anio, color, precio,
                         tipo, materialBota, noRuedas);
             }
         }else if(valido && !agregar && cmb_tipoVehiculo.getSelectedIndex() == 1){
+            temp = 1;
             res = RPGDB.agregarRegistroPatines(idVehiculo, modelo, marca, anio, color, precio,
                     tipo, materialBota, noRuedas);
         }
@@ -217,7 +221,7 @@ public class Frm_Menu_Vehiculos extends javax.swing.JFrame {
         }
         if(res > 0){
             this.limpiar();
-            this.listar();
+            this.listar(temp);
         }
     }
     @SuppressWarnings("unchecked")
@@ -264,6 +268,11 @@ public class Frm_Menu_Vehiculos extends javax.swing.JFrame {
         tb_datosV = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 153));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Menú de Vehículos", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Cambria", 3, 24), new java.awt.Color(0, 0, 204))); // NOI18N
@@ -286,7 +295,7 @@ public class Frm_Menu_Vehiculos extends javax.swing.JFrame {
         lb_Anio.setFont(new java.awt.Font("Cambria", 1, 18)); // NOI18N
         lb_Anio.setText("Año:");
 
-        jyc_Anio.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jyc_Anio.setFont(new java.awt.Font("Cambria", 0, 18)); // NOI18N
 
         lb_Color.setFont(new java.awt.Font("Cambria", 1, 18)); // NOI18N
         lb_Color.setText("Color:");
@@ -303,6 +312,11 @@ public class Frm_Menu_Vehiculos extends javax.swing.JFrame {
 
         cmb_tipoVehiculo.setFont(new java.awt.Font("Cambria", 0, 18)); // NOI18N
         cmb_tipoVehiculo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Gokart", "Patines" }));
+        cmb_tipoVehiculo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmb_tipoVehiculoActionPerformed(evt);
+            }
+        });
 
         lb_Cilindrada.setFont(new java.awt.Font("Cambria", 1, 18)); // NOI18N
         lb_Cilindrada.setText("Cilindrada:");
@@ -382,7 +396,7 @@ public class Frm_Menu_Vehiculos extends javax.swing.JFrame {
                                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                                 .addComponent(lb_Anio, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addGap(18, 18, 18)
-                                                .addComponent(jyc_Anio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(jyc_Anio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                 .addComponent(lb_Color, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
                                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -442,7 +456,7 @@ public class Frm_Menu_Vehiculos extends javax.swing.JFrame {
                         .addComponent(lb_Anio)
                         .addComponent(lb_Color)
                         .addComponent(ct_Color, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jyc_Anio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jyc_Anio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lb_tipoVehiculo)
@@ -518,6 +532,11 @@ public class Frm_Menu_Vehiculos extends javax.swing.JFrame {
         jButton1.setFont(new java.awt.Font("Cambria", 3, 18)); // NOI18N
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Agregar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setBackground(new java.awt.Color(51, 51, 51));
         jButton2.setFont(new java.awt.Font("Cambria", 3, 18)); // NOI18N
@@ -597,6 +616,54 @@ public class Frm_Menu_Vehiculos extends javax.swing.JFrame {
     private void cmb_opcionesVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmb_opcionesVActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cmb_opcionesVActionPerformed
+
+    private void cmb_tipoVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmb_tipoVehiculoActionPerformed
+        if(cmb_tipoVehiculo.getSelectedIndex() == -1){
+            ct_Cilindrada.setText("");
+            cmb_noLLantas.setSelectedIndex(-1);
+            ct_velocidadMaxima.setText("");
+            ct_Tipo.setText("");
+            ct_materialBota.setText("");
+            cmb_noRuedas.setSelectedIndex(-1);
+            ct_Tipo.setEditable(false);
+            ct_materialBota.setEditable(false);
+            cmb_noRuedas.setEnabled(false);
+            ct_Cilindrada.setEditable(false);
+            cmb_noLLantas.setEnabled(false);
+            ct_velocidadMaxima.setEditable(false);
+            this.listar(-1);
+        }else if(cmb_tipoVehiculo.getSelectedIndex() == 0){
+            ct_Tipo.setText("");
+            ct_materialBota.setText("");
+            cmb_noRuedas.setSelectedIndex(-1);
+            ct_Tipo.setEditable(false);
+            ct_materialBota.setEditable(false);
+            cmb_noRuedas.setEnabled(false);
+            ct_Cilindrada.setEditable(true);
+            cmb_noLLantas.setEnabled(true);
+            ct_velocidadMaxima.setEditable(true);
+            this.listar(0);
+        }else if(cmb_tipoVehiculo.getSelectedIndex() == 1){
+            ct_Cilindrada.setText("");
+            cmb_noLLantas.setSelectedIndex(-1);
+            ct_velocidadMaxima.setText("");
+            ct_Cilindrada.setEditable(false);
+            cmb_noLLantas.setEnabled(false);
+            ct_velocidadMaxima.setEditable(false);
+            ct_Tipo.setEditable(true);
+            ct_materialBota.setEditable(true);
+            cmb_noRuedas.setEnabled(true);
+            this.listar(1);
+        }
+    }//GEN-LAST:event_cmb_tipoVehiculoActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        this.limpiar();
+    }//GEN-LAST:event_formWindowOpened
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        this.agregar_actualizar(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments

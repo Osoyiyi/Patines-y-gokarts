@@ -128,7 +128,6 @@ public class RentasPG_DB {
             JOptionPane.showMessageDialog(null, "Error al agregar vehículo: " + e.getMessage(), "ERROR", 0);
         }finally{
             PS = null;
-            CN.close();
         }
         return res;
     }
@@ -146,7 +145,6 @@ public class RentasPG_DB {
             JOptionPane.showMessageDialog(null, "Error al agregar gokart: " + e.getMessage(), "ERROR", 0);
         } finally {
             PS = null;
-            CN.close();
         }
         return res;
     }
@@ -164,7 +162,6 @@ public class RentasPG_DB {
             JOptionPane.showMessageDialog(null, "Error al agregar patines: " + e.getMessage(), "ERROR", 0);
         } finally {
             PS = null;
-            CN.close();
         }
         return res;
     }
@@ -172,7 +169,8 @@ public class RentasPG_DB {
                                   int cilindrada, int noLLantas, float velocidadMaxima) {
         int v = agregarV(idVehiculo, modelo, marca, anio, color, precio);
         int g = agregarG(idVehiculo, cilindrada, noLLantas, velocidadMaxima);
-
+        
+        //CN.close();
         if (v > 0 && g > 0) {
             JOptionPane.showMessageDialog(null, "GoKart registrado correctamente.", "Registro Gokart", 1);
             return 1;
@@ -185,6 +183,7 @@ public class RentasPG_DB {
                                     String tipo, String materialBota, int noRuedas){
         int v = agregarV(idVehiculo, modelo, marca, anio, color, precio);
         int p = agregarP(idVehiculo, tipo, materialBota, noRuedas);
+        //CN.close();
         if (v > 0 && p > 0) {
             JOptionPane.showMessageDialog(null, "Patines registrados correctamente.", "Registro Patines", 1);
             return 1;
