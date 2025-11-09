@@ -11,7 +11,7 @@ public class Frm_Menu_Vehiculos extends javax.swing.JFrame {
         RPGDB = new RentasPG_DB();
         this.setLocationRelativeTo(null);
         this.limpiar();
-        this.listar(true);
+        //this.listar(true);
     }
     private void listar(boolean flag){
         if(flag){
@@ -131,6 +131,8 @@ public class Frm_Menu_Vehiculos extends javax.swing.JFrame {
                 if(cmb_noLLantas.getSelectedIndex() == -1){
                     JOptionPane.showMessageDialog(null, "Debe seleccionar un No de LLantas...", "Warning", 2);
                     valido = false;
+                }else{
+                    noLLantas = Integer.parseInt(cmb_noLLantas.getSelectedItem().toString());
                 }
                 try{
                     velocidadMaxima = Float.parseFloat(ct_velocidadMaxima.getText());
@@ -172,6 +174,8 @@ public class Frm_Menu_Vehiculos extends javax.swing.JFrame {
                 if(cmb_noRuedas.getSelectedIndex() == -1){
                     JOptionPane.showMessageDialog(null, "Debe seleccionar un No de Ruedas...", "Warning", 2);
                     valido = false;
+                }else{
+                    noRuedas = Integer.parseInt(cmb_noRuedas.getSelectedItem().toString());
                 }
             }
         }
