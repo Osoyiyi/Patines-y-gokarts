@@ -9,9 +9,15 @@ public class Frm_Menu_Vehiculos extends javax.swing.JFrame {
         initComponents();
         RPGDB = new RentasPG_DB();
         this.setLocationRelativeTo(null);
+        this.limpiar();
+        this.listar(true);
     }
-    private void listar(){
-    
+    private void listar(boolean flag){
+        if(flag){
+            tb_datosV.setModel(RPGDB.getDatosVG());
+        }else{
+            tb_datosV.setModel(RPGDB.getDatosVP());
+        }
     }
     private void limpiar(){
         ct_idVehiculo.setText("");
