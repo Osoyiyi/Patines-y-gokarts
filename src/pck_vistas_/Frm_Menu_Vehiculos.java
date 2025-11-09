@@ -37,6 +37,18 @@ public class Frm_Menu_Vehiculos extends javax.swing.JFrame {
         cmb_noLLantas.setSelectedIndex(-1);
         cmb_noRuedas.setSelectedIndex(-1);
         tb_datosV.clearSelection();
+        ct_idVehiculo.setEditable(false);
+        ct_Modelo.setEditable(false);
+        ct_Precio.setEditable(false);
+        ct_Marca.setEditable(false);
+        ct_Color.setEditable(false);
+        ct_Cilindrada.setEditable(false);
+        ct_velocidadMaxima.setEditable(false);
+        ct_Tipo.setEditable(false);
+        ct_materialBota.setEditable(false);
+        jyc_Anio.setEnabled(false);
+        cmb_noLLantas.setEnabled(false);
+        cmb_noRuedas.setEnabled(false);
     }
     private void agregar_actualizar(boolean agregar){
         int idVehiculo = 0, anio = 0, cilindrada = 0, noLLantas = 0, noRuedas = 0, res = 0, temp = -1;
@@ -260,10 +272,10 @@ public class Frm_Menu_Vehiculos extends javax.swing.JFrame {
         ct_parametroV = new javax.swing.JTextField();
         btn_buscarV = new javax.swing.JButton();
         btn_resetV = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        btn_Agregar = new javax.swing.JButton();
+        btn_Actualizar = new javax.swing.JButton();
+        btn_Eliminar = new javax.swing.JButton();
+        btn_Consultar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tb_datosV = new javax.swing.JTable();
 
@@ -528,30 +540,41 @@ public class Frm_Menu_Vehiculos extends javax.swing.JFrame {
                 .addContainerGap(18, Short.MAX_VALUE))
         );
 
-        jButton1.setBackground(new java.awt.Color(51, 51, 51));
-        jButton1.setFont(new java.awt.Font("Cambria", 3, 18)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Agregar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btn_Agregar.setBackground(new java.awt.Color(51, 51, 51));
+        btn_Agregar.setFont(new java.awt.Font("Cambria", 3, 18)); // NOI18N
+        btn_Agregar.setForeground(new java.awt.Color(255, 255, 255));
+        btn_Agregar.setText("Agregar");
+        btn_Agregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btn_AgregarActionPerformed(evt);
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(51, 51, 51));
-        jButton2.setFont(new java.awt.Font("Cambria", 3, 18)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("Actualizar");
+        btn_Actualizar.setBackground(new java.awt.Color(51, 51, 51));
+        btn_Actualizar.setFont(new java.awt.Font("Cambria", 3, 18)); // NOI18N
+        btn_Actualizar.setForeground(new java.awt.Color(255, 255, 255));
+        btn_Actualizar.setText("Actualizar");
+        btn_Actualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_ActualizarActionPerformed(evt);
+            }
+        });
 
-        jButton3.setBackground(new java.awt.Color(51, 51, 51));
-        jButton3.setFont(new java.awt.Font("Cambria", 3, 18)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(255, 255, 255));
-        jButton3.setText("Eliminar");
+        btn_Eliminar.setBackground(new java.awt.Color(51, 51, 51));
+        btn_Eliminar.setFont(new java.awt.Font("Cambria", 3, 18)); // NOI18N
+        btn_Eliminar.setForeground(new java.awt.Color(255, 255, 255));
+        btn_Eliminar.setText("Eliminar");
 
-        jButton4.setBackground(new java.awt.Color(51, 51, 51));
-        jButton4.setFont(new java.awt.Font("Cambria", 3, 18)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(255, 255, 255));
-        jButton4.setText("Consultar");
+        btn_Consultar.setBackground(new java.awt.Color(51, 51, 51));
+        btn_Consultar.setFont(new java.awt.Font("Cambria", 3, 18)); // NOI18N
+        btn_Consultar.setForeground(new java.awt.Color(255, 255, 255));
+        btn_Consultar.setText("Consultar");
+
+        jScrollPane1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jScrollPane1MouseClicked(evt);
+            }
+        });
 
         tb_datosV.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -561,6 +584,11 @@ public class Frm_Menu_Vehiculos extends javax.swing.JFrame {
 
             }
         ));
+        tb_datosV.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tb_datosVMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tb_datosV);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -576,10 +604,10 @@ public class Frm_Menu_Vehiculos extends javax.swing.JFrame {
                             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(btn_Actualizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btn_Agregar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btn_Eliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btn_Consultar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addComponent(jScrollPane1))
                 .addContainerGap(108, Short.MAX_VALUE))
         );
@@ -592,13 +620,13 @@ public class Frm_Menu_Vehiculos extends javax.swing.JFrame {
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(42, 42, 42)
-                        .addComponent(jButton1)
+                        .addComponent(btn_Agregar)
                         .addGap(48, 48, 48)
-                        .addComponent(jButton2)
+                        .addComponent(btn_Actualizar)
                         .addGap(59, 59, 59)
-                        .addComponent(jButton3)
+                        .addComponent(btn_Eliminar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton4)))
+                        .addComponent(btn_Consultar)))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(36, 36, 36)
@@ -625,6 +653,13 @@ public class Frm_Menu_Vehiculos extends javax.swing.JFrame {
             ct_Tipo.setText("");
             ct_materialBota.setText("");
             cmb_noRuedas.setSelectedIndex(-1);
+            ct_idVehiculo.setEditable(true);
+            ct_Modelo.setEditable(true);
+            ct_Precio.setEditable(true);
+            ct_Marca.setEditable(true);
+            ct_Color.setEditable(true);
+            ct_Tipo.setEditable(false);
+            jyc_Anio.setEnabled(true);
             ct_Tipo.setEditable(false);
             ct_materialBota.setEditable(false);
             cmb_noRuedas.setEnabled(false);
@@ -636,7 +671,13 @@ public class Frm_Menu_Vehiculos extends javax.swing.JFrame {
             ct_Tipo.setText("");
             ct_materialBota.setText("");
             cmb_noRuedas.setSelectedIndex(-1);
+            ct_idVehiculo.setEditable(true);
+            ct_Modelo.setEditable(true);
+            ct_Precio.setEditable(true);
+            ct_Marca.setEditable(true);
+            ct_Color.setEditable(true);
             ct_Tipo.setEditable(false);
+            jyc_Anio.setEnabled(true);
             ct_materialBota.setEditable(false);
             cmb_noRuedas.setEnabled(false);
             ct_Cilindrada.setEditable(true);
@@ -647,6 +688,13 @@ public class Frm_Menu_Vehiculos extends javax.swing.JFrame {
             ct_Cilindrada.setText("");
             cmb_noLLantas.setSelectedIndex(-1);
             ct_velocidadMaxima.setText("");
+            ct_idVehiculo.setEditable(true);
+            ct_Modelo.setEditable(true);
+            ct_Precio.setEditable(true);
+            ct_Marca.setEditable(true);
+            ct_Color.setEditable(true);
+            ct_Tipo.setEditable(false);
+            jyc_Anio.setEnabled(true);
             ct_Cilindrada.setEditable(false);
             cmb_noLLantas.setEnabled(false);
             ct_velocidadMaxima.setEditable(false);
@@ -661,9 +709,43 @@ public class Frm_Menu_Vehiculos extends javax.swing.JFrame {
         this.limpiar();
     }//GEN-LAST:event_formWindowOpened
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btn_AgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_AgregarActionPerformed
         this.agregar_actualizar(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btn_AgregarActionPerformed
+
+    private void btn_ActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ActualizarActionPerformed
+        this.agregar_actualizar(false);
+    }//GEN-LAST:event_btn_ActualizarActionPerformed
+
+    private void jScrollPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jScrollPane1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jScrollPane1MouseClicked
+
+    private void tb_datosVMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_datosVMouseClicked
+        ct_idVehiculo.setEditable(false);
+        int fila = tb_datosV.getSelectedRow();
+        ct_idVehiculo.setText(tb_datosV.getValueAt(fila, 0).toString());
+        ct_Modelo.setText(tb_datosV.getValueAt(fila, 1).toString());
+        ct_Marca.setText(tb_datosV.getValueAt(fila, 2).toString());
+        try {
+            int anio = Integer.parseInt(tb_datosV.getValueAt(fila, 3).toString());
+            jyc_Anio.setYear(anio);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Error al cargar el año.", "Error de datos", 2);
+            jyc_Anio.setYear(0); // opcional: restablecer
+        }
+        ct_Color.setText(tb_datosV.getValueAt(fila, 4).toString());
+        ct_Precio.setText(tb_datosV.getValueAt(fila, 5).toString());
+        if(cmb_tipoVehiculo.getSelectedIndex() == 0){
+            ct_Cilindrada.setText(tb_datosV.getValueAt(fila, 6).toString());
+            cmb_noLLantas.setSelectedItem(tb_datosV.getValueAt(fila, 7).toString());
+            ct_velocidadMaxima.setText(tb_datosV.getValueAt(fila, 8).toString());
+        }else if(cmb_tipoVehiculo.getSelectedIndex() == 1){
+            ct_Tipo.setText(tb_datosV.getValueAt(fila, 6).toString());
+            ct_materialBota.setText(tb_datosV.getValueAt(fila, 7).toString());
+            cmb_noRuedas.setSelectedItem(tb_datosV.getValueAt(fila, 8).toString());
+        }
+    }//GEN-LAST:event_tb_datosVMouseClicked
 
     /**
      * @param args the command line arguments
@@ -702,6 +784,10 @@ public class Frm_Menu_Vehiculos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_Actualizar;
+    private javax.swing.JButton btn_Agregar;
+    private javax.swing.JButton btn_Consultar;
+    private javax.swing.JButton btn_Eliminar;
     private javax.swing.JButton btn_buscarV;
     private javax.swing.JButton btn_resetV;
     private javax.swing.JComboBox<String> cmb_noLLantas;
@@ -719,10 +805,6 @@ public class Frm_Menu_Vehiculos extends javax.swing.JFrame {
     private javax.swing.JLabel ct_noRuedas;
     private javax.swing.JTextField ct_parametroV;
     private javax.swing.JTextField ct_velocidadMaxima;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
