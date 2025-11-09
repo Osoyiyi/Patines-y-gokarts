@@ -6,7 +6,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class Conexion_DB_ {
-    static final String URL = "";
+    static final String URL = "jdbc:mysql://localhost:3306/rentasvehiculosdb";
     static final String USER = "root";
     static final String PASS = "";
     private static Connection con;
