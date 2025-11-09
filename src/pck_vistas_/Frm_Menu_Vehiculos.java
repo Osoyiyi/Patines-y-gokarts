@@ -646,6 +646,7 @@ public class Frm_Menu_Vehiculos extends javax.swing.JFrame {
     }//GEN-LAST:event_cmb_opcionesVActionPerformed
 
     private void cmb_tipoVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmb_tipoVehiculoActionPerformed
+        int fila = tb_datosV.getSelectedRow();
         if(cmb_tipoVehiculo.getSelectedIndex() == -1){
             ct_Cilindrada.setText("");
             cmb_noLLantas.setSelectedIndex(-1);
@@ -668,6 +669,14 @@ public class Frm_Menu_Vehiculos extends javax.swing.JFrame {
             ct_velocidadMaxima.setEditable(false);
             this.listar(-1);
         }else if(cmb_tipoVehiculo.getSelectedIndex() == 0){
+            if(fila != -1){
+                ct_idVehiculo.setText("");
+                ct_Modelo.setText("");
+                ct_Precio.setText("");
+                ct_Marca.setText("");
+                ct_Color.setText("");
+                jyc_Anio.setYear(0);
+            }
             ct_Tipo.setText("");
             ct_materialBota.setText("");
             cmb_noRuedas.setSelectedIndex(-1);
@@ -685,6 +694,14 @@ public class Frm_Menu_Vehiculos extends javax.swing.JFrame {
             ct_velocidadMaxima.setEditable(true);
             this.listar(0);
         }else if(cmb_tipoVehiculo.getSelectedIndex() == 1){
+            if(fila != -1){
+                ct_idVehiculo.setText("");
+                ct_Modelo.setText("");
+                ct_Precio.setText("");
+                ct_Marca.setText("");
+                ct_Color.setText("");
+                jyc_Anio.setYear(0);
+            }
             ct_Cilindrada.setText("");
             cmb_noLLantas.setSelectedIndex(-1);
             ct_velocidadMaxima.setText("");
