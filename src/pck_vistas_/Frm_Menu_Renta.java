@@ -4,15 +4,8 @@
  */
 package pck_vistas_;
 
-/**
- *
- * @author J
- */
 public class Frm_Menu_Renta extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Frm_Menu_Renta
-     */
     public Frm_Menu_Renta() {
         initComponents();
     }
