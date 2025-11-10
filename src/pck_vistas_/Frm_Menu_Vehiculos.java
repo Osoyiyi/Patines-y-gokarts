@@ -50,6 +50,8 @@ public class Frm_Menu_Vehiculos extends javax.swing.JFrame {
         jyc_Anio.setEnabled(false);
         cmb_noLLantas.setEnabled(false);
         cmb_noRuedas.setEnabled(false);
+        ct_parametroV.setText("");
+        ct_parametroV.setEditable(false);
     }
     private void agregar_actualizar(boolean agregar){
         int idVehiculo = 0, anio = 0, cilindrada = 0, noLLantas = 0, noRuedas = 0, res = 0, temp = -1;
@@ -675,12 +677,6 @@ public class Frm_Menu_Vehiculos extends javax.swing.JFrame {
             ct_Color.setEditable(true);
             ct_Tipo.setEditable(false);
             jyc_Anio.setEnabled(true);
-            ct_Tipo.setEditable(false);
-            ct_materialBota.setEditable(false);
-            cmb_noRuedas.setEnabled(false);
-            ct_Cilindrada.setEditable(false);
-            cmb_noLLantas.setEnabled(false);
-            ct_velocidadMaxima.setEditable(false);
             this.listar(-1);
         }else if(cmb_tipoVehiculo.getSelectedIndex() == 0){
             if(fila != -1){
@@ -706,6 +702,7 @@ public class Frm_Menu_Vehiculos extends javax.swing.JFrame {
             ct_Cilindrada.setEditable(true);
             cmb_noLLantas.setEnabled(true);
             ct_velocidadMaxima.setEditable(true);
+            ct_parametroV.setEditable(true);
             this.listar(0);
         }else if(cmb_tipoVehiculo.getSelectedIndex() == 1){
             if(fila != -1){
@@ -732,6 +729,7 @@ public class Frm_Menu_Vehiculos extends javax.swing.JFrame {
             ct_Tipo.setEditable(true);
             ct_materialBota.setEditable(true);
             cmb_noRuedas.setEnabled(true);
+            ct_parametroV.setEditable(true);
             this.listar(1);
         }
     }//GEN-LAST:event_cmb_tipoVehiculoActionPerformed
