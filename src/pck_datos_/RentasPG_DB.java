@@ -73,7 +73,7 @@ public class RentasPG_DB {
         } finally {
             PS = null;
             RS = null;
-            CN.close();
+            //CN.close();
         }
         return DTM;
     }
@@ -107,7 +107,7 @@ public class RentasPG_DB {
         } finally {
             PS = null;
             RS = null;
-            CN.close();
+            //CN.close();
         }
         return DTM;
     }
@@ -292,7 +292,86 @@ public class RentasPG_DB {
         return DTM;
     }
     
-    
+    public int actualizarRegistroGoKart(int idVehiculo, String modelo, String marca, int anio, 
+                                    String color, float precio, int cilindrada, int noLLantas, float velocidadMaxima) {
+        int res = 0;
+        
+        String SQL_UPDATE_V = "UPDATE vehiculos SET modelo = ?, marca = ?, anio = ?, color = ?, precio = ? WHERE idVehiculo = ?";
+        String SQL_UPDATE_G = "UPDATE gokarts SET cilindrada = ?, noLLantas = ?, velocidadMaxima = ? WHERE idVehiculo = ?";
+
+        try {
+            PS = CN.getConnection().prepareStatement(SQL_UPDATE_V);
+            PS.setString(1, modelo);
+            PS.setString(2, marca);
+            PS.setInt(3, anio);
+            PS.setString(4, color);
+            PS.setFloat(5, precio);
+            PS.setInt(6, idVehiculo);
+            PS.executeUpdate();
+            PS.close();
+
+            PS = CN.getConnection().prepareStatement(SQL_UPDATE_G);
+            PS.setInt(1, cilindrada);
+            PS.setInt(2, noLLantas);
+            PS.setFloat(3, velocidadMaxima);
+            PS.setInt(4, idVehiculo);
+            res = PS.executeUpdate();
+
+            if (res > 0) {
+                JOptionPane.showMessageDialog(null, "Registro de gokart actualizado exitosamente.", 
+                                              "Actualizar registro", 1);
+            }
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al actualizar gokart: " + e.getMessage(), 
+                                          "Error de actualización", 2);
+        } finally {
+            PS = null;
+            //CN.close();
+        }
+
+        return res;
+    }
+    public int actualizarRegistroPatin(int idVehiculo, String modelo, String marca, int anio, 
+                                   String color, float precio, String tipo, String materialBota, int noRuedas) {
+        int res = 0;
+
+        String SQL_UPDATE_V = "UPDATE vehiculos SET modelo = ?, marca = ?, anio = ?, color = ?, precio = ? WHERE idVehiculo = ?";
+        String SQL_UPDATE_P = "UPDATE patines SET tipo = ?, materialBota = ?, noRuedas = ? WHERE idVehiculo = ?";
+
+        try {
+            PS = CN.getConnection().prepareStatement(SQL_UPDATE_V);
+            PS.setString(1, modelo);
+            PS.setString(2, marca);
+            PS.setInt(3, anio);
+            PS.setString(4, color);
+            PS.setFloat(5, precio);
+            PS.setInt(6, idVehiculo);
+            PS.executeUpdate();
+            PS.close();
+            
+            PS = CN.getConnection().prepareStatement(SQL_UPDATE_P);
+            PS.setString(1, tipo);
+            PS.setString(2, materialBota);
+            PS.setInt(3, noRuedas);
+            PS.setInt(4, idVehiculo);
+            res = PS.executeUpdate();
+
+            if (res > 0) {
+                JOptionPane.showMessageDialog(null, "Registro de patín actualizado exitosamente.", 
+                                              "Actualizar registro", 1);
+            }
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al actualizar patín: " + e.getMessage(), 
+                                          "Error de actualización", 2);
+        } finally {
+            PS = null;
+            //CN.close();
+        }
+
+        return res;
+    }
     public void cerrar(){
         CN.close();
     }

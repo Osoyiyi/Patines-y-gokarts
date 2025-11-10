@@ -209,7 +209,7 @@ public class Frm_Menu_Vehiculos extends javax.swing.JFrame {
             }
         }else if(valido && !agregar && cmb_tipoVehiculo.getSelectedIndex() == 0){
             temp = 0;
-            res = RPGDB.agregarRegistroGoKart(idVehiculo, modelo, marca, anio, color, precio, cilindrada
+            res = RPGDB.actualizarRegistroGoKart(idVehiculo, modelo, marca, anio, color, precio, cilindrada
                         , noLLantas, velocidadMaxima);
         }else if(valido && agregar && cmb_tipoVehiculo.getSelectedIndex() == 1){
             if(RPGDB.existeV(idVehiculo)){
@@ -226,7 +226,7 @@ public class Frm_Menu_Vehiculos extends javax.swing.JFrame {
             }
         }else if(valido && !agregar && cmb_tipoVehiculo.getSelectedIndex() == 1){
             temp = 1;
-            res = RPGDB.agregarRegistroPatines(idVehiculo, modelo, marca, anio, color, precio,
+            res = RPGDB.actualizarRegistroPatin(idVehiculo, modelo, marca, anio, color, precio,
                     tipo, materialBota, noRuedas);
         }
         else{
@@ -521,6 +521,11 @@ public class Frm_Menu_Vehiculos extends javax.swing.JFrame {
 
         btn_resetV.setFont(new java.awt.Font("Cambria", 3, 18)); // NOI18N
         btn_resetV.setText("Reset");
+        btn_resetV.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_resetVActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -793,6 +798,10 @@ public class Frm_Menu_Vehiculos extends javax.swing.JFrame {
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         RPGDB.cerrar();
     }//GEN-LAST:event_formWindowClosed
+
+    private void btn_resetVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_resetVActionPerformed
+        this.limpiar();
+    }//GEN-LAST:event_btn_resetVActionPerformed
 
     /**
      * @param args the command line arguments
