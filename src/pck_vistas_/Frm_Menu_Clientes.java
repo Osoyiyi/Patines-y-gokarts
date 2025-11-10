@@ -448,7 +448,7 @@ public class Frm_Menu_Clientes extends javax.swing.JFrame {
             res = JOptionPane.showConfirmDialog(null, "Esta seguro de eliminar este cliente?\nNo podra recuperarse despues...","Eliminar un cliente", JOptionPane.YES_NO_OPTION);
             
             if(res == JOptionPane.YES_OPTION){
-                res = CDB.eliminarCliente((Integer)tbl_Clientes.getValueAt(fila, 0));
+                res = CDB.eliminarCliente((Integer)tbl_Clientes.getValueAt(fila, 0).toString());
                 this.limpiar();
                 this.listar();
             }
@@ -468,8 +468,8 @@ public class Frm_Menu_Clientes extends javax.swing.JFrame {
         ct_Direccion.setText(tbl_Clientes.getValueAt(fila, 2).toString());
         ct_Identificacion.setText(tbl_Clientes.getValueAt(fila, 3).toString());
         ct_Telefono.setText(tbl_Clientes.getValueAt(fila, 4).toString());
-        cmb_Tipo.setSelectedItem(tbl_Clientes.getValueAt(fila, 4).toString());
-        String fecha1 = tbl_Clientes.getValueAt(fila, 5).toString();
+        cmb_Tipo.setSelectedItem(tbl_Clientes.getValueAt(fila, 5).toString());
+        String fecha1 = tbl_Clientes.getValueAt(fila, 6).toString();
         Date date1;
         try{
             date1 = new SimpleDateFormat("yyyy-MM-dd").parse(fecha1);
