@@ -208,8 +208,92 @@ public class RentasPG_DB {
         } finally {
             PS = null;
             RS = null;
-            CN.close();
+            //CN.close();
         }
         return existe;
+    }
+    public DefaultTableModel buscaV(int criterio, String parametro, int tipoV){
+        String SQL_BUSCAR = null;
+        boolean error = false;
+        String tablaJoin, columnasExtra;
+        
+        if(tipoV == 0){
+            tablaJoin = "gokarts g";
+            columnasExtra = "g.cilindrada, g.noLLantas, g.velocidadMaxima";
+            this.setTitulosVG(); 
+        }else{
+            tablaJoin = "patines p";
+            columnasExtra = "p.tipo, p.materialBota, p.noRuedas";
+            this.setTitulosVP();
+        }
+        if (criterio == 0) {
+            try {
+                Integer.parseInt(parametro);
+                SQL_BUSCAR = "SELECT v.idVehiculo, v.modelo, v.marca, v.anio, v.color, v.precio, "
+                           + columnasExtra
+                           + " FROM vehiculos v INNER JOIN " + tablaJoin + " ON v.idVehiculo = "
+                           + (tipoV == 0 ? "g.idVehiculo" : "p.idVehiculo")
+                           + " WHERE v.idVehiculo = " + parametro;
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "El idVehiculo debe ser numérico.", "Warning", 2);
+                error = true;
+            }
+        }else if(criterio == 1){
+            if (parametro == null || parametro.isBlank() || 
+                !parametro.matches("^[A-Za-zÁÉÍÓÚáéíóúÑñ]+(?:[ -][A-Za-zÁÉÍÓÚáéíóúÑñ]+)*$")){
+                JOptionPane.showMessageDialog(null, "Marca no válida.", "Warning", 2);
+                error = true;
+            }else{
+                SQL_BUSCAR = "SELECT v.idVehiculo, v.modelo, v.marca, v.anio, v.color, v.precio, "
+                       + columnasExtra
+                       + " FROM vehiculos v INNER JOIN " + tablaJoin + " ON v.idVehiculo = "
+                       + (tipoV == 0 ? "g.idVehiculo" : "p.idVehiculo")
+                       + " WHERE v.marca LIKE '" + parametro + "%'";
+            }
+        }
+        if (error) {
+            return null;
+        }
+        try {
+            PS = CN.getConnection().prepareStatement(SQL_BUSCAR);
+            RS = PS.executeQuery();
+
+            Object[] fila = new Object[9];
+
+            while (RS.next()) {
+                fila[0] = RS.getInt("idVehiculo");
+                fila[1] = RS.getString("modelo");
+                fila[2] = RS.getString("marca");
+                fila[3] = RS.getInt("anio");
+                fila[4] = RS.getString("color");
+                fila[5] = RS.getFloat("precio");
+
+                if (tipoV == 0) { 
+                    fila[6] = RS.getInt("cilindrada");
+                    fila[7] = RS.getInt("noLLantas");
+                    fila[8] = RS.getFloat("velocidadMaxima");
+                } else { 
+                    fila[6] = RS.getString("tipo");
+                    fila[7] = RS.getString("materialBota");
+                    fila[8] = RS.getInt("noRuedas");
+                }
+
+                DTM.addRow(fila);
+            }
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al buscar vehículos: " + e.getMessage(), "Error de búsqueda", 2);
+        } finally {
+            PS = null;
+            RS = null;
+            //CN.close();
+        }
+
+        return DTM;
+    }
+    
+    
+    public void cerrar(){
+        CN.close();
     }
 }

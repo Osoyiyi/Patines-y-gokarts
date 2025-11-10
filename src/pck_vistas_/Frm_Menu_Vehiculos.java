@@ -2,6 +2,7 @@
 package pck_vistas_;
 
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import pck_datos_.RentasPG_DB;
 
 public class Frm_Menu_Vehiculos extends javax.swing.JFrame {
@@ -281,6 +282,9 @@ public class Frm_Menu_Vehiculos extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
             }
@@ -509,6 +513,11 @@ public class Frm_Menu_Vehiculos extends javax.swing.JFrame {
 
         btn_buscarV.setFont(new java.awt.Font("Cambria", 3, 18)); // NOI18N
         btn_buscarV.setText("Buscar");
+        btn_buscarV.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_buscarVActionPerformed(evt);
+            }
+        });
 
         btn_resetV.setFont(new java.awt.Font("Cambria", 3, 18)); // NOI18N
         btn_resetV.setText("Reset");
@@ -763,6 +772,27 @@ public class Frm_Menu_Vehiculos extends javax.swing.JFrame {
             cmb_noRuedas.setSelectedItem(tb_datosV.getValueAt(fila, 8).toString());
         }
     }//GEN-LAST:event_tb_datosVMouseClicked
+
+    private void btn_buscarVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_buscarVActionPerformed
+        int tipo = -1;
+        if(cmb_tipoVehiculo.getSelectedIndex() == 0){
+            tipo = 0;
+        }else if(cmb_tipoVehiculo.getSelectedIndex() == 1){
+            tipo = 1;
+        }
+        DefaultTableModel modelo = RPGDB.buscaV(cmb_opcionesV.getSelectedIndex(), 
+                ct_parametroV.getText()
+                ,tipo);
+        if (modelo == null) {
+            ct_parametroV.setText("");
+        } else {
+            tb_datosV.setModel(modelo);
+        }
+    }//GEN-LAST:event_btn_buscarVActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        RPGDB.cerrar();
+    }//GEN-LAST:event_formWindowClosed
 
     /**
      * @param args the command line arguments
