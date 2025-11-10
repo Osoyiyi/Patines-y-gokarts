@@ -4,17 +4,21 @@
  */
 package pck_vistas_;
 
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import pck_datos_.RentasPG_DB;
 /**
  *
  * @author J
  */
 public class Frm_Menu_Renta extends javax.swing.JFrame {
-
+    private final RentasPG_DB RPGDB;
     /**
      * Creates new form Frm_Menu_Renta
      */
     public Frm_Menu_Renta() {
         initComponents();
+        RPGDB = new RentasPG_DB();
     }
 
     /**
@@ -76,6 +80,11 @@ public class Frm_Menu_Renta extends javax.swing.JFrame {
         lb_HoraFinal.setText("Hora Final: ");
 
         ct_HoraInicio.setFont(new java.awt.Font("Cambria", 0, 18)); // NOI18N
+        ct_HoraInicio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ct_HoraInicioActionPerformed(evt);
+            }
+        });
 
         lb_HoraInicio.setFont(new java.awt.Font("Cambria", 1, 18)); // NOI18N
         lb_HoraInicio.setText("Hora de Inicio:");
@@ -99,26 +108,26 @@ public class Frm_Menu_Renta extends javax.swing.JFrame {
                         .addComponent(ct_idVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(lb_idCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(ct_idCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(75, 75, 75)
                         .addComponent(lb_HoraInicio)
                         .addGap(18, 18, 18)
-                        .addComponent(ct_HoraInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(93, 93, 93)
-                        .addComponent(lb_HoraFinal)
-                        .addGap(18, 18, 18)
-                        .addComponent(ct_HoraFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(151, 151, 151)
-                        .addComponent(lb_FechaRenta)))
-                .addContainerGap(45, Short.MAX_VALUE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lb_FechaRenta)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(ct_HoraInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(54, 54, 54)
+                                .addComponent(lb_HoraFinal)
+                                .addGap(18, 18, 18)
+                                .addComponent(ct_HoraFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(51, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(25, 25, 25)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lb_idVenta)
                     .addComponent(ct_idVenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -126,15 +135,20 @@ public class Frm_Menu_Renta extends javax.swing.JFrame {
                     .addComponent(ct_idVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lb_idCliente)
                     .addComponent(ct_idCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lb_HoraInicio)
-                    .addComponent(ct_HoraInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lb_HoraFinal)
-                    .addComponent(ct_HoraFinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(lb_HoraInicio))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(ct_HoraInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lb_HoraFinal)
+                            .addComponent(ct_HoraFinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(18, 18, 18)
                 .addComponent(lb_FechaRenta)
-                .addContainerGap(170, Short.MAX_VALUE))
+                .addContainerGap(137, Short.MAX_VALUE))
         );
 
         jPanel4.setBackground(new java.awt.Color(51, 51, 51));
@@ -282,6 +296,10 @@ public class Frm_Menu_Renta extends javax.swing.JFrame {
     private void btn_AgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_AgregarActionPerformed
         
     }//GEN-LAST:event_btn_AgregarActionPerformed
+
+    private void ct_HoraInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ct_HoraInicioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ct_HoraInicioActionPerformed
 
     /**
      * @param args the command line arguments

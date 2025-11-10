@@ -41,7 +41,6 @@ public class Frm_Menu_Clientes extends javax.swing.JFrame {
         cmb_Tipo = new javax.swing.JComboBox<>();
         lb_Telefono = new javax.swing.JLabel();
         ct_Telefono = new javax.swing.JTextField();
-        jdc_Fecha = new com.toedter.calendar.JDateChooser();
         lb_Fecha = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         cmb_opcionesC = new javax.swing.JComboBox<>();
@@ -90,8 +89,6 @@ public class Frm_Menu_Clientes extends javax.swing.JFrame {
 
         ct_Telefono.setFont(new java.awt.Font("Cambria", 0, 18)); // NOI18N
 
-        jdc_Fecha.setFont(new java.awt.Font("Cambria", 0, 18)); // NOI18N
-
         lb_Fecha.setFont(new java.awt.Font("Cambria", 1, 18)); // NOI18N
         lb_Fecha.setText("Fecha de nacimiento");
 
@@ -132,10 +129,8 @@ public class Frm_Menu_Clientes extends javax.swing.JFrame {
                                     .addGap(18, 18, 18)))
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(ct_Telefono, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(lb_Fecha)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(jdc_Fecha, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                .addComponent(lb_Fecha))
+                            .addGap(210, 210, 210))))
                 .addContainerGap(73, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -162,7 +157,6 @@ public class Frm_Menu_Clientes extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(lb_Tipo)
                         .addComponent(cmb_Tipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jdc_Fecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lb_Fecha))
                 .addContainerGap(30, Short.MAX_VALUE))
         );
@@ -369,7 +363,6 @@ public class Frm_Menu_Clientes extends javax.swing.JFrame {
     private javax.swing.JTextField ct_parametroC;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private com.toedter.calendar.JDateChooser jdc_Fecha;
     private javax.swing.JLabel lb_Direccion;
     private javax.swing.JLabel lb_Fecha;
     private javax.swing.JLabel lb_Identificacion;

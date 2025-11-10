@@ -127,12 +127,9 @@
                               </Group>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="ct_Telefono" min="-2" pref="202" max="-2" attributes="0"/>
-                                  <Group type="102" attributes="0">
-                                      <Component id="lb_Fecha" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="jdc_Fecha" min="-2" pref="202" max="-2" attributes="0"/>
-                                  </Group>
+                                  <Component id="lb_Fecha" min="-2" max="-2" attributes="0"/>
                               </Group>
+                              <EmptySpace min="-2" pref="210" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -168,7 +165,6 @@
                           <Component id="lb_Tipo" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="cmb_Tipo" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="jdc_Fecha" min="-2" max="-2" attributes="0"/>
                       <Component id="lb_Fecha" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="30" max="32767" attributes="0"/>
@@ -270,13 +266,6 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="ct_Telefono">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Cambria" size="18" style="0"/>
-            </Property>
-          </Properties>
-        </Component>
-        <Component class="com.toedter.calendar.JDateChooser" name="jdc_Fecha">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Cambria" size="18" style="0"/>
