@@ -41,19 +41,19 @@ public class ClientesPG_DB {
     }
 
     public DefaultTableModel getDatosCleinte() {
-        String SQL_SELECT_CLIENTE = "SELECT idCliente, nombre, direccion, identificacion, tipo, telefono, fechaNacimiento"
+        String SQL_SELECT_CLIENTE = "SELECT idCliente, nombre, direccion, identificacion, tipo, telefono, fechaNacimiento "
                 + "FROM clientes ";
         try {
             this.setTitulosCliente();
             PS = CN.getConnection().prepareStatement(SQL_SELECT_CLIENTE);
             RS = PS.executeQuery();
-            Object[] fila = new Object[6];
+            Object[] fila = new Object[7];
 
             while (RS.next()) {
                 fila[0] = RS.getString("idCliente");
                 fila[1] = RS.getString("nombre");
                 fila[2] = RS.getString("direccion");
-                fila[3] = RS.getString("identifacion");
+                fila[3] = RS.getString("identif8icacion");
                 fila[4] = RS.getString("tipo");
                 fila[5] = RS.getString("telefono");
                 fila[6] = RS.getDate("fechaNacimiento");
@@ -64,7 +64,7 @@ public class ClientesPG_DB {
         } finally {
             PS = null;
             RS = null;
-            //CN.close();
+            CN.close();
         }
         return DTM;
     }
@@ -96,15 +96,17 @@ public class ClientesPG_DB {
         String SQL_BUSCAR_CLIENTE;
 
         if (criterio == 0) {
-            SQL_BUSCAR_CLIENTE = "SELECT * FROM rentasvehiculosdb WHERE idCliente =" + parametro;
+            SQL_BUSCAR_CLIENTE = "SELECT * FROM clientes WHERE idCliente =" + parametro;
         } else {
-            SQL_BUSCAR_CLIENTE = "SELECT * FROM rentasvehiculosdb WHERE nombre like '" + parametro + "%'";
+            SQL_BUSCAR_CLIENTE = "SELECT * FROM clientes WHERE nombre like '" + parametro + "%'";
         }
         try {
             this.setTitulosCliente();
             PS = CN.getConnection().prepareStatement(SQL_BUSCAR_CLIENTE);
             RS = PS.executeQuery();
             Object[] fila = new Object[7];
+            
+            while(RS.next()){
             fila[0] = RS.getString("idCliente");
             fila[1] = RS.getString(2);
             fila[2] = RS.getString(3);
@@ -113,6 +115,7 @@ public class ClientesPG_DB {
             fila[5] = RS.getString(6);
             fila[6] = RS.getDate(7);
             DTM.addRow(fila);
+            }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error al consultar datos...o" + e.getMessage(), "Error de consulta", 2);
         } finally {
@@ -126,7 +129,7 @@ public class ClientesPG_DB {
     public int actualizarRegistroCliente(String idCliente, String nombre, String direccion, String identificacion,
             String tipo, String telefono, Date fechaNacimiento) {
         int res = 0;
-        String SQL_UPDATE_CLIENTE = "UPADTE rentasvehiculosdb SET nombre='" + nombre + "',direccion='" + direccion
+        String SQL_UPDATE_CLIENTE = "UPDATE clientes SET nombre='" + nombre + "',direccion='" + direccion
                 + "',identifiacion='" + identificacion + "',tipo='" + tipo + "',telefono='"
                 + telefono + "',fechaNacimiento='" + fechaNacimiento + "' WHERE idCliente=" + idCliente;
         try {
@@ -145,7 +148,7 @@ public class ClientesPG_DB {
     }
 
     public int eliminarCliente(int id) {
-        String SQL_DELETE_CLIENTE = "DELETE FROM rentasvehiculosdb WHERE idCliente = ?";
+        String SQL_DELETE_CLIENTE = "DELETE FROM cliented WHERE idCliente = ?";
         int res = 0;
 
         try {
