@@ -47,4 +47,13 @@ public class Hora implements Serializable{
     public String getHora(){
         return num1 + ":" + num2;
     }
+    
+    public boolean esMenorQue(Hora otraHora){
+        if (this.num1 < otraHora.num1) {
+            return true; // Si la hora es menor (ej. 10 < 11)
+        } else if (this.num1 == otraHora.num1) {
+            return this.num2 < otraHora.num2; // Si la hora es igual, comparamos minutos (ej. 10:30 < 10:45)
+        }
+        return false;
+    }
 }
