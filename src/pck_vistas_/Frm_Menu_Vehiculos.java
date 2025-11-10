@@ -251,7 +251,6 @@ public class Frm_Menu_Vehiculos extends javax.swing.JFrame {
         lb_Marca = new javax.swing.JLabel();
         ct_Marca = new javax.swing.JTextField();
         lb_Anio = new javax.swing.JLabel();
-        jyc_Anio = new com.toedter.calendar.JYearChooser();
         lb_Color = new javax.swing.JLabel();
         lb_Precio = new javax.swing.JLabel();
         ct_Precio = new javax.swing.JTextField();
@@ -312,8 +311,6 @@ public class Frm_Menu_Vehiculos extends javax.swing.JFrame {
 
         lb_Anio.setFont(new java.awt.Font("Cambria", 1, 18)); // NOI18N
         lb_Anio.setText("Año:");
-
-        jyc_Anio.setFont(new java.awt.Font("Cambria", 0, 18)); // NOI18N
 
         lb_Color.setFont(new java.awt.Font("Cambria", 1, 18)); // NOI18N
         lb_Color.setText("Color:");
@@ -413,8 +410,6 @@ public class Frm_Menu_Vehiculos extends javax.swing.JFrame {
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                                 .addComponent(lb_Anio, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(jyc_Anio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                 .addComponent(lb_Color, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
                                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -467,14 +462,12 @@ public class Frm_Menu_Vehiculos extends javax.swing.JFrame {
                     .addComponent(lb_Precio)
                     .addComponent(ct_Precio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(lb_Marca)
-                        .addComponent(ct_Marca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(lb_Anio)
-                        .addComponent(lb_Color)
-                        .addComponent(ct_Color, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jyc_Anio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lb_Marca)
+                    .addComponent(ct_Marca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lb_Anio)
+                    .addComponent(lb_Color)
+                    .addComponent(ct_Color, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lb_tipoVehiculo)
@@ -653,13 +646,80 @@ public class Frm_Menu_Vehiculos extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cmb_noRuedasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmb_noRuedasActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cmb_noRuedasActionPerformed
-
     private void cmb_opcionesVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmb_opcionesVActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cmb_opcionesVActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        this.limpiar();
+    }//GEN-LAST:event_formWindowOpened
+
+    private void btn_AgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_AgregarActionPerformed
+        this.agregar_actualizar(true);
+    }//GEN-LAST:event_btn_AgregarActionPerformed
+
+    private void btn_ActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ActualizarActionPerformed
+        this.agregar_actualizar(false);
+    }//GEN-LAST:event_btn_ActualizarActionPerformed
+
+    private void jScrollPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jScrollPane1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jScrollPane1MouseClicked
+
+    private void tb_datosVMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_datosVMouseClicked
+        ct_idVehiculo.setEditable(false);
+        int fila = tb_datosV.getSelectedRow();
+        ct_idVehiculo.setText(tb_datosV.getValueAt(fila, 0).toString());
+        ct_Modelo.setText(tb_datosV.getValueAt(fila, 1).toString());
+        ct_Marca.setText(tb_datosV.getValueAt(fila, 2).toString());
+        try {
+            int anio = Integer.parseInt(tb_datosV.getValueAt(fila, 3).toString());
+            jyc_Anio.setYear(anio);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Error al cargar el año.", "Error de datos", 2);
+            jyc_Anio.setYear(0); // opcional: restablecer
+        }
+        ct_Color.setText(tb_datosV.getValueAt(fila, 4).toString());
+        ct_Precio.setText(tb_datosV.getValueAt(fila, 5).toString());
+        if(cmb_tipoVehiculo.getSelectedIndex() == 0){
+            ct_Cilindrada.setText(tb_datosV.getValueAt(fila, 6).toString());
+            cmb_noLLantas.setSelectedItem(tb_datosV.getValueAt(fila, 7).toString());
+            ct_velocidadMaxima.setText(tb_datosV.getValueAt(fila, 8).toString());
+        }else if(cmb_tipoVehiculo.getSelectedIndex() == 1){
+            ct_Tipo.setText(tb_datosV.getValueAt(fila, 6).toString());
+            ct_materialBota.setText(tb_datosV.getValueAt(fila, 7).toString());
+            cmb_noRuedas.setSelectedItem(tb_datosV.getValueAt(fila, 8).toString());
+        }
+    }//GEN-LAST:event_tb_datosVMouseClicked
+
+    private void btn_buscarVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_buscarVActionPerformed
+        int tipo = -1;
+        if(cmb_tipoVehiculo.getSelectedIndex() == 0){
+            tipo = 0;
+        }else if(cmb_tipoVehiculo.getSelectedIndex() == 1){
+            tipo = 1;
+        }
+        DefaultTableModel modelo = RPGDB.buscaV(cmb_opcionesV.getSelectedIndex(), 
+                ct_parametroV.getText()
+                ,tipo);
+        if (modelo == null) {
+            ct_parametroV.setText("");
+        } else {
+            tb_datosV.setModel(modelo);
+        }
+    }//GEN-LAST:event_btn_buscarVActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        RPGDB.cerrar();
+    }//GEN-LAST:event_formWindowClosed
+
+    private void btn_resetVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_resetVActionPerformed
+        this.limpiar();
+    }//GEN-LAST:event_btn_resetVActionPerformed
+
+    private void cmb_noRuedasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmb_noRuedasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmb_noRuedasActionPerformed
 
     private void cmb_tipoVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmb_tipoVehiculoActionPerformed
         int fila = tb_datosV.getSelectedRow();
@@ -734,73 +794,6 @@ public class Frm_Menu_Vehiculos extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_cmb_tipoVehiculoActionPerformed
 
-    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        this.limpiar();
-    }//GEN-LAST:event_formWindowOpened
-
-    private void btn_AgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_AgregarActionPerformed
-        this.agregar_actualizar(true);
-    }//GEN-LAST:event_btn_AgregarActionPerformed
-
-    private void btn_ActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ActualizarActionPerformed
-        this.agregar_actualizar(false);
-    }//GEN-LAST:event_btn_ActualizarActionPerformed
-
-    private void jScrollPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jScrollPane1MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jScrollPane1MouseClicked
-
-    private void tb_datosVMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_datosVMouseClicked
-        ct_idVehiculo.setEditable(false);
-        int fila = tb_datosV.getSelectedRow();
-        ct_idVehiculo.setText(tb_datosV.getValueAt(fila, 0).toString());
-        ct_Modelo.setText(tb_datosV.getValueAt(fila, 1).toString());
-        ct_Marca.setText(tb_datosV.getValueAt(fila, 2).toString());
-        try {
-            int anio = Integer.parseInt(tb_datosV.getValueAt(fila, 3).toString());
-            jyc_Anio.setYear(anio);
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, "Error al cargar el año.", "Error de datos", 2);
-            jyc_Anio.setYear(0); // opcional: restablecer
-        }
-        ct_Color.setText(tb_datosV.getValueAt(fila, 4).toString());
-        ct_Precio.setText(tb_datosV.getValueAt(fila, 5).toString());
-        if(cmb_tipoVehiculo.getSelectedIndex() == 0){
-            ct_Cilindrada.setText(tb_datosV.getValueAt(fila, 6).toString());
-            cmb_noLLantas.setSelectedItem(tb_datosV.getValueAt(fila, 7).toString());
-            ct_velocidadMaxima.setText(tb_datosV.getValueAt(fila, 8).toString());
-        }else if(cmb_tipoVehiculo.getSelectedIndex() == 1){
-            ct_Tipo.setText(tb_datosV.getValueAt(fila, 6).toString());
-            ct_materialBota.setText(tb_datosV.getValueAt(fila, 7).toString());
-            cmb_noRuedas.setSelectedItem(tb_datosV.getValueAt(fila, 8).toString());
-        }
-    }//GEN-LAST:event_tb_datosVMouseClicked
-
-    private void btn_buscarVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_buscarVActionPerformed
-        int tipo = -1;
-        if(cmb_tipoVehiculo.getSelectedIndex() == 0){
-            tipo = 0;
-        }else if(cmb_tipoVehiculo.getSelectedIndex() == 1){
-            tipo = 1;
-        }
-        DefaultTableModel modelo = RPGDB.buscaV(cmb_opcionesV.getSelectedIndex(), 
-                ct_parametroV.getText()
-                ,tipo);
-        if (modelo == null) {
-            ct_parametroV.setText("");
-        } else {
-            tb_datosV.setModel(modelo);
-        }
-    }//GEN-LAST:event_btn_buscarVActionPerformed
-
-    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-        RPGDB.cerrar();
-    }//GEN-LAST:event_formWindowClosed
-
-    private void btn_resetVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_resetVActionPerformed
-        this.limpiar();
-    }//GEN-LAST:event_btn_resetVActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -862,7 +855,6 @@ public class Frm_Menu_Vehiculos extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private com.toedter.calendar.JYearChooser jyc_Anio;
     private javax.swing.JLabel lb_Anio;
     private javax.swing.JLabel lb_Cilindrada;
     private javax.swing.JLabel lb_Color;
