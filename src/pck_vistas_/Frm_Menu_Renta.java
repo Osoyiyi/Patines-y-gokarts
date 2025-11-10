@@ -6,7 +6,7 @@ package pck_vistas_;
 
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import pck_datos_.RentasPG_DB;
+import Pck_Datos_.RentasPG_DB;
 /**
  *
  * @author J

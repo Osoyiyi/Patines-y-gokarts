@@ -49,7 +49,7 @@
 //    ->     FOREIGN KEY (idVehiculo) REFERENCES vehiculos(idVehiculo),
 //    ->     FOREIGN KEY (idCliente) REFERENCES clientes(idCliente)
 //    -> );
-package pck_conexion_;
+package Pck_Conexion_;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -58,7 +58,7 @@ import java.sql.SQLException;
 public class Conexion_DB_ {
     static final String URL = "jdbc:mysql://localhost:3306/rentasvehiculosdb";
     static final String USER = "root";
-    static final String PASS = "";
+    static final String PASS = "Billar2402";
     private static Connection con;
     
     public Conexion_DB_(){

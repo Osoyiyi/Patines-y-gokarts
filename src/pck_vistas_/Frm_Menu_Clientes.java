@@ -1,23 +1,49 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+//
+//José Luis González Flor
+//
 package pck_vistas_;
 
-/**
- *
- * @author J
- */
-public class Frm_Menu_Clientes extends javax.swing.JFrame {
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.swing.JOptionPane;
+import Pck_Datos_.ClientesPG_DB;
 
-    /**
-     * Creates new form Frm_Menu_Clientes
-     */
+
+public class Frm_Menu_Clientes extends javax.swing.JFrame {
+    private final ClientesPG_DB CDB;
+    
     public Frm_Menu_Clientes() {
         initComponents();
+        CDB = new ClientesPG_DB();
         this.setLocationRelativeTo(null);
-
+        this.listar();
     }
+    
+    private void listar(){
+        tbl_Clientes.setModel(CDB.getDatosCleinte());
+    }
+    
+    private void limpiar(){
+        ct_idCliente.setText("");
+        ct_Telefono.setText("");
+        ct_Nombre.setText("");
+        ct_Identificacion.setText("");
+        ct_Direccion.setText("");
+        cmb_Tipo.setSelectedIndex(-1);
+//        jdt_Fecha.setDate(null);
+    }
+    
+    private void agregar_actualizar(boolean agregar){
+        String id, nombre, direccion, identificacion,  telefono, clasific = null;
+        
+        try{
+            id = (ct_idCliente.getText(){
+            
+        }
+        }
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -34,7 +60,7 @@ public class Frm_Menu_Clientes extends javax.swing.JFrame {
         lb_Nombre = new javax.swing.JLabel();
         ct_Nombre = new javax.swing.JTextField();
         lb_Direccion = new javax.swing.JLabel();
-        ct_DIreccion = new javax.swing.JTextField();
+        ct_Direccion = new javax.swing.JTextField();
         lb_Identificacion = new javax.swing.JLabel();
         ct_Identificacion = new javax.swing.JTextField();
         lb_Tipo = new javax.swing.JLabel();
@@ -51,7 +77,7 @@ public class Frm_Menu_Clientes extends javax.swing.JFrame {
         btn_Consultar = new javax.swing.JButton();
         btn_Eliminar = new javax.swing.JButton();
         btn_Actualizar = new javax.swing.JButton();
-        JScrollPane = new javax.swing.JScrollPane();
+        tb_Datos = new javax.swing.JScrollPane();
         tbl_Clientes = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -71,7 +97,7 @@ public class Frm_Menu_Clientes extends javax.swing.JFrame {
         lb_Direccion.setFont(new java.awt.Font("Cambria", 1, 18)); // NOI18N
         lb_Direccion.setText("Direccion:");
 
-        ct_DIreccion.setFont(new java.awt.Font("Cambria", 0, 18)); // NOI18N
+        ct_Direccion.setFont(new java.awt.Font("Cambria", 0, 18)); // NOI18N
 
         lb_Identificacion.setFont(new java.awt.Font("Cambria", 1, 18)); // NOI18N
         lb_Identificacion.setText("Identificacion:");
@@ -102,7 +128,7 @@ public class Frm_Menu_Clientes extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(lb_Direccion)
                         .addGap(18, 18, 18)
-                        .addComponent(ct_DIreccion, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(ct_Direccion, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(400, 400, 400)
                         .addComponent(lb_Identificacion)
@@ -145,7 +171,7 @@ public class Frm_Menu_Clientes extends javax.swing.JFrame {
                 .addGap(30, 30, 30)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lb_Direccion)
-                    .addComponent(ct_DIreccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ct_Direccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lb_Identificacion)
                     .addComponent(ct_Identificacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27)
@@ -237,7 +263,7 @@ public class Frm_Menu_Clientes extends javax.swing.JFrame {
             }
         });
 
-        JScrollPane.setFont(new java.awt.Font("Cambria", 0, 18)); // NOI18N
+        tb_Datos.setFont(new java.awt.Font("Cambria", 0, 18)); // NOI18N
 
         tbl_Clientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -250,7 +276,7 @@ public class Frm_Menu_Clientes extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        JScrollPane.setViewportView(tbl_Clientes);
+        tb_Datos.setViewportView(tbl_Clientes);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -259,7 +285,7 @@ public class Frm_Menu_Clientes extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(JScrollPane)
+                    .addComponent(tb_Datos)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -292,7 +318,7 @@ public class Frm_Menu_Clientes extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(JScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(tb_Datos, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -346,7 +372,6 @@ public class Frm_Menu_Clientes extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JScrollPane JScrollPane;
     private javax.swing.JButton btn_Actualizar;
     private javax.swing.JButton btn_Agregar;
     private javax.swing.JButton btn_Consultar;
@@ -355,7 +380,7 @@ public class Frm_Menu_Clientes extends javax.swing.JFrame {
     private javax.swing.JButton btn_resetC;
     private javax.swing.JComboBox<String> cmb_Tipo;
     private javax.swing.JComboBox<String> cmb_opcionesC;
-    private javax.swing.JTextField ct_DIreccion;
+    private javax.swing.JTextField ct_Direccion;
     private javax.swing.JTextField ct_Identificacion;
     private javax.swing.JTextField ct_Nombre;
     private javax.swing.JTextField ct_Telefono;
@@ -370,6 +395,7 @@ public class Frm_Menu_Clientes extends javax.swing.JFrame {
     private javax.swing.JLabel lb_Telefono;
     private javax.swing.JLabel lb_Tipo;
     private javax.swing.JLabel lb_idCliente;
+    private javax.swing.JScrollPane tb_Datos;
     private javax.swing.JTable tbl_Clientes;
     // End of variables declaration//GEN-END:variables
 }

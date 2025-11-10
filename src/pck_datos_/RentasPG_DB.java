@@ -1,12 +1,12 @@
 
-package pck_datos_;
+package Pck_Datos_;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import pck_conexion_.Conexion_DB_;
+import Pck_Conexion_.Conexion_DB_;
 
 
 public class RentasPG_DB {
