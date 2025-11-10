@@ -3,11 +3,11 @@
 //
 package pck_vistas_;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JOptionPane;
 import Pck_Datos_.ClientesPG_DB;
+import java.text.ParseException;
 
 
 public class Frm_Menu_Clientes extends javax.swing.JFrame {
@@ -31,19 +31,88 @@ public class Frm_Menu_Clientes extends javax.swing.JFrame {
         ct_Identificacion.setText("");
         ct_Direccion.setText("");
         cmb_Tipo.setSelectedIndex(-1);
-//        jdt_Fecha.setDate(null);
+        jdt_Fecha.setDate(null);
     }
     
-    private void agregar_actualizar(boolean agregar){
-        String id, nombre, direccion, identificacion,  telefono, clasific = null;
+    private void agregar_actualizar(boolean agregar) {
+        String id, nombre, direccion, identificacion, telefono, tipo = null;
+        int res = 0;
+        boolean valido = true;
+
+        id = ct_idCliente.getText();
+        if (id == null || id.isBlank() || !id.matches("^[A-Za-zÁÉÍÓÚáéíóúÑñ0-9 ]+$")) {
+            JOptionPane.showMessageDialog(null,
+                    "No corresponde a un id válido.", "Warning", 2);
+            ct_idCliente.setText("");
+            valido = false;
+        }
+
+        nombre = ct_Nombre.getText();
+        if (nombre == null || nombre.isBlank() || !nombre.matches("^[A-Za-zÁÉÍÓÚáéíóúÑñ0-9.,:;!?()\"'\\- ]+$")) {
+            JOptionPane.showMessageDialog(null,
+                    "No corresponde a un nombre válido.", "Warning", 2);
+            ct_Nombre.setText("");
+            valido = false;
+        }
         
-        try{
-            id = (ct_idCliente.getText(){
-            
+        direccion = ct_Direccion.getText();
+        if (direccion == null || direccion.isBlank() || !direccion.matches("^[A-Za-zÁÉÍÓÚáéíóúÑñ0-9 #.,\\-/]+$")) {
+            JOptionPane.showMessageDialog(null,
+                    "No corresponde a una dirección válida.", "Warning", 2);
+            ct_Direccion.setText("");
+            valido = false;
         }
+        
+        identificacion = ct_Identificacion.getText();
+        if (identificacion == null || identificacion.isBlank() || !identificacion.matches("^[A-Za-zÁÉÍÓÚáéíóúÑñ0-9 #.,\\-/]+$")) {
+            JOptionPane.showMessageDialog(null,
+                    "No corresponde a una identificacion válida.", "Warning", 2);
+            ct_Identificacion.setText("");
+            valido = false;
         }
+        
+        telefono = ct_Telefono.getText();
+        if (telefono == null || telefono.isBlank() || !telefono.matches("^[0-9 +()\\-]+$")) {
+            JOptionPane.showMessageDialog(null,
+                    "No corresponde a un teléfono válido.", "Warning", 2);
+            ct_Telefono.setText("");
+            valido = false;
+        }
+        
+        if(cmb_Tipo.getSelectedIndex() == -1){
+            JOptionPane.showMessageDialog(null, "El campo tipo esta vacio", "Error", 2);
+            valido = false;
+        }else{
+            tipo = cmb_Tipo.getSelectedItem().toString();
+        }
+        
+        java.sql.Date fechaE = null;
+        Date fE = jdt_Fecha.getDate();
+        if(fE == null){
+            JOptionPane.showMessageDialog(null, "Debe seleccionar una fecha de estreno", "Error", 2);
+            valido = false;
+        }else{
+        long dE = fE.getTime();
+        fechaE = new java.sql.Date(dE);
+        }
+
+        if(valido && agregar){
+        res = CDB.agregarCliente(id, nombre, direccion, identificacion, telefono, tipo, fechaE);
+        this.listar();
+        this.limpiar();
+         JOptionPane.showMessageDialog(null, "Cliente agregado con exito", "Registro exitoso", 3);
+        }else if (valido && !agregar){
+                res = CDB.actualizarRegistroCliente(id, nombre, direccion, identificacion, telefono, tipo, fechaE);
+                
+        }if(res > 0){
+            this.listar();
+            this.limpiar();
+        }else{
+            JOptionPane.showMessageDialog(null, "No se puede seguir con el proceso, Todos los datos deben ser válidos", "Error", 2);
+        }
+
     }
-    
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -69,8 +138,8 @@ public class Frm_Menu_Clientes extends javax.swing.JFrame {
         ct_Telefono = new javax.swing.JTextField();
         lb_Fecha = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        cmb_opcionesC = new javax.swing.JComboBox<>();
-        ct_parametroC = new javax.swing.JTextField();
+        cmb_OpcionesC = new javax.swing.JComboBox<>();
+        ct_ParametroC = new javax.swing.JTextField();
         btn_buscarC = new javax.swing.JButton();
         btn_resetC = new javax.swing.JButton();
         btn_Agregar = new javax.swing.JButton();
@@ -81,6 +150,11 @@ public class Frm_Menu_Clientes extends javax.swing.JFrame {
         tbl_Clientes = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Menu de Clientes", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Cambria", 1, 24))); // NOI18N
 
@@ -156,7 +230,7 @@ public class Frm_Menu_Clientes extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(ct_Telefono, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(lb_Fecha))
-                            .addGap(210, 210, 210))))
+                            .addGap(74, 74, 74))))
                 .addContainerGap(73, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -190,21 +264,31 @@ public class Frm_Menu_Clientes extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(51, 51, 51));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Buscar", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Cambria", 3, 24), new java.awt.Color(255, 255, 255))); // NOI18N
 
-        cmb_opcionesC.setFont(new java.awt.Font("Cambria", 3, 18)); // NOI18N
-        cmb_opcionesC.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Id Cliente", "Nombre", " " }));
-        cmb_opcionesC.addActionListener(new java.awt.event.ActionListener() {
+        cmb_OpcionesC.setFont(new java.awt.Font("Cambria", 3, 18)); // NOI18N
+        cmb_OpcionesC.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Id Cliente", "Nombre", " " }));
+        cmb_OpcionesC.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmb_opcionesCActionPerformed(evt);
+                cmb_OpcionesCActionPerformed(evt);
             }
         });
 
-        ct_parametroC.setFont(new java.awt.Font("Cambria", 0, 18)); // NOI18N
+        ct_ParametroC.setFont(new java.awt.Font("Cambria", 0, 18)); // NOI18N
 
         btn_buscarC.setFont(new java.awt.Font("Cambria", 3, 18)); // NOI18N
         btn_buscarC.setText("Buscar");
+        btn_buscarC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_buscarCActionPerformed(evt);
+            }
+        });
 
         btn_resetC.setFont(new java.awt.Font("Cambria", 3, 18)); // NOI18N
         btn_resetC.setText("Reset");
+        btn_resetC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_resetCActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -212,9 +296,9 @@ public class Frm_Menu_Clientes extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(cmb_opcionesC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cmb_OpcionesC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(67, 67, 67)
-                .addComponent(ct_parametroC, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(ct_ParametroC, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(53, 53, 53)
                 .addComponent(btn_buscarC)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -226,8 +310,8 @@ public class Frm_Menu_Clientes extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cmb_opcionesC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ct_parametroC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmb_OpcionesC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ct_ParametroC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_buscarC)
                     .addComponent(btn_resetC))
                 .addContainerGap(30, Short.MAX_VALUE))
@@ -247,11 +331,21 @@ public class Frm_Menu_Clientes extends javax.swing.JFrame {
         btn_Consultar.setFont(new java.awt.Font("Cambria", 3, 18)); // NOI18N
         btn_Consultar.setForeground(new java.awt.Color(255, 255, 255));
         btn_Consultar.setText("Consultar");
+        btn_Consultar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_ConsultarActionPerformed(evt);
+            }
+        });
 
         btn_Eliminar.setBackground(new java.awt.Color(51, 51, 51));
         btn_Eliminar.setFont(new java.awt.Font("Cambria", 3, 18)); // NOI18N
         btn_Eliminar.setForeground(new java.awt.Color(255, 255, 255));
         btn_Eliminar.setText("Eliminar");
+        btn_Eliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_EliminarActionPerformed(evt);
+            }
+        });
 
         btn_Actualizar.setBackground(new java.awt.Color(51, 51, 51));
         btn_Actualizar.setFont(new java.awt.Font("Cambria", 3, 18)); // NOI18N
@@ -267,15 +361,20 @@ public class Frm_Menu_Clientes extends javax.swing.JFrame {
 
         tbl_Clientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {},
+                {},
+                {},
+                {}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
+        tbl_Clientes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbl_ClientesMouseClicked(evt);
+            }
+        });
         tb_Datos.setViewportView(tbl_Clientes);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -291,12 +390,16 @@ public class Frm_Menu_Clientes extends javax.swing.JFrame {
                             .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btn_Actualizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btn_Agregar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btn_Eliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btn_Consultar, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 9, Short.MAX_VALUE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(btn_Actualizar, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)
+                                    .addComponent(btn_Agregar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btn_Eliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(btn_Consultar, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -324,17 +427,70 @@ public class Frm_Menu_Clientes extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cmb_opcionesCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmb_opcionesCActionPerformed
+    private void cmb_OpcionesCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmb_OpcionesCActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_cmb_opcionesCActionPerformed
+    }//GEN-LAST:event_cmb_OpcionesCActionPerformed
 
     private void btn_ActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ActualizarActionPerformed
-        
+        this.agregar_actualizar(false);
     }//GEN-LAST:event_btn_ActualizarActionPerformed
 
     private void btn_AgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_AgregarActionPerformed
-                 
+        this.agregar_actualizar(true);
     }//GEN-LAST:event_btn_AgregarActionPerformed
+
+    private void btn_EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_EliminarActionPerformed
+        int res;
+        int fila = tbl_Clientes.getSelectedRow();
+        if(fila == -1){
+            JOptionPane.showMessageDialog(null, "Debe seleccionar un registro", "Error", 2);
+        }else{
+            res = JOptionPane.showConfirmDialog(null, "Esta seguro de eliminar este cliente?\nNo podra recuperarse despues...","Eliminar un cliente", JOptionPane.YES_NO_OPTION);
+            
+            if(res == JOptionPane.YES_OPTION){
+                res = CDB.eliminarCliente((Integer)tbl_Clientes.getValueAt(fila, 0));
+                this.limpiar();
+                this.listar();
+            }
+        }
+    }//GEN-LAST:event_btn_EliminarActionPerformed
+
+    private void btn_ConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ConsultarActionPerformed
+        Frm_Consulta_Clientes frmCC = new Frm_Consulta_Clientes();
+        frmCC.setVisible(true);
+        this.limpiar();
+    }//GEN-LAST:event_btn_ConsultarActionPerformed
+
+    private void tbl_ClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_ClientesMouseClicked
+        int fila = tbl_Clientes.getSelectedRow();
+        ct_idCliente.setText(tbl_Clientes.getValueAt(fila, 0).toString());
+        ct_Nombre.setText(tbl_Clientes.getValueAt(fila, 1).toString());
+        ct_Direccion.setText(tbl_Clientes.getValueAt(fila, 2).toString());
+        ct_Identificacion.setText(tbl_Clientes.getValueAt(fila, 3).toString());
+        ct_Telefono.setText(tbl_Clientes.getValueAt(fila, 4).toString());
+        cmb_Tipo.setSelectedItem(tbl_Clientes.getValueAt(fila, 4).toString());
+        String fecha1 = tbl_Clientes.getValueAt(fila, 5).toString();
+        Date date1;
+        try{
+            date1 = new SimpleDateFormat("yyyy-MM-dd").parse(fecha1);
+            jdt_Fecha.setDate(date1);
+        }catch(ParseException e){
+            JOptionPane.showMessageDialog(null,"Error al carga la fecha" + e.getMessage(), "Error", 2);
+        }   
+    }//GEN-LAST:event_tbl_ClientesMouseClicked
+
+    private void btn_buscarCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_buscarCActionPerformed
+        tbl_Clientes.setModel(CDB.buscarCliente(cmb_OpcionesC.getSelectedIndex(),ct_ParametroC.getText()));
+    }//GEN-LAST:event_btn_buscarCActionPerformed
+
+    private void btn_resetCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_resetCActionPerformed
+        this.listar();
+        this.limpiar();
+    }//GEN-LAST:event_btn_resetCActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        this.limpiar();
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments
@@ -378,14 +534,14 @@ public class Frm_Menu_Clientes extends javax.swing.JFrame {
     private javax.swing.JButton btn_Eliminar;
     private javax.swing.JButton btn_buscarC;
     private javax.swing.JButton btn_resetC;
+    private javax.swing.JComboBox<String> cmb_OpcionesC;
     private javax.swing.JComboBox<String> cmb_Tipo;
-    private javax.swing.JComboBox<String> cmb_opcionesC;
     private javax.swing.JTextField ct_Direccion;
     private javax.swing.JTextField ct_Identificacion;
     private javax.swing.JTextField ct_Nombre;
+    private javax.swing.JTextField ct_ParametroC;
     private javax.swing.JTextField ct_Telefono;
     private javax.swing.JTextField ct_idCliente;
-    private javax.swing.JTextField ct_parametroC;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lb_Direccion;
