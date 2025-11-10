@@ -1,13 +1,127 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package pck_vistas_;
+
+import Pck_Examen.Hora;
+import javax.swing.JOptionPane;
 
 public class Frm_Menu_Renta extends javax.swing.JFrame {
 
     public Frm_Menu_Renta() {
         initComponents();
+    }
+
+    private void listar() {
+//        tbl_Rentas.setModel(PDB.getDatos());
+    }
+
+    private void limpiar() {
+        ct_HoraFinal.setText("");
+        ct_HoraInicio.setText("");
+        ct_idCliente.setText("");
+        ct_idRenta.setText("");
+        ct_idVehiculo.setText("");
+        
+    }
+
+    private Hora validarHora(String horaStr, String campoNombre) {
+        String[] partes = horaStr.split(":");
+        if (partes.length != 2) {
+            JOptionPane.showMessageDialog(null, "El formato de la " + campoNombre + " debe ser en formato HH:MM",
+                    "Warning", 2);
+            return null;
+        }
+        try {
+            int hora = Integer.parseInt(partes[0].trim());
+            int minuto = Integer.parseInt(partes[1].trim());
+            Hora horaObj = new Hora(hora, minuto);
+
+            if (horaObj.horaCorrecta()) {
+                return horaObj;
+            } else {
+                return null;
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null,
+                    "La hora debe contener valores numéricos para horas y minutos en formato HH:MM",
+                    "Warning", 2);
+            return null;
+        }
+    }
+
+    private void aregar_actualizar(boolean agregar) {
+        int idRenta = 0, idVehiculo = 0, idCliente = 0, res = 0;
+        boolean valido = false;
+
+        try {
+            idRenta = Integer.parseInt(ct_idRenta.getText());
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "El ID de la renta debe ser numérico",
+                    "Warning", 2);
+            ct_idRenta.setText("");
+            valido = false;
+        }
+
+        try {
+            idVehiculo = Integer.parseInt(ct_idVehiculo.getText());
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "El ID del vehiculo debe ser numérico",
+                    "Warning", 2);
+            ct_idVehiculo.setText("");
+            valido = false;
+        }
+
+        try {
+            idCliente = Integer.parseInt(ct_idCliente.getText());
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "El ID Cliente debe ser numérico",
+                    "Warning", 2);
+            ct_idCliente.setText("");
+            valido = false;
+        }
+
+        if (!valido) {
+            return;
+        }
+
+        Hora horaInicio = validarHora(ct_HoraInicio.getText(), "Hora de Inicio");
+        if (horaInicio == null) {
+            ct_HoraInicio.setText("");
+            valido = false;
+        }
+
+        Hora horaFinal = validarHora(ct_HoraFinal.getText(), "Hora Final");
+        if (horaFinal == null) {
+            ct_HoraFinal.setText("");
+            valido = true;
+        }
+
+        if (!valido) {
+            return;
+        }
+
+        if (horaFinal.esMenorQue(horaInicio) || horaFinal.getHora().equals(horaInicio.getHora())) {
+            JOptionPane.showMessageDialog(null, "La Hora Final (" + horaFinal.getHora() + ") no puede ser menor o igual a la Hora de Inicio (" + horaInicio.getHora() + ").",
+                     "Error de Renta", 2);
+            valido = false;
+        }
+
+        if (!valido) {
+            return;
+        }
+
+        if (valido && agregar) {
+//            res = PDB.agregarRegistro(idRenta, idVehiculo, idCliente, FechaRenta, HoraInicio, HoraFinal);
+        } else if (valido && !agregar) {
+//            res = PDB.agregarRegistro(idRenta, idVehiculo, idCliente, FechaRenta, HoraInicio, HoraFinal);
+        } else {
+            JOptionPane.showMessageDialog(null, "Por favor conteste todos campos o verifique que sean datos validos",
+                    "Error de carga de datos", 0);
+        }
+
+        if (res > 0) {
+//            this.listar();
+//            this.limpiar();
+        }
+
     }
 
     /**
@@ -22,8 +136,8 @@ public class Frm_Menu_Renta extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         ct_idCliente = new javax.swing.JTextField();
         lb_idCliente = new javax.swing.JLabel();
-        lb_idVenta = new javax.swing.JLabel();
-        ct_idVenta = new javax.swing.JTextField();
+        lb_idRenta = new javax.swing.JLabel();
+        ct_idRenta = new javax.swing.JTextField();
         lb_idVehiculo = new javax.swing.JLabel();
         ct_idVehiculo = new javax.swing.JTextField();
         lb_FechaRenta = new javax.swing.JLabel();
@@ -52,10 +166,10 @@ public class Frm_Menu_Renta extends javax.swing.JFrame {
         lb_idCliente.setFont(new java.awt.Font("Cambria", 1, 18)); // NOI18N
         lb_idCliente.setText("Id Cliente:");
 
-        lb_idVenta.setFont(new java.awt.Font("Cambria", 1, 18)); // NOI18N
-        lb_idVenta.setText("Id Venta:");
+        lb_idRenta.setFont(new java.awt.Font("Cambria", 1, 18)); // NOI18N
+        lb_idRenta.setText("Id Renta:");
 
-        ct_idVenta.setFont(new java.awt.Font("Cambria", 0, 18)); // NOI18N
+        ct_idRenta.setFont(new java.awt.Font("Cambria", 0, 18)); // NOI18N
 
         lb_idVehiculo.setFont(new java.awt.Font("Cambria", 1, 18)); // NOI18N
         lb_idVehiculo.setText("Id Vehiculo:");
@@ -83,38 +197,41 @@ public class Frm_Menu_Renta extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(lb_idVenta)
+                        .addComponent(lb_idRenta)
                         .addGap(18, 18, 18)
-                        .addComponent(ct_idVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(ct_idRenta, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(lb_idVehiculo)
                         .addGap(18, 18, 18)
                         .addComponent(ct_idVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(lb_idCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                        .addComponent(lb_idCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(ct_idCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(75, 75, 75)
-                        .addComponent(lb_HoraInicio)
-                        .addGap(18, 18, 18)
-                        .addComponent(ct_HoraInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(93, 93, 93)
-                        .addComponent(lb_HoraFinal)
-                        .addGap(18, 18, 18)
-                        .addComponent(ct_HoraFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(151, 151, 151)
-                        .addComponent(lb_FechaRenta)))
-                .addContainerGap(45, Short.MAX_VALUE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(75, 75, 75)
+                                .addComponent(lb_HoraInicio)
+                                .addGap(18, 18, 18)
+                                .addComponent(ct_HoraInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(93, 93, 93)
+                                .addComponent(lb_HoraFinal)
+                                .addGap(18, 18, 18)
+                                .addComponent(ct_HoraFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(151, 151, 151)
+                                .addComponent(lb_FechaRenta)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lb_idVenta)
-                    .addComponent(ct_idVenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lb_idRenta)
+                    .addComponent(ct_idRenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lb_idVehiculo)
                     .addComponent(ct_idVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lb_idCliente)
@@ -217,6 +334,11 @@ public class Frm_Menu_Renta extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tbl_Rentas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbl_RentasMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tbl_Rentas);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -269,12 +391,22 @@ public class Frm_Menu_Renta extends javax.swing.JFrame {
     }//GEN-LAST:event_cmb_opcionesRActionPerformed
 
     private void btn_ActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ActualizarActionPerformed
-        
+
     }//GEN-LAST:event_btn_ActualizarActionPerformed
 
     private void btn_AgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_AgregarActionPerformed
-        
+
     }//GEN-LAST:event_btn_AgregarActionPerformed
+
+    private void tbl_RentasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_RentasMouseClicked
+        int fila = tbl_Rentas.getSelectedRow();
+        ct_idRenta.setText(tbl_Rentas.getValueAt(fila, 0).toString());
+        ct_idVehiculo.setText(tbl_Rentas.getValueAt(fila, 1).toString());
+        ct_idCliente.setText(tbl_Rentas.getValueAt(fila, 2).toString());
+        //aqui va el Jdt_Fecha
+        ct_HoraInicio.setText(tbl_Rentas.getValueAt(fila, 3).toString());
+        ct_HoraFinal.setText(tbl_Rentas.getValueAt(fila, 4).toString());
+    }//GEN-LAST:event_tbl_RentasMouseClicked
 
     /**
      * @param args the command line arguments
@@ -322,8 +454,8 @@ public class Frm_Menu_Renta extends javax.swing.JFrame {
     private javax.swing.JTextField ct_HoraFinal;
     private javax.swing.JTextField ct_HoraInicio;
     private javax.swing.JTextField ct_idCliente;
+    private javax.swing.JTextField ct_idRenta;
     private javax.swing.JTextField ct_idVehiculo;
-    private javax.swing.JTextField ct_idVenta;
     private javax.swing.JTextField ct_parametroR;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel4;
@@ -332,8 +464,8 @@ public class Frm_Menu_Renta extends javax.swing.JFrame {
     private javax.swing.JLabel lb_HoraFinal;
     private javax.swing.JLabel lb_HoraInicio;
     private javax.swing.JLabel lb_idCliente;
+    private javax.swing.JLabel lb_idRenta;
     private javax.swing.JLabel lb_idVehiculo;
-    private javax.swing.JLabel lb_idVenta;
     private javax.swing.JTable tbl_Rentas;
     // End of variables declaration//GEN-END:variables
 }

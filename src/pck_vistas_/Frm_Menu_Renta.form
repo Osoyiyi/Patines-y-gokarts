@@ -90,34 +90,39 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="lb_idVenta" min="-2" max="-2" attributes="0"/>
+                          <Component id="lb_idRenta" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="ct_idVenta" min="-2" pref="143" max="-2" attributes="0"/>
+                          <Component id="ct_idRenta" min="-2" pref="143" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="lb_idVehiculo" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="ct_idVehiculo" min="-2" pref="143" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="lb_idCliente" min="-2" pref="85" max="-2" attributes="0"/>
+                          <EmptySpace pref="32" max="32767" attributes="0"/>
+                          <Component id="lb_idCliente" min="-2" pref="110" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="ct_idCliente" min="-2" pref="143" max="-2" attributes="0"/>
                       </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="75" max="-2" attributes="0"/>
-                          <Component id="lb_HoraInicio" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="ct_HoraInicio" min="-2" pref="176" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="93" max="-2" attributes="0"/>
-                          <Component id="lb_HoraFinal" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="ct_HoraFinal" min="-2" pref="159" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="151" max="-2" attributes="0"/>
-                          <Component id="lb_FechaRenta" min="-2" max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="75" max="-2" attributes="0"/>
+                                  <Component id="lb_HoraInicio" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="ct_HoraInicio" min="-2" pref="176" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="93" max="-2" attributes="0"/>
+                                  <Component id="lb_HoraFinal" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="ct_HoraFinal" min="-2" pref="159" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="151" max="-2" attributes="0"/>
+                                  <Component id="lb_FechaRenta" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace pref="45" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -126,8 +131,8 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="lb_idVenta" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="ct_idVenta" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lb_idRenta" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="ct_idRenta" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="lb_idVehiculo" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="ct_idVehiculo" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="lb_idCliente" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -163,15 +168,15 @@
             <Property name="text" type="java.lang.String" value="Id Cliente:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="lb_idVenta">
+        <Component class="javax.swing.JLabel" name="lb_idRenta">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Cambria" size="18" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Id Venta:"/>
+            <Property name="text" type="java.lang.String" value="Id Renta:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="ct_idVenta">
+        <Component class="javax.swing.JTextField" name="ct_idRenta">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Cambria" size="18" style="0"/>
@@ -402,6 +407,9 @@
               </Table>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tbl_RentasMouseClicked"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
