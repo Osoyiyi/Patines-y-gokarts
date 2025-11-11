@@ -489,9 +489,13 @@ public class Frm_Menu_Renta extends javax.swing.JFrame {
         ct_idRenta.setText(tbl_Rentas.getValueAt(fila, 0).toString());
         ct_idVehiculo.setText(tbl_Rentas.getValueAt(fila, 1).toString());
         ct_idCliente.setText(tbl_Rentas.getValueAt(fila, 2).toString());
+        java.sql.Time horaInicio = (java.sql.Time) tbl_Rentas.getValueAt(fila, 3); //aqui se genera hora inicio como tipo time en lugar de string 
+        java.sql.Time horaFinal = (java.sql.Time) tbl_Rentas.getValueAt(fila, 4);   //lo mismo que en el anterior
         jdc_FechaRenta.setDate((java.util.Date) tbl_Rentas.getValueAt(fila, 5));
-        ct_HoraInicio.setText(tbl_Rentas.getValueAt(fila, 3).toString());
-        ct_HoraFinal.setText(tbl_Rentas.getValueAt(fila, 4).toString());
+        
+        java.text.SimpleDateFormat formatoMH = new java.text.SimpleDateFormat("HH:mm"); //aqui se hace un formateo de hora para solo sea hora y minuto en lugar de hora,  minuto y segundo
+        ct_HoraInicio.setText(formatoMH.format(horaInicio));   //se asginan el valor de hora y minuto a las horas 
+        ct_HoraFinal.setText(formatoMH.format(horaFinal));
     }//GEN-LAST:event_tbl_RentasMouseClicked
 
     private void btn_ConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ConsultarActionPerformed
