@@ -141,7 +141,7 @@ public class Frm_Menu_Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_VehiculoActionPerformed
 
     private void btn_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SalirActionPerformed
-        this.dispose();
+        System.exit(0);
     }//GEN-LAST:event_btn_SalirActionPerformed
 
     /**

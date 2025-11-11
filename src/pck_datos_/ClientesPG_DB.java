@@ -96,9 +96,9 @@ public class ClientesPG_DB {
         String SQL_BUSCAR_CLIENTE;
 
         if (criterio == 0) {
-            SQL_BUSCAR_CLIENTE = "SELECT * FROM clientes WHERE idCliente =" + parametro;
+            SQL_BUSCAR_CLIENTE = "SELECT * FROM clientes WHERE idCliente LIKE '" + parametro + "%'";
         } else {
-            SQL_BUSCAR_CLIENTE = "SELECT * FROM clientes WHERE nombre like '" + parametro + "%'";
+            SQL_BUSCAR_CLIENTE = "SELECT * FROM clientes WHERE nombre LIKE '" + parametro + "%'";
         }
         try {
             this.setTitulosCliente();
@@ -107,7 +107,7 @@ public class ClientesPG_DB {
             Object[] fila = new Object[7];
             
             while(RS.next()){
-            fila[0] = RS.getString("idCliente");
+            fila[0] = RS.getString(1);
             fila[1] = RS.getString(2);
             fila[2] = RS.getString(3);
             fila[3] = RS.getString(4);
@@ -131,7 +131,7 @@ public class ClientesPG_DB {
         int res = 0;
         String SQL_UPDATE_CLIENTE = "UPDATE clientes SET nombre='" + nombre + "',direccion='" + direccion
                 + "',identificacion='" + identificacion + "',tipo='" + tipo + "',telefono='"
-                + telefono + "',fechaNacimiento='" + fechaNacimiento + "' WHERE idCliente=" + idCliente;
+                + telefono + "',fechaNacimiento='" + fechaNacimiento + "' WHERE idCliente='" + idCliente + "'";
         try {
             PS = CN.getConnection().prepareStatement(SQL_UPDATE_CLIENTE);
             res = PS.executeUpdate();

@@ -43,13 +43,8 @@ public class Frm_Menu_Clientes extends javax.swing.JFrame {
         boolean idDuplicado;
 
         id = ct_idCliente.getText();
-idDuplicado = CDB.idDuplicado(id);
-        if (id == null || id.isBlank() || !id.matches("^[0-9]+$")) {
-            JOptionPane.showMessageDialog(null,
-                    "El ID solo debe contener números.", "Warning", 2);
-            ct_idCliente.setText("");
-            valido = false;
-        } else if (idDuplicado && agregar) {
+        idDuplicado = CDB.idDuplicado(id);
+        if (idDuplicado && agregar) {
             JOptionPane.showMessageDialog(null, "El ID ya existe", "Id existente", 2);
             ct_idCliente.setText("");
             ct_idCliente.requestFocus();
@@ -57,9 +52,9 @@ idDuplicado = CDB.idDuplicado(id);
         }
 
         nombre = ct_Nombre.getText();
-        if (nombre == null || nombre.isBlank() || !nombre.matches("^[A-Za-zÁÉÍÓÚáéíóúÑñ0-9.,:;!?()\"'\\- ]+$")) {
+        if (nombre == null || nombre.isBlank() || !nombre.matches("^[A-Za-zÁÉÍÓÚáéíóúÑñ ]+$")) {
             JOptionPane.showMessageDialog(null,
-                    "No corresponde a un nombre válido.", "Warning", 2);
+                    "No corresponde a un nombre válido. Solo se permiten letras y espacios.", "Warning", 2);
             ct_Nombre.setText("");
             ct_Nombre.requestFocus();
             valido = false;
