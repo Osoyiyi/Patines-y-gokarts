@@ -8,6 +8,7 @@ import java.util.Date;
 import javax.swing.JOptionPane;
 import Pck_Datos_.ClientesPG_DB;
 import java.text.ParseException;
+import java.util.Calendar;
 
 
 public class Frm_Menu_Clientes extends javax.swing.JFrame {
@@ -36,7 +37,7 @@ public class Frm_Menu_Clientes extends javax.swing.JFrame {
     
     private void agregar_actualizar(boolean agregar) {
         String id, nombre, direccion, identificacion, telefono, tipo = null;
-        int res = 0;
+        int res = 0, anio;
         boolean valido = true;
         boolean idDuplicado;
 
@@ -99,13 +100,22 @@ public class Frm_Menu_Clientes extends javax.swing.JFrame {
         
         java.sql.Date fechaE = null;
         Date fE = jdt_Fecha.getDate();
-        if(fE == null){
-            JOptionPane.showMessageDialog(null, "Debe seleccionar una fecha de estreno", "Error", 2);
+        if (fE == null) {
+            JOptionPane.showMessageDialog(null, "Debe seleccionar una fecha de nacimiento", "Error", 2);
             valido = false;
-        }else{
-        long dE = fE.getTime();
-        fechaE = new java.sql.Date(dE);
+        } else {
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(fE);
+            anio = cal.get(Calendar.YEAR);
+            if (anio >= 2013) {
+                JOptionPane.showMessageDialog(null, "La edad del cliente no puede ser menor a 13 años", "Error", 2);
+                valido = false;
+            } else {
+                long dE = fE.getTime();
+                fechaE = new java.sql.Date(dE);
+            }
         }
+        
 
         if(valido && agregar){
         res = CDB.agregarCliente(id, nombre, direccion, identificacion, telefono, tipo, fechaE);
