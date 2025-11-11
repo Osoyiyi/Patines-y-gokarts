@@ -121,7 +121,7 @@ public class ClientesPG_DB {
         } finally {
             PS = null;
             RS = null;
-            //CN.close();
+            CN.close();
         }
         return DTM;
     }

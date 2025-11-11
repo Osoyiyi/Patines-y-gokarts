@@ -16,7 +16,7 @@ public class Frm_Menu_Vehiculos extends javax.swing.JFrame {
     }
     private void listar(int temp){
         if(temp == -1){
-            
+            tb_datosV.setModel(new DefaultTableModel());
         }else if(temp == 0){
             tb_datosV.setModel(RPGDB.getDatosVG());
         }else if(temp == 1){
@@ -76,10 +76,10 @@ public class Frm_Menu_Vehiculos extends javax.swing.JFrame {
                                 || !modelo.matches("^[A-Za-z0-9]+(?:[ -][A-Za-z0-9]+)*$")) {
                             JOptionPane.showMessageDialog(null, "No corresponde a un nombre de Modelo válido.",
                             "Warning", 2);
-                            La expresión permite nombres como: 
-                            CX-5, A4, GT-R, Corolla Cross
-                            La expresión no permite nombres como:
-                            -GT, Focus--RS, Civic@2024
+//                            La expresión permite nombres como: 
+//                            CX-5, A4, GT-R, Corolla Cross
+//                            La expresión no permite nombres como:
+//                            -GT, Focus--RS, Civic@2024
                             ct_Modelo.setText("");
                             valido = false;
         }
@@ -100,10 +100,10 @@ public class Frm_Menu_Vehiculos extends javax.swing.JFrame {
                                 || !marca.matches("^[A-Za-zÁÉÍÓÚáéíóúÑñ]+(?:[ -][A-Za-zÁÉÍÓÚáéíóúÑñ]+)*$")) {
                             JOptionPane.showMessageDialog(null, "No corresponde a un nombre de Marca válido.",
                             "Warning", 2);
-                            La expresión permite nombres como: 
-                            Ford, Mercedes-Benz, Land Rover
-                            La expresión no permite nombres como:
-                            -Ford, BMW-, Audi@@
+//                            La expresión permite nombres como: 
+//                            Ford, Mercedes-Benz, Land Rover
+//                            La expresión no permite nombres como:
+//                            -Ford, BMW-, Audi@@
                             ct_Marca.setText("");
                             valido = false;
         }
@@ -119,10 +119,10 @@ public class Frm_Menu_Vehiculos extends javax.swing.JFrame {
         color = ct_Color.getText();
         if (color == null || color.isBlank()
                                 || !color.matches("^[A-Za-zÁÉÍÓÚáéíóúÑñ]+(?:[ -][A-Za-zÁÉÍÓÚáéíóúÑñ]+)*$")) {
-                            La expresión permite nombres como: 
-                            Rojo, Rojo-Mate, Azul Marino, Gris-Plata
-                            La expresión no permite nombres como:
-                            -Rojo, -Rojo, Verde--Lima, " "Rojo-Mate
+//                            La expresión permite nombres como: 
+//                            Rojo, Rojo-Mate, Azul Marino, Gris-Plata
+//                            La expresión no permite nombres como:
+//                            -Rojo, -Rojo, Verde--Lima, " "Rojo-Mate
                             JOptionPane.showMessageDialog(null, "No corresponde a un nombre de Color válido.",
                             "Warning", 2);
                             ct_Color.setText("");
@@ -167,10 +167,10 @@ public class Frm_Menu_Vehiculos extends javax.swing.JFrame {
                 tipo = ct_Tipo.getText();
                 if (tipo == null || tipo.isBlank()
                                 || !tipo.matches("^[A-Za-zÁÉÍÓÚáéíóúÑñ]+(?:[ -][A-Za-zÁÉÍÓÚáéíóúÑñ]+)*$")) {
-                            La expresión permite nombres como: 
-                            Inline, Roller, Roller-Inline, Patín de hielo
-                            La expresión no permite nombres como:
-                            -Inline, Roller-, Patín123, " "Inline
+//                            La expresión permite nombres como: 
+//                            Inline, Roller, Roller-Inline, Patín de hielo
+//                            La expresión no permite nombres como:
+//                            -Inline, Roller-, Patín123, " "Inline
                             JOptionPane.showMessageDialog(null, "No corresponde a un nombre de tipo de patín válido.",
                             "Warning", 2);
                             ct_Tipo.setText("");
@@ -179,10 +179,10 @@ public class Frm_Menu_Vehiculos extends javax.swing.JFrame {
                 materialBota = ct_materialBota.getText();
                 if (materialBota == null || materialBota.isBlank()
                                 || !materialBota.matches("^[A-Za-zÁÉÍÓÚáéíóúÑñ]+(?:[ -/][A-Za-zÁÉÍÓÚáéíóúÑñ]+)*$")) {
-                            La expresión permite nombres como: 
-                            Cuero, Cuero Sintético, Nylon/Poliéster, Cuero-Plástico
-                            La expresión no permite nombres como:
-                            -Cuero, Cuero-, Nylon//Poliéster, Cuero123
+//                            La expresión permite nombres como: 
+//                            Cuero, Cuero Sintético, Nylon/Poliéster, Cuero-Plástico
+//                            La expresión no permite nombres como:
+//                            -Cuero, Cuero-, Nylon//Poliéster, Cuero123
                             JOptionPane.showMessageDialog(null, "No corresponde a un nombre de material de bota válido",
                             "Warning", 2);
                             ct_materialBota.setText("");
