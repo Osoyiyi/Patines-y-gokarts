@@ -436,7 +436,4 @@ public class RentasPG_DB {
 
         return res;
     }
-    public void cerrar(){
-        CN.close();
-    }
 }

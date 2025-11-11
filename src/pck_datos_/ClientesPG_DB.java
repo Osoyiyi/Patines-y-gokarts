@@ -166,4 +166,18 @@ public class ClientesPG_DB {
         }
         return res;
     }
+    public boolean idDuplicado(String id) {
+        String SQL_ID = "SELECT idCliente FROM clientes WHERE idCliente = ?";
+
+        try {
+            PS = CN.getConnection().prepareStatement(SQL_ID);
+            PS.setString(1, id);
+            RS = PS.executeQuery(); //hace un SELECT en la base de datos y te regresa un ResultSet
+            return RS.next();       // true si ya existe un id duplicado previamente
+            
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al buscar el id" + e.getMessage(), "Error", 2);
+            return false;
+        }
+    }
 }
