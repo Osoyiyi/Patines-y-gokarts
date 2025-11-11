@@ -48,6 +48,11 @@ public class Frm_Menu_Principal extends javax.swing.JFrame {
 
         btn_Vehiculo.setFont(new java.awt.Font("Cambria", 3, 18)); // NOI18N
         btn_Vehiculo.setText("Vehículos");
+        btn_Vehiculo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_VehiculoActionPerformed(evt);
+            }
+        });
 
         btn_Renta.setFont(new java.awt.Font("Cambria", 3, 18)); // NOI18N
         btn_Renta.setText("Rentas");
@@ -59,6 +64,11 @@ public class Frm_Menu_Principal extends javax.swing.JFrame {
 
         btn_Salir.setFont(new java.awt.Font("Cambria", 3, 18)); // NOI18N
         btn_Salir.setText("Salir");
+        btn_Salir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_SalirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -113,7 +123,9 @@ public class Frm_Menu_Principal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_RentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_RentaActionPerformed
-        // TODO add your handling code here:
+        Frm_Menu_Renta frmR = new Frm_Menu_Renta();
+        frmR.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btn_RentaActionPerformed
 
     private void btn_ClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ClienteActionPerformed
@@ -121,6 +133,16 @@ public class Frm_Menu_Principal extends javax.swing.JFrame {
        frmMC.setVisible(true);
        this.dispose();
     }//GEN-LAST:event_btn_ClienteActionPerformed
+
+    private void btn_VehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_VehiculoActionPerformed
+        Frm_Menu_Vehiculos frmV = new Frm_Menu_Vehiculos();
+        frmV.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btn_VehiculoActionPerformed
+
+    private void btn_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SalirActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btn_SalirActionPerformed
 
     /**
      * @param args the command line arguments

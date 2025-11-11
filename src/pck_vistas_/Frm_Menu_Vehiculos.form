@@ -41,7 +41,7 @@
                           <Component id="btn_Agregar" alignment="0" max="32767" attributes="0"/>
                           <Component id="btn_Consultar" alignment="0" max="32767" attributes="0"/>
                           <Component id="btn_Eliminar" alignment="0" max="32767" attributes="0"/>
-                          <Component id="btn_Salir" alignment="0" max="32767" attributes="0"/>
+                          <Component id="btn_Regresar" alignment="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <Component id="jScrollPane1" max="32767" attributes="0"/>
@@ -76,7 +76,7 @@
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
-                      <Component id="btn_Salir" min="-2" max="-2" attributes="0"/>
+                      <Component id="btn_Regresar" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
@@ -148,8 +148,8 @@
                                           <Group type="103" groupAlignment="1" max="-2" attributes="0">
                                               <Group type="102" alignment="0" attributes="0">
                                                   <Component id="lb_Anio" min="-2" pref="47" max="-2" attributes="0"/>
-                                                  <EmptySpace max="-2" attributes="0"/>
-                                                  <Component id="jyc_Anio" max="32767" attributes="0"/>
+                                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                                                   <EmptySpace max="32767" attributes="0"/>
                                                   <Component id="lb_Color" min="-2" pref="56" max="-2" attributes="0"/>
                                               </Group>
@@ -224,15 +224,13 @@
                       <Component id="ct_Precio" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="1" attributes="0">
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lb_Marca" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="ct_Marca" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lb_Anio" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lb_Color" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="ct_Color" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Component id="jyc_Anio" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="lb_Marca" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="ct_Marca" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lb_Anio" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lb_Color" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="ct_Color" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -493,11 +491,9 @@
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
         </Component>
-        <Component class="com.toedter.calendar.JYearChooser" name="jyc_Anio">
+        <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Cambria" size="18" style="0"/>
-            </Property>
+            <Property name="text" type="java.lang.String" value="agregar jyc jyc_Anio"/>
           </Properties>
         </Component>
       </SubComponents>
@@ -687,7 +683,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_EliminarActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="btn_Salir">
+    <Component class="javax.swing.JButton" name="btn_Regresar">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="33" green="33" red="33" type="rgb"/>
@@ -698,10 +694,10 @@
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="ff" green="ff" red="ff" type="rgb"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Salir"/>
+        <Property name="text" type="java.lang.String" value="Regresar"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_SalirActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_RegresarActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

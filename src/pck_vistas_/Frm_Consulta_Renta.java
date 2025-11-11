@@ -1,23 +1,31 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package pck_vistas_;
 
 import java.awt.event.ItemEvent;
+import javax.swing.table.DefaultTableModel;
+import pck_datos_.RentaDatos_DB;
+import javax.swing.JOptionPane;
 
-/**
- *
- * @author J
- */
 public class Frm_Consulta_Renta extends javax.swing.JFrame {
-
-    /**
-     * Creates new form Frm_Consulta_Renta
-     */
+    
+    private final RentaDatos_DB RentaDatos;
+    DefaultTableModel Dtm = new DefaultTableModel();
+    
     public Frm_Consulta_Renta() {
         initComponents();
         this.setLocationRelativeTo(null);
+        RentaDatos = new RentaDatos_DB();
+        Dtm = RentaDatos.getDatos();
+        for(int i = 0; i < Dtm.getRowCount();i++){
+            cmb_idRenta.addItem(Dtm.getValueAt(i, 0).toString());
+        }
+    }
+    
+    private void limpiarCampos() {
+        ct_idVehiculo.setText("");
+        ct_idCliente.setText("");
+        ct_HoraInicio.setText("");
+        ct_HoraFinal1.setText(""); 
+        ct_FechaRenta.setText("");
     }
 
     /**
@@ -119,7 +127,7 @@ public class Frm_Consulta_Renta extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(lb_FechaRenta)
                         .addGap(18, 18, 18)
-                        .addComponent(ct_FechaRenta, javax.swing.GroupLayout.DEFAULT_SIZE, 336, Short.MAX_VALUE)))
+                        .addComponent(ct_FechaRenta, javax.swing.GroupLayout.DEFAULT_SIZE, 344, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -149,7 +157,7 @@ public class Frm_Consulta_Renta extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lb_FechaRenta)
                     .addComponent(ct_FechaRenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(42, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -158,15 +166,15 @@ public class Frm_Consulta_Renta extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 517, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(85, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(38, Short.MAX_VALUE))
         );
 
         pack();
@@ -178,10 +186,16 @@ public class Frm_Consulta_Renta extends javax.swing.JFrame {
             int fila = cmb_idRenta.getSelectedIndex();
             if (fila >= 0 && fila < Dtm.getRowCount()) {
                 try {
-                 //variables de la base de datos usando: txt_titulo.setText(Dtm.getValueAt(fila, 1) != null ? Dtm.getValueAt(fila, 1).toString() : "");
+                 ct_idVehiculo.setText(Dtm.getValueAt(fila, 1) != null ? Dtm.getValueAt(fila, 1).toString() : "");
+                 ct_idCliente.setText(Dtm.getValueAt(fila, 2) != null ? Dtm.getValueAt(fila, 2).toString() : "");
+                 ct_HoraInicio.setText(Dtm.getValueAt(fila, 3) != null ? Dtm.getValueAt(fila, 3).toString() : "");
+                 ct_HoraFinal1.setText(Dtm.getValueAt(fila, 4) != null ? Dtm.getValueAt(fila, 4).toString() : "");
+                 ct_FechaRenta.setText(Dtm.getValueAt(fila, 5) != null ? Dtm.getValueAt(fila, 5).toString() : "");
+                 
                 } catch (Exception e) {
-                    System.out.println("Error al cargar datos: " + e.getMessage());
-                    //limpiar
+                    JOptionPane.showMessageDialog(null,"Error al cargar los datos de la renta" +
+                            e.getMessage(),"Error de carga",0);
+                    limpiarCampos();
                 }
             }
         }

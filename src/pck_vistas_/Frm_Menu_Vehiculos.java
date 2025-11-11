@@ -270,6 +270,7 @@ public class Frm_Menu_Vehiculos extends javax.swing.JFrame {
         ct_materialBota = new javax.swing.JTextField();
         ct_noRuedas = new javax.swing.JLabel();
         cmb_noRuedas = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         cmb_opcionesV = new javax.swing.JComboBox<>();
         ct_parametroV = new javax.swing.JTextField();
@@ -281,7 +282,7 @@ public class Frm_Menu_Vehiculos extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tb_datosV = new javax.swing.JTable();
         btn_Eliminar = new javax.swing.JButton();
-        btn_Salir = new javax.swing.JButton();
+        btn_Regresar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -372,7 +373,7 @@ public class Frm_Menu_Vehiculos extends javax.swing.JFrame {
             }
         });
 
-        jyc_Anio.setFont(new java.awt.Font("Cambria", 0, 18)); // NOI18N
+        jLabel1.setText("agregar jyc jyc_Anio");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -414,6 +415,8 @@ public class Frm_Menu_Vehiculos extends javax.swing.JFrame {
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                                 .addComponent(lb_Anio, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(jLabel1)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                 .addComponent(lb_Color, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
                                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -471,7 +474,8 @@ public class Frm_Menu_Vehiculos extends javax.swing.JFrame {
                     .addComponent(ct_Marca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lb_Anio)
                     .addComponent(lb_Color)
-                    .addComponent(ct_Color, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(ct_Color, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lb_tipoVehiculo)
@@ -614,13 +618,13 @@ public class Frm_Menu_Vehiculos extends javax.swing.JFrame {
             }
         });
 
-        btn_Salir.setBackground(new java.awt.Color(51, 51, 51));
-        btn_Salir.setFont(new java.awt.Font("Cambria", 3, 18)); // NOI18N
-        btn_Salir.setForeground(new java.awt.Color(255, 255, 255));
-        btn_Salir.setText("Salir");
-        btn_Salir.addActionListener(new java.awt.event.ActionListener() {
+        btn_Regresar.setBackground(new java.awt.Color(51, 51, 51));
+        btn_Regresar.setFont(new java.awt.Font("Cambria", 3, 18)); // NOI18N
+        btn_Regresar.setForeground(new java.awt.Color(255, 255, 255));
+        btn_Regresar.setText("Regresar");
+        btn_Regresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_SalirActionPerformed(evt);
+                btn_RegresarActionPerformed(evt);
             }
         });
 
@@ -641,7 +645,7 @@ public class Frm_Menu_Vehiculos extends javax.swing.JFrame {
                             .addComponent(btn_Agregar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btn_Consultar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btn_Eliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btn_Salir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(btn_Regresar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addComponent(jScrollPane1))
                 .addContainerGap(108, Short.MAX_VALUE))
         );
@@ -667,7 +671,7 @@ public class Frm_Menu_Vehiculos extends javax.swing.JFrame {
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(63, 63, 63)
-                        .addComponent(btn_Salir)))
+                        .addComponent(btn_Regresar)))
                 .addGap(36, 36, 36)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(215, Short.MAX_VALUE))
@@ -740,7 +744,7 @@ public class Frm_Menu_Vehiculos extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_buscarVActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-        RPGDB.cerrar();
+        
     }//GEN-LAST:event_formWindowClosed
 
     private void btn_resetVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_resetVActionPerformed
@@ -861,9 +865,11 @@ public class Frm_Menu_Vehiculos extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btn_EliminarActionPerformed
 
-    private void btn_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SalirActionPerformed
+    private void btn_RegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_RegresarActionPerformed
+        Frm_Menu_Principal frmP = new Frm_Menu_Principal();
+        frmP.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_btn_SalirActionPerformed
+    }//GEN-LAST:event_btn_RegresarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -906,7 +912,7 @@ public class Frm_Menu_Vehiculos extends javax.swing.JFrame {
     private javax.swing.JButton btn_Agregar;
     private javax.swing.JButton btn_Consultar;
     private javax.swing.JButton btn_Eliminar;
-    private javax.swing.JButton btn_Salir;
+    private javax.swing.JButton btn_Regresar;
     private javax.swing.JButton btn_buscarV;
     private javax.swing.JButton btn_resetV;
     private javax.swing.JComboBox<String> cmb_noLLantas;
@@ -924,6 +930,7 @@ public class Frm_Menu_Vehiculos extends javax.swing.JFrame {
     private javax.swing.JLabel ct_noRuedas;
     private javax.swing.JTextField ct_parametroV;
     private javax.swing.JTextField ct_velocidadMaxima;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
