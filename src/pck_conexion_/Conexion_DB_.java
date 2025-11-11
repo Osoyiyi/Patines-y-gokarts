@@ -1,3 +1,8 @@
+//José Luis González Flor
+//Alexis Aarath Lara Hernandez
+//Carlos Alberto Godinez Hernandez
+//Joshua Trejo Hernandez
+
 //Creen la BD así, y ya cada quien la usa:
 
 //mysql> CREATE DATABASE rentasvehiculosdb;
@@ -49,7 +54,7 @@
 //    ->     FOREIGN KEY (idVehiculo) REFERENCES vehiculos(idVehiculo),
 //    ->     FOREIGN KEY (idCliente) REFERENCES clientes(idCliente)
 //    -> );
-package Pck_Conexion_;
+package pck_conexion_;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

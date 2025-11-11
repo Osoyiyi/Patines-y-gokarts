@@ -1,11 +1,12 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+//José Luis González Flor
+//Alexis Aarath Lara Hernandez
+//Carlos Alberto Godinez Hernandez
+//Joshua Trejo Hernandez
+
 package pck_vistas_;
 
 import java.awt.event.ItemEvent;
-import Pck_Datos_.ClientesPG_DB;
+import pck_datos_.ClientesPG_DB;
 import javax.swing.table.DefaultTableModel;
 
 /**

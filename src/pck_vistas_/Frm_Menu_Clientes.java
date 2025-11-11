@@ -1,12 +1,13 @@
-//
 //José Luis González Flor
-//
+//Alexis Aarath Lara Hernandez
+//Carlos Alberto Godinez Hernandez
+//Joshua Trejo Hernandez
 package pck_vistas_;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JOptionPane;
-import Pck_Datos_.ClientesPG_DB;
+import pck_datos_.ClientesPG_DB;
 import java.text.ParseException;
 import java.util.Calendar;
 
@@ -42,14 +43,14 @@ public class Frm_Menu_Clientes extends javax.swing.JFrame {
         boolean idDuplicado;
 
         id = ct_idCliente.getText();
-        idDuplicado = CDB.idDuplicado(id);
-        if (id == null || id.isBlank() || !id.matches("^[A-Za-zÁÉÍÓÚáéíóúÑñ0-9 ]+$")) {
+idDuplicado = CDB.idDuplicado(id);
+        if (id == null || id.isBlank() || !id.matches("^[0-9]+$")) {
             JOptionPane.showMessageDialog(null,
-                    "No corresponde a un id válido.", "Warning", 2);
+                    "El ID solo debe contener números.", "Warning", 2);
             ct_idCliente.setText("");
             valido = false;
-        }else if(idDuplicado && agregar){
-            JOptionPane.showMessageDialog(null, "El id ya existe", "Id existente", 2);
+        } else if (idDuplicado && agregar) {
+            JOptionPane.showMessageDialog(null, "El ID ya existe", "Id existente", 2);
             ct_idCliente.setText("");
             ct_idCliente.requestFocus();
             valido = false;
@@ -159,6 +160,7 @@ public class Frm_Menu_Clientes extends javax.swing.JFrame {
         ct_Telefono = new javax.swing.JTextField();
         lb_Fecha = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        jdt_Fecha = new com.toedter.calendar.JDateChooser();
         jPanel2 = new javax.swing.JPanel();
         cmb_OpcionesC = new javax.swing.JComboBox<>();
         ct_ParametroC = new javax.swing.JTextField();
@@ -225,40 +227,45 @@ public class Frm_Menu_Clientes extends javax.swing.JFrame {
                 .addGap(15, 15, 15)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(lb_Direccion)
-                        .addGap(18, 18, 18)
-                        .addComponent(ct_Direccion, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(lb_Direccion)
+                                .addGap(18, 18, 18)
+                                .addComponent(ct_Direccion, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(400, 400, 400)
+                                .addComponent(lb_Identificacion)
+                                .addGap(18, 18, 18)
+                                .addComponent(ct_Identificacion, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(lb_idCliente)
+                                .addGap(18, 18, 18)
+                                .addComponent(ct_idCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(83, 83, 83)
+                                .addComponent(lb_Nombre)
+                                .addGap(18, 18, 18)
+                                .addComponent(ct_Nombre)))
+                        .addContainerGap(73, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(400, 400, 400)
-                        .addComponent(lb_Identificacion)
-                        .addGap(18, 18, 18)
-                        .addComponent(ct_Identificacion, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(lb_idCliente)
-                            .addGap(18, 18, 18)
-                            .addComponent(ct_idCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(83, 83, 83)
-                            .addComponent(lb_Nombre)
-                            .addGap(18, 18, 18)
-                            .addComponent(ct_Nombre))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(lb_Tipo)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(cmb_Tipo, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(86, 86, 86))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                    .addComponent(lb_Telefono)
-                                    .addGap(18, 18, 18)))
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(ct_Telefono, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(lb_Fecha)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(jLabel1))))))
-                .addContainerGap(73, Short.MAX_VALUE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(lb_Tipo)
+                                .addGap(18, 18, 18)
+                                .addComponent(cmb_Tipo, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(86, 86, 86))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(lb_Telefono)
+                                .addGap(18, 18, 18)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(ct_Telefono, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lb_Fecha))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(jdt_Fecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel1))
+                        .addGap(140, 140, 140))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -275,19 +282,24 @@ public class Frm_Menu_Clientes extends javax.swing.JFrame {
                     .addComponent(ct_Direccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lb_Identificacion)
                     .addComponent(ct_Identificacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lb_Telefono)
-                    .addComponent(ct_Telefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(33, 33, 33)
+                .addGap(17, 17, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(lb_Tipo)
-                        .addComponent(cmb_Tipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(lb_Fecha)
-                        .addComponent(jLabel1)))
-                .addContainerGap(29, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lb_Telefono)
+                            .addComponent(ct_Telefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(33, 33, 33)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(lb_Tipo)
+                                .addComponent(cmb_Tipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lb_Fecha)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jdt_Fecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(11, 11, 11)))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         jPanel2.setBackground(new java.awt.Color(51, 51, 51));
@@ -597,6 +609,7 @@ public class Frm_Menu_Clientes extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private com.toedter.calendar.JDateChooser jdt_Fecha;
     private javax.swing.JLabel lb_Direccion;
     private javax.swing.JLabel lb_Fecha;
     private javax.swing.JLabel lb_Identificacion;

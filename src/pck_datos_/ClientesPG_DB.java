@@ -1,12 +1,12 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package Pck_Datos_;
+//José Luis González Flor
+//Alexis Aarath Lara Hernandez
+//Carlos Alberto Godinez Hernandez
+//Joshua Trejo Hernandez
+package pck_datos_;
 
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
-import Pck_Conexion_.Conexion_DB_;
+import pck_conexion_.Conexion_DB_;
 import javax.swing.table.DefaultTableModel;
 import java.sql.ResultSet;
 import java.sql.Date;

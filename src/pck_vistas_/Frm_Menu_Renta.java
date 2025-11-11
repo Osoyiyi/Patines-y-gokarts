@@ -1,3 +1,7 @@
+//José Luis González Flor
+//Alexis Aarath Lara Hernandez
+//Carlos Alberto Godinez Hernandez
+//Joshua Trejo Hernandez
 package pck_vistas_;
 
 import Pck_Examen.Hora;
@@ -7,7 +11,7 @@ import java.sql.Date;
 import java.sql.Time;
 
 public class Frm_Menu_Renta extends javax.swing.JFrame {
-    
+
     private final RentaDatos_DB PDB;
 
     public Frm_Menu_Renta() {
@@ -29,7 +33,7 @@ public class Frm_Menu_Renta extends javax.swing.JFrame {
         ct_idRenta.setText("");
         ct_idVehiculo.setText("");
         jdc_FechaRenta.setDate(null);
-        
+
     }
 
     private Hora validarHora(String horaStr, String campoNombre) {
@@ -84,12 +88,12 @@ public class Frm_Menu_Renta extends javax.swing.JFrame {
         }
 
         idCliente = ct_idCliente.getText().trim();
-        if(idCliente.isEmpty()){
+        if (idCliente.isEmpty()) {
             JOptionPane.showMessageDialog(null, "El campo ID Cliente no puede estar vacío.", "Warning", 2);
             valido = false;
-        } else if(!idCliente.matches("^[A-Za-zÁÉÍÓÚáéíóúÑñ0-9_-]+$")){
-            JOptionPane.showMessageDialog(null,"El ID cliente solo puede contener letras, numero, guiones y guines bajos",
-                    "Warning",2);
+        } else if (!idCliente.matches("^[A-Za-zÁÉÍÓÚáéíóúÑñ0-9_-]+$")) {
+            JOptionPane.showMessageDialog(null, "El ID cliente solo puede contener letras, numero, guiones y guines bajos",
+                    "Warning", 2);
             ct_idCliente.setText("");
             valido = false;
         }
@@ -113,43 +117,39 @@ public class Frm_Menu_Renta extends javax.swing.JFrame {
         if (!valido) {
             return;
         }
-        
+
         if (horaFinal.esMenorQue(horaInicio) || horaFinal.getHora().equals(horaInicio.getHora())) {
             JOptionPane.showMessageDialog(null, "La Hora Final (" + horaFinal.getHora() + ") no puede ser menor o igual a la Hora de Inicio (" + horaInicio.getHora() + ").",
-                     "Error de Renta", 2);
+                    "Error de Renta", 2);
             valido = false;
         }
 
         if (!valido) {
             return;
         }
-        
-        
+
         java.util.Date DateRenta = jdc_FechaRenta.getDate();
-        if(DateRenta == null){
-            JOptionPane.showMessageDialog(null,"Porfavor, ingrese una fecha de renta","Warning",2);
+        if (DateRenta == null) {
+            JOptionPane.showMessageDialog(null, "Porfavor, ingrese una fecha de renta", "Warning", 2);
             valido = false;
         }
-        if(!valido){
+        if (!valido) {
             return;
         }
-        
+
         FechaRenta = new java.sql.Date(DateRenta.getTime());
         java.sql.Time sqlHoraInicio = java.sql.Time.valueOf(horaInicio.getHora() + ":00");
         java.sql.Time sqlHoraFinal = java.sql.Time.valueOf(horaFinal.getHora() + ":00");
-        
-        
-        
+
         //Si el campo de fecha es un textField
 //        try{
 //            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 //            
 //        }
-
         if (valido && agregar) {
-           res = PDB.agregarRegistro(idRenta, idVehiculo, idCliente, FechaRenta, sqlHoraInicio, sqlHoraFinal);
+            res = PDB.agregarRegistro(idRenta, idVehiculo, idCliente, FechaRenta, sqlHoraInicio, sqlHoraFinal);
         } else if (valido && !agregar) {
-           res = PDB.actualizarRegistro(idRenta, idVehiculo, idCliente, FechaRenta, sqlHoraInicio, sqlHoraFinal);
+            res = PDB.actualizarRegistro(idRenta, idVehiculo, idCliente, FechaRenta, sqlHoraInicio, sqlHoraFinal);
         } else {
             JOptionPane.showMessageDialog(null, "Por favor conteste todos campos o verifique que sean datos validos",
                     "Error de carga de datos", 0);
@@ -183,6 +183,7 @@ public class Frm_Menu_Renta extends javax.swing.JFrame {
         lb_HoraInicio = new javax.swing.JLabel();
         ct_HoraFinal = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
+        jdc_FechaRenta = new com.toedter.calendar.JDateChooser();
         jPanel4 = new javax.swing.JPanel();
         cmb_opcionesR = new javax.swing.JComboBox<>();
         ct_parametroR = new javax.swing.JTextField();
@@ -269,9 +270,13 @@ public class Frm_Menu_Renta extends javax.swing.JFrame {
                                 .addGap(151, 151, 151)
                                 .addComponent(lb_FechaRenta)
                                 .addGap(18, 18, 18)
-                                .addComponent(jLabel1)))
+                                .addComponent(jdc_FechaRenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(305, 305, 305))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -291,10 +296,12 @@ public class Frm_Menu_Renta extends javax.swing.JFrame {
                     .addComponent(lb_HoraFinal)
                     .addComponent(ct_HoraFinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(19, 19, 19)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lb_FechaRenta)
-                    .addComponent(jLabel1))
-                .addContainerGap(150, Short.MAX_VALUE))
+                    .addComponent(jdc_FechaRenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(35, 35, 35)
+                .addComponent(jLabel1)
+                .addContainerGap(97, Short.MAX_VALUE))
         );
 
         jPanel4.setBackground(new java.awt.Color(51, 51, 51));
@@ -495,14 +502,14 @@ public class Frm_Menu_Renta extends javax.swing.JFrame {
     private void btn_EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_EliminarActionPerformed
         int res;
         int fila = tbl_Rentas.getSelectedRow();
-        if(fila == -1){
-            JOptionPane.showMessageDialog(null,"Debe seleccionar un registro de la tabla", "Eliminar un resgitro", 1);
+        if (fila == -1) {
+            JOptionPane.showMessageDialog(null, "Debe seleccionar un registro de la tabla", "Eliminar un resgitro", 1);
         }
-        res = JOptionPane.showConfirmDialog(null,"¿Esta seguro de eliminar este registro?\n No podrá recuperar esta informacion despues de esta acción",
+        res = JOptionPane.showConfirmDialog(null, "¿Esta seguro de eliminar este registro?\n No podrá recuperar esta informacion despues de esta acción",
                 "Eliminar registro", JOptionPane.YES_NO_OPTION);
-        if(res == JOptionPane.YES_OPTION){
-            res = PDB.eliminarRegistro((Integer)tbl_Rentas.getValueAt(fila, 0));
-            if(res > 0){
+        if (res == JOptionPane.YES_OPTION) {
+            res = PDB.eliminarRegistro((Integer) tbl_Rentas.getValueAt(fila, 0));
+            if (res > 0) {
                 this.limpiar();
                 this.listar();
             }
@@ -511,7 +518,7 @@ public class Frm_Menu_Renta extends javax.swing.JFrame {
 
     private void btn_buscarRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_buscarRActionPerformed
         tbl_Rentas.setModel(PDB.buscarRenta(cmb_opcionesR.getSelectedIndex(), ct_parametroR.getText()));
-        
+
     }//GEN-LAST:event_btn_buscarRActionPerformed
 
     private void btn_resetRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_resetRActionPerformed
@@ -583,6 +590,7 @@ public class Frm_Menu_Renta extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
+    private com.toedter.calendar.JDateChooser jdc_FechaRenta;
     private javax.swing.JLabel lb_FechaRenta;
     private javax.swing.JLabel lb_HoraFinal;
     private javax.swing.JLabel lb_HoraInicio;

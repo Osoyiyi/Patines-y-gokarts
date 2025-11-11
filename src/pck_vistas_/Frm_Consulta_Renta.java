@@ -1,3 +1,7 @@
+//José Luis González Flor
+//Alexis Aarath Lara Hernandez
+//Carlos Alberto Godinez Hernandez
+//Joshua Trejo Hernandez
 package pck_vistas_;
 
 import java.awt.event.ItemEvent;

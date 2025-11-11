@@ -1,6 +1,10 @@
+//José Luis González Flor
+//Alexis Aarath Lara Hernandez
+//Carlos Alberto Godinez Hernandez
+//Joshua Trejo Hernandez
 package pck_datos_;
 import java.sql.PreparedStatement;
-import Pck_Conexion_.Conexion_DB_;
+import pck_conexion_.Conexion_DB_;
 import java.sql.Date;
 import java.sql.Time;
 import java.sql.ResultSet;

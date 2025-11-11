@@ -1,12 +1,15 @@
-
-package Pck_Datos_;
+//José Luis González Flor
+//Alexis Aarath Lara Hernandez
+//Carlos Alberto Godinez Hernandez
+//Joshua Trejo Hernandez
+package pck_datos_;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import Pck_Conexion_.Conexion_DB_;
+import pck_conexion_.Conexion_DB_;
 
 
 public class RentasPG_DB {
