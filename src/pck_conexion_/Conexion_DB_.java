@@ -82,4 +82,13 @@ public class Conexion_DB_ {
            System.out.println("Error al cerrar conexión a la BD: " + e.getMessage());  
         }
     }
+    
+    public static void main(String[] args){
+        Conexion_DB_ cnx = new Conexion_DB_();
+        if(cnx.getConnection() != null){
+          System.out.println("Conexión exitosa."); 
+        }else{
+          System.out.println("Conexión NO exitosa.");  
+        }
+    }
 }
