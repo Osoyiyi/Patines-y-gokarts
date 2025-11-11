@@ -15,6 +15,7 @@ public class Frm_Menu_Principal extends javax.swing.JFrame {
      */
     public Frm_Menu_Principal() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -27,37 +28,37 @@ public class Frm_Menu_Principal extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel2 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        btn_Cliente = new javax.swing.JButton();
+        btn_Vehiculo = new javax.swing.JButton();
+        btn_Renta = new javax.swing.JButton();
+        btn_Salir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel2.setBackground(new java.awt.Color(204, 255, 204));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Menú Principal", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Cambria", 3, 24))); // NOI18N
 
-        jButton1.setFont(new java.awt.Font("Cambria", 3, 18)); // NOI18N
-        jButton1.setText("Clientes");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btn_Cliente.setFont(new java.awt.Font("Cambria", 3, 18)); // NOI18N
+        btn_Cliente.setText("Clientes");
+        btn_Cliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btn_ClienteActionPerformed(evt);
             }
         });
 
-        jButton2.setFont(new java.awt.Font("Cambria", 3, 18)); // NOI18N
-        jButton2.setText("Vehículos");
+        btn_Vehiculo.setFont(new java.awt.Font("Cambria", 3, 18)); // NOI18N
+        btn_Vehiculo.setText("Vehículos");
 
-        jButton3.setFont(new java.awt.Font("Cambria", 3, 18)); // NOI18N
-        jButton3.setText("Rentas");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btn_Renta.setFont(new java.awt.Font("Cambria", 3, 18)); // NOI18N
+        btn_Renta.setText("Rentas");
+        btn_Renta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btn_RentaActionPerformed(evt);
             }
         });
 
-        jButton5.setFont(new java.awt.Font("Cambria", 3, 18)); // NOI18N
-        jButton5.setText("Salir");
+        btn_Salir.setFont(new java.awt.Font("Cambria", 3, 18)); // NOI18N
+        btn_Salir.setText("Salir");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -65,17 +66,17 @@ public class Frm_Menu_Principal extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(29, 29, 29)
-                .addComponent(jButton1)
+                .addComponent(btn_Cliente)
                 .addGap(56, 56, 56)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jButton2)
+                        .addComponent(btn_Vehiculo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
-                        .addComponent(jButton3)
+                        .addComponent(btn_Renta)
                         .addGap(40, 40, 40))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(24, 24, 24)
-                        .addComponent(jButton5)
+                        .addComponent(btn_Salir)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel2Layout.setVerticalGroup(
@@ -83,11 +84,11 @@ public class Frm_Menu_Principal extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(46, 46, 46)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
+                    .addComponent(btn_Cliente)
+                    .addComponent(btn_Vehiculo)
+                    .addComponent(btn_Renta))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
-                .addComponent(jButton5)
+                .addComponent(btn_Salir)
                 .addGap(32, 32, 32))
         );
 
@@ -111,14 +112,15 @@ public class Frm_Menu_Principal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void btn_RentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_RentaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_btn_RentaActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btn_ClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ClienteActionPerformed
        Frm_Menu_Clientes frmMC = new Frm_Menu_Clientes();
        frmMC.setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
+       this.dispose();
+    }//GEN-LAST:event_btn_ClienteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -157,10 +159,10 @@ public class Frm_Menu_Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton5;
+    private javax.swing.JButton btn_Cliente;
+    private javax.swing.JButton btn_Renta;
+    private javax.swing.JButton btn_Salir;
+    private javax.swing.JButton btn_Vehiculo;
     private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
 }
