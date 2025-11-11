@@ -2,7 +2,7 @@
 package pck_vistas_;
 
 import javax.swing.table.DefaultTableModel;
-import pck_datos_.RentasPG_DB;
+import Pck_Datos_.RentasPG_DB;
 
 
 public class Frm_Consulta_V extends javax.swing.JFrame {
