@@ -146,9 +146,12 @@
                               </Group>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="ct_Telefono" alignment="0" min="-2" pref="202" max="-2" attributes="0"/>
-                                  <Component id="lb_Fecha" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="lb_Fecha" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
-                              <EmptySpace min="-2" pref="202" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -184,7 +187,10 @@
                           <Component id="lb_Tipo" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="cmb_Tipo" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="lb_Fecha" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="lb_Fecha" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
                   <EmptySpace pref="29" max="32767" attributes="0"/>
               </Group>
@@ -297,6 +303,11 @@
               <Font name="Cambria" size="18" style="1"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Fecha de nacimiento"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel1">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="agregar jdc con el name jdt_Fecha"/>
           </Properties>
         </Component>
       </SubComponents>

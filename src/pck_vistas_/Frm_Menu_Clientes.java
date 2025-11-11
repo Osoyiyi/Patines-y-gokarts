@@ -38,12 +38,19 @@ public class Frm_Menu_Clientes extends javax.swing.JFrame {
         String id, nombre, direccion, identificacion, telefono, tipo = null;
         int res = 0;
         boolean valido = true;
+        boolean idDuplicado;
 
         id = ct_idCliente.getText();
+        idDuplicado = CDB.idDuplicado(id);
         if (id == null || id.isBlank() || !id.matches("^[A-Za-zÁÉÍÓÚáéíóúÑñ0-9 ]+$")) {
             JOptionPane.showMessageDialog(null,
                     "No corresponde a un id válido.", "Warning", 2);
             ct_idCliente.setText("");
+            valido = false;
+        }else if(idDuplicado && agregar){
+            JOptionPane.showMessageDialog(null, "El id ya existe", "Id existente", 2);
+            ct_idCliente.setText("");
+            ct_idCliente.requestFocus();
             valido = false;
         }
 
@@ -52,6 +59,7 @@ public class Frm_Menu_Clientes extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null,
                     "No corresponde a un nombre válido.", "Warning", 2);
             ct_Nombre.setText("");
+            ct_Nombre.requestFocus();
             valido = false;
         }
         
@@ -60,6 +68,7 @@ public class Frm_Menu_Clientes extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null,
                     "No corresponde a una dirección válida.", "Warning", 2);
             ct_Direccion.setText("");
+            ct_Direccion.requestFocus();
             valido = false;
         }
         
@@ -68,6 +77,7 @@ public class Frm_Menu_Clientes extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null,
                     "No corresponde a una identificacion válida.", "Warning", 2);
             ct_Identificacion.setText("");
+            ct_Identificacion.requestFocus();
             valido = false;
         }
         
@@ -76,6 +86,7 @@ public class Frm_Menu_Clientes extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null,
                     "No corresponde a un teléfono válido.", "Warning", 2);
             ct_Telefono.setText("");
+            ct_Telefono.requestFocus();
             valido = false;
         }
         
@@ -137,6 +148,7 @@ public class Frm_Menu_Clientes extends javax.swing.JFrame {
         lb_Telefono = new javax.swing.JLabel();
         ct_Telefono = new javax.swing.JTextField();
         lb_Fecha = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         cmb_OpcionesC = new javax.swing.JComboBox<>();
         ct_ParametroC = new javax.swing.JTextField();
@@ -193,6 +205,8 @@ public class Frm_Menu_Clientes extends javax.swing.JFrame {
         lb_Fecha.setFont(new java.awt.Font("Cambria", 1, 18)); // NOI18N
         lb_Fecha.setText("Fecha de nacimiento");
 
+        jLabel1.setText("agregar jdc con el name jdt_Fecha");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -230,8 +244,10 @@ public class Frm_Menu_Clientes extends javax.swing.JFrame {
                                     .addGap(18, 18, 18)))
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(ct_Telefono, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(lb_Fecha))
-                            .addGap(202, 202, 202))))
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(lb_Fecha)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(jLabel1))))))
                 .addContainerGap(73, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -258,7 +274,9 @@ public class Frm_Menu_Clientes extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(lb_Tipo)
                         .addComponent(cmb_Tipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(lb_Fecha))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lb_Fecha)
+                        .addComponent(jLabel1)))
                 .addContainerGap(29, Short.MAX_VALUE))
         );
 
@@ -409,7 +427,7 @@ public class Frm_Menu_Clientes extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(btn_Regresar)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(btn_Actualizar, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)
+                                        .addComponent(btn_Actualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 115, Short.MAX_VALUE)
                                         .addComponent(btn_Agregar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(btn_Eliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                                 .addGap(0, 0, Short.MAX_VALUE)))))
@@ -566,6 +584,7 @@ public class Frm_Menu_Clientes extends javax.swing.JFrame {
     private javax.swing.JTextField ct_ParametroC;
     private javax.swing.JTextField ct_Telefono;
     private javax.swing.JTextField ct_idCliente;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lb_Direccion;
