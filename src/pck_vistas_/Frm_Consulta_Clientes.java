@@ -206,8 +206,8 @@ public class Frm_Consulta_Clientes extends javax.swing.JFrame {
                     ct_Nombre.setText(Dtm.getValueAt(fila, 1).toString());
                     ct_Direccion.setText(Dtm.getValueAt(fila, 2).toString());
                     ct_Identificacion.setText(Dtm.getValueAt(fila, 3).toString());
-                    ct_Telefono.setText(Dtm.getValueAt(fila, 4).toString());
-                    ct_Tipo.setText(Dtm.getValueAt(fila, 5).toString());
+                    ct_Tipo.setText(Dtm.getValueAt(fila, 4).toString());
+                    ct_Telefono.setText(Dtm.getValueAt(fila, 5).toString());
                     ct_Fecha.setText(Dtm.getValueAt(fila, 6).toString());
                 } catch (Exception e) {
                     System.out.println("Error al cargar datos: " + e.getMessage());

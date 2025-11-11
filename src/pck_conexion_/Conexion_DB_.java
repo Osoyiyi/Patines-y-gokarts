@@ -56,7 +56,8 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class Conexion_DB_ {
-    static final String URL = "jdbc:mysql://localhost:3306/rentasvehiculosdb";
+    static final String DB = "rentasvehiculosdb";
+    static final String URL = "jdbc:mysql://localhost:3306/" + DB;
     static final String USER = "root";
     static final String PASS = "Billar2402";
     private static Connection con;

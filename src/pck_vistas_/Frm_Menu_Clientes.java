@@ -137,6 +137,7 @@ public class Frm_Menu_Clientes extends javax.swing.JFrame {
         lb_Telefono = new javax.swing.JLabel();
         ct_Telefono = new javax.swing.JTextField();
         lb_Fecha = new javax.swing.JLabel();
+        jdt_Fecha = new com.toedter.calendar.JDateChooser();
         jPanel2 = new javax.swing.JPanel();
         cmb_OpcionesC = new javax.swing.JComboBox<>();
         ct_ParametroC = new javax.swing.JTextField();
@@ -229,8 +230,10 @@ public class Frm_Menu_Clientes extends javax.swing.JFrame {
                                     .addGap(18, 18, 18)))
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(ct_Telefono, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(lb_Fecha))
-                            .addGap(74, 74, 74))))
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(lb_Fecha)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(jdt_Fecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addContainerGap(73, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -253,12 +256,16 @@ public class Frm_Menu_Clientes extends javax.swing.JFrame {
                     .addComponent(lb_Telefono)
                     .addComponent(ct_Telefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(33, 33, 33)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(lb_Tipo)
-                        .addComponent(cmb_Tipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(lb_Fecha))
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lb_Tipo)
+                            .addComponent(cmb_Tipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(lb_Fecha))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(jdt_Fecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         jPanel2.setBackground(new java.awt.Color(51, 51, 51));
@@ -393,7 +400,7 @@ public class Frm_Menu_Clientes extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(btn_Actualizar, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)
+                                    .addComponent(btn_Actualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 115, Short.MAX_VALUE)
                                     .addComponent(btn_Agregar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(btn_Eliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(0, 0, Short.MAX_VALUE))
@@ -448,7 +455,7 @@ public class Frm_Menu_Clientes extends javax.swing.JFrame {
             res = JOptionPane.showConfirmDialog(null, "Esta seguro de eliminar este cliente?\nNo podra recuperarse despues...","Eliminar un cliente", JOptionPane.YES_NO_OPTION);
             
             if(res == JOptionPane.YES_OPTION){
-                res = CDB.eliminarCliente((Integer)tbl_Clientes.getValueAt(fila, 0).toString());
+                res = CDB.eliminarCliente((String)tbl_Clientes.getValueAt(fila, 0));
                 this.limpiar();
                 this.listar();
             }
@@ -511,7 +518,7 @@ public class Frm_Menu_Clientes extends javax.swing.JFrame {
         } catch (ClassNotFoundException ex) {
             java.util.logging.Logger.getLogger(Frm_Menu_Clientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLoggelb_Tipos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Frm_Menu_Clientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
             java.util.logging.Logger.getLogger(Frm_Menu_Clientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
@@ -544,6 +551,7 @@ public class Frm_Menu_Clientes extends javax.swing.JFrame {
     private javax.swing.JTextField ct_idCliente;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private com.toedter.calendar.JDateChooser jdt_Fecha;
     private javax.swing.JLabel lb_Direccion;
     private javax.swing.JLabel lb_Fecha;
     private javax.swing.JLabel lb_Identificacion;
