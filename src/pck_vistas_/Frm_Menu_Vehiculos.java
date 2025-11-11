@@ -16,7 +16,7 @@ public class Frm_Menu_Vehiculos extends javax.swing.JFrame {
     }
     private void listar(int temp){
         if(temp == -1){
-            
+            tb_datosV.setModel(new DefaultTableModel());
         }else if(temp == 0){
             tb_datosV.setModel(RPGDB.getDatosVG());
         }else if(temp == 1){
@@ -237,6 +237,7 @@ public class Frm_Menu_Vehiculos extends javax.swing.JFrame {
         if(res > 0){
             this.limpiar();
             this.listar(temp);
+            cmb_tipoVehiculo.setSelectedIndex(temp);
         }
     }
     @SuppressWarnings("unchecked")
@@ -277,10 +278,11 @@ public class Frm_Menu_Vehiculos extends javax.swing.JFrame {
         btn_resetV = new javax.swing.JButton();
         btn_Agregar = new javax.swing.JButton();
         btn_Actualizar = new javax.swing.JButton();
-        btn_Eliminar = new javax.swing.JButton();
         btn_Consultar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tb_datosV = new javax.swing.JTable();
+        btn_Eliminar = new javax.swing.JButton();
+        btn_Salir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -370,6 +372,8 @@ public class Frm_Menu_Vehiculos extends javax.swing.JFrame {
                 cmb_noRuedasActionPerformed(evt);
             }
         });
+
+        jyc_Anio.setFont(new java.awt.Font("Cambria", 0, 18)); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -574,15 +578,15 @@ public class Frm_Menu_Vehiculos extends javax.swing.JFrame {
             }
         });
 
-        btn_Eliminar.setBackground(new java.awt.Color(51, 51, 51));
-        btn_Eliminar.setFont(new java.awt.Font("Cambria", 3, 18)); // NOI18N
-        btn_Eliminar.setForeground(new java.awt.Color(255, 255, 255));
-        btn_Eliminar.setText("Eliminar");
-
         btn_Consultar.setBackground(new java.awt.Color(51, 51, 51));
         btn_Consultar.setFont(new java.awt.Font("Cambria", 3, 18)); // NOI18N
         btn_Consultar.setForeground(new java.awt.Color(255, 255, 255));
         btn_Consultar.setText("Consultar");
+        btn_Consultar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_ConsultarActionPerformed(evt);
+            }
+        });
 
         jScrollPane1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -605,6 +609,26 @@ public class Frm_Menu_Vehiculos extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tb_datosV);
 
+        btn_Eliminar.setBackground(new java.awt.Color(51, 51, 51));
+        btn_Eliminar.setFont(new java.awt.Font("Cambria", 3, 18)); // NOI18N
+        btn_Eliminar.setForeground(new java.awt.Color(255, 255, 255));
+        btn_Eliminar.setText("Eliminar");
+        btn_Eliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_EliminarActionPerformed(evt);
+            }
+        });
+
+        btn_Salir.setBackground(new java.awt.Color(51, 51, 51));
+        btn_Salir.setFont(new java.awt.Font("Cambria", 3, 18)); // NOI18N
+        btn_Salir.setForeground(new java.awt.Color(255, 255, 255));
+        btn_Salir.setText("Salir");
+        btn_Salir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_SalirActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -620,8 +644,9 @@ public class Frm_Menu_Vehiculos extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btn_Actualizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btn_Agregar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btn_Consultar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btn_Eliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btn_Consultar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(btn_Salir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addComponent(jScrollPane1))
                 .addContainerGap(108, Short.MAX_VALUE))
         );
@@ -637,12 +662,17 @@ public class Frm_Menu_Vehiculos extends javax.swing.JFrame {
                         .addComponent(btn_Agregar)
                         .addGap(48, 48, 48)
                         .addComponent(btn_Actualizar)
-                        .addGap(59, 59, 59)
+                        .addGap(54, 54, 54)
                         .addComponent(btn_Eliminar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btn_Consultar)))
-                .addGap(18, 18, 18)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(63, 63, 63)
+                        .addComponent(btn_Salir)))
                 .addGap(36, 36, 36)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(215, Short.MAX_VALUE))
@@ -682,7 +712,7 @@ public class Frm_Menu_Vehiculos extends javax.swing.JFrame {
             jyc_Anio.setYear(anio);
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "Error al cargar el año.", "Error de datos", 2);
-            jyc_Anio.setYear(0); // opcional: restablecer
+            jyc_Anio.setYear(0);
         }
         ct_Color.setText(tb_datosV.getValueAt(fila, 4).toString());
         ct_Precio.setText(tb_datosV.getValueAt(fila, 5).toString());
@@ -729,19 +759,7 @@ public class Frm_Menu_Vehiculos extends javax.swing.JFrame {
     private void cmb_tipoVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmb_tipoVehiculoActionPerformed
         int fila = tb_datosV.getSelectedRow();
         if(cmb_tipoVehiculo.getSelectedIndex() == -1){
-            ct_Cilindrada.setText("");
-            cmb_noLLantas.setSelectedIndex(-1);
-            ct_velocidadMaxima.setText("");
-            ct_Tipo.setText("");
-            ct_materialBota.setText("");
-            cmb_noRuedas.setSelectedIndex(-1);
-            ct_idVehiculo.setEditable(true);
-            ct_Modelo.setEditable(true);
-            ct_Precio.setEditable(true);
-            ct_Marca.setEditable(true);
-            ct_Color.setEditable(true);
-            ct_Tipo.setEditable(false);
-            jyc_Anio.setEnabled(true);
+            this.limpiar();
             this.listar(-1);
         }else if(cmb_tipoVehiculo.getSelectedIndex() == 0){
             if(fila != -1){
@@ -755,6 +773,11 @@ public class Frm_Menu_Vehiculos extends javax.swing.JFrame {
             ct_Tipo.setText("");
             ct_materialBota.setText("");
             cmb_noRuedas.setSelectedIndex(-1);
+            ct_idVehiculo.setEditable(true);
+            ct_Modelo.setEditable(true);
+            ct_Precio.setEditable(true);
+            ct_Marca.setEditable(true);
+            ct_Color.setEditable(true);
             ct_idVehiculo.setEditable(true);
             ct_Modelo.setEditable(true);
             ct_Precio.setEditable(true);
@@ -799,6 +822,54 @@ public class Frm_Menu_Vehiculos extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_cmb_tipoVehiculoActionPerformed
 
+    private void btn_ConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ConsultarActionPerformed
+        int fila = tb_datosV.getSelectedRow();
+        if(fila == -1){
+            JOptionPane.showMessageDialog(null, "Debe seleccionar un registro de la tabla...", "Consultar registro", 1);
+        }else{
+            Frm_Consulta_V frmcv = null;
+            if(cmb_tipoVehiculo.getSelectedIndex() == 0){
+                frmcv = new Frm_Consulta_V(0);
+            }else if(cmb_tipoVehiculo.getSelectedIndex() == 1){
+                frmcv = new Frm_Consulta_V(1);
+            }
+            if (frmcv != null) {
+                frmcv.setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog(null, "Debe seleccionar un tipo de vehículo válido.", "Error", 0);
+            }
+        }
+    }//GEN-LAST:event_btn_ConsultarActionPerformed
+
+    private void btn_EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_EliminarActionPerformed
+        int res, temp = -1;
+        int fila = tb_datosV.getSelectedRow();
+        if(fila == -1){
+            JOptionPane.showMessageDialog(null, "Debe seleccionar un registro de la tabla...", "Eliminar registro", 1);
+        }else{
+            res = JOptionPane.showConfirmDialog(null, "¿Estás seguro de eliminar este registro?" +
+                    "\nNo podrá recuperarse después...","Eliminar registro", JOptionPane.YES_NO_OPTION);
+            if(res == JOptionPane.YES_OPTION){
+                if(cmb_tipoVehiculo.getSelectedIndex() == 0){
+                    res = RPGDB.eliminarRegistroGoKart((Integer)tb_datosV.getValueAt(fila, 0));
+                    temp = 0;
+                }else if(cmb_tipoVehiculo.getSelectedIndex() == 1){
+                    res = RPGDB.eliminarRegistroPatin((Integer)tb_datosV.getValueAt(fila, 0));
+                    temp = 1;
+                }
+                if(res > 0){
+                    this.limpiar();
+                    this.listar(temp);
+                    cmb_tipoVehiculo.setSelectedIndex(temp);
+                }
+            }
+        }
+    }//GEN-LAST:event_btn_EliminarActionPerformed
+
+    private void btn_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SalirActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btn_SalirActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -840,6 +911,7 @@ public class Frm_Menu_Vehiculos extends javax.swing.JFrame {
     private javax.swing.JButton btn_Agregar;
     private javax.swing.JButton btn_Consultar;
     private javax.swing.JButton btn_Eliminar;
+    private javax.swing.JButton btn_Salir;
     private javax.swing.JButton btn_buscarV;
     private javax.swing.JButton btn_resetV;
     private javax.swing.JComboBox<String> cmb_noLLantas;

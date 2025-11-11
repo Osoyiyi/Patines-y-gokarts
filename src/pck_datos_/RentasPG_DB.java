@@ -167,30 +167,32 @@ public class RentasPG_DB {
     }
     public int agregarRegistroGoKart(int idVehiculo, String modelo, String marca, int anio, String color, float precio,
                                   int cilindrada, int noLLantas, float velocidadMaxima) {
+        int res = 0;
         int v = agregarV(idVehiculo, modelo, marca, anio, color, precio);
         int g = agregarG(idVehiculo, cilindrada, noLLantas, velocidadMaxima);
         
         //CN.close();
         if (v > 0 && g > 0) {
             JOptionPane.showMessageDialog(null, "GoKart registrado correctamente.", "Registro Gokart", 1);
-            return 1;
+            res = 1;
         } else {
             JOptionPane.showMessageDialog(null, "Error al registrar GoKart.", "Registro Gokart", 2);
-            return 0;
         }
+        return res;
     }
     public int agregarRegistroPatines(int idVehiculo, String modelo, String marca, int anio, String color, float precio,
                                     String tipo, String materialBota, int noRuedas){
+        int res = 0;
         int v = agregarV(idVehiculo, modelo, marca, anio, color, precio);
         int p = agregarP(idVehiculo, tipo, materialBota, noRuedas);
         //CN.close();
         if (v > 0 && p > 0) {
             JOptionPane.showMessageDialog(null, "Patines registrados correctamente.", "Registro Patines", 1);
-            return 1;
+            res = 1;
         } else {
             JOptionPane.showMessageDialog(null, "Error al registrar Patines.", "Registro Patines", 2);
-            return 0;
         }
+        return res;
     }
     public boolean existeV(int idVehiculo){
         boolean existe = false;
@@ -368,6 +370,68 @@ public class RentasPG_DB {
         } finally {
             PS = null;
             //CN.close();
+        }
+
+        return res;
+    }
+    public int eliminarRegistroGoKart(int idVehiculo) {
+        int res = 0;
+        String SQL_DELETE_G = "DELETE FROM gokarts WHERE idVehiculo = ?";
+        String SQL_DELETE_V = "DELETE FROM vehiculos WHERE idVehiculo = ?";
+
+        try {
+            PS = CN.getConnection().prepareStatement(SQL_DELETE_G);
+            PS.setInt(1, idVehiculo);
+            PS.executeUpdate();
+            PS.close();
+
+            PS = CN.getConnection().prepareStatement(SQL_DELETE_V);
+            PS.setInt(1, idVehiculo);
+            res = PS.executeUpdate();
+
+            if (res > 0) {
+                JOptionPane.showMessageDialog(null, 
+                    "El registro de gokart se eliminó con éxito.", 
+                    "Eliminar registro", 1);
+            }
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, 
+                "Error al eliminar gokart: " + e.getMessage(), 
+                "Error de eliminación", 2);
+        } finally {
+            PS = null;
+        }
+
+        return res;
+    }
+    public int eliminarRegistroPatin(int idVehiculo) {
+        int res = 0;
+        String SQL_DELETE_P = "DELETE FROM patines WHERE idVehiculo = ?";
+        String SQL_DELETE_V = "DELETE FROM vehiculos WHERE idVehiculo = ?";
+
+        try {
+            PS = CN.getConnection().prepareStatement(SQL_DELETE_P);
+            PS.setInt(1, idVehiculo);
+            PS.executeUpdate();
+            PS.close();
+
+            PS = CN.getConnection().prepareStatement(SQL_DELETE_V);
+            PS.setInt(1, idVehiculo);
+            res = PS.executeUpdate();
+
+            if (res > 0) {
+                JOptionPane.showMessageDialog(null, 
+                    "El registro de patín se eliminó con éxito.", 
+                    "Eliminar registro", 1);
+            }
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, 
+                "Error al eliminar patín: " + e.getMessage(), 
+                "Error de eliminación", 2);
+        } finally {
+            PS = null;
         }
 
         return res;
