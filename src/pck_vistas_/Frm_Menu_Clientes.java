@@ -107,8 +107,8 @@ public class Frm_Menu_Clientes extends javax.swing.JFrame {
             Calendar cal = Calendar.getInstance();
             cal.setTime(fE);
             anio = cal.get(Calendar.YEAR);
-            if (anio >= 2013) {
-                JOptionPane.showMessageDialog(null, "La edad del cliente no puede ser menor a 13 años", "Error", 2);
+            if (anio >= 2013 || anio <= 1925) {
+                JOptionPane.showMessageDialog(null, "La fehc a de nacimiento debe estar entre 2012 y 1926", "Error", 2);
                 valido = false;
             } else {
                 long dE = fE.getTime();
